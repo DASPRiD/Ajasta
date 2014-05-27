@@ -1,0 +1,15 @@
+<div class="page-header">
+    <h1>Edit client</h1>
+</div>
+
+<?php
+$this->formRow()->setLabelAttributes(['class' => 'col-sm-2']);
+echo $this->form($this->form);
+?>
+
+<script type="text/javascript">
+dynamicAddressFields(
+    $('select[name="client[address][countryCode]"]'),
+    '<?php echo $this->escapeJs($this->url('clients/get-address-fields-for-country', ['countryCode' => ''])); ?>'
+);
+</script>

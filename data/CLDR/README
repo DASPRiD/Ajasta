@@ -1,0 +1,9 @@
+This is a limited export of CLDR locales supported by this application. We only
+need the XML files of locales used in the user interface, not for printed PDFs.
+
+When updating or adding files here, take them from the "core.zip" file of the
+CLDR release. They are usually located in the "/common/main/" directory in the
+ZIP file. When adding a full locale here (e.g. "en_US"), make sure to also add
+the base locale (e.g. "en").
+
+CLDR version of the export: 25

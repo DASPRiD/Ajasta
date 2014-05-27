@@ -1,0 +1,1 @@
+{"postprefix": "FL-", "zipex": "9496,9491,9490,9485", "posturl": "http://www.post.ch/db/owa/pv_plz_pack/pr_main", "zip": "(948[5-9])|(949[0-7])", "require": "ACZ", "id": "data/LI", "key": "LI", "fmt": "%O%n%N%n%A%nFL-%Z %C", "name": "LIECHTENSTEIN"}

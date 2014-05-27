@@ -1,0 +1,1 @@
+{"upper": "AC", "zipex": "060274,061357,200716", "posturl": "http://www.posta-romana.ro/zip_codes", "zip": "\\d{6}", "fmt": "%N%n%O%n%A%n%Z %C", "key": "RO", "id": "data/RO", "name": "ROMANIA"}

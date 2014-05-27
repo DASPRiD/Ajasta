@@ -1,0 +1,19 @@
+{
+    "name": "dasprid/ajasta",
+    "description": "Invoicing application",
+    "require": {
+        "php": ">=5.4.0",
+        "ext-bcmath": "*",
+        "ext-intl": "*",
+        "zendframework/zendframework": ">=2.3.0",
+        "spiffy/spiffy-navigation": ">=1.0.0",
+        "doctrine/doctrine-orm-module": "0.*",
+        "tecnick.com/tcpdf": ">=6.0.0",
+        "setasign/fpdi": ">=1.4.2",
+        "marc-mabe/php-enum": ">=1.2.0",
+        "neilime/zf2-twb-bundle": "2.*@stable"
+    },
+    "require-dev": {
+        "doctrine/migrations": "dev-master"
+    }
+}
