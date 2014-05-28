@@ -43,4 +43,21 @@ class Manager
 
         return $names[$currencyCode];
     }
+
+    public function lookupCountryName($countryCode, $locale = null)
+    {
+        $locale = $locale ?: Locale::getDefault();
+
+        if (!preg_match('(^[A-Z]{2}$)', $countryCode)) {
+            throw new InvalidArgumentException('Invalid country code given');
+        }
+
+        $names = $this->reader->getPathData($locale, '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]', '', $countryCode);
+
+        if (!isset($names[$countryCode])) {
+            return $countryCode;
+        }
+
+        return $names[$countryCode];
+    }
 }
