@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Ajasta\Address\Entity\Address" table="address">
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="recipient" type="string" nullable="true"/>
+        <field name="organization" type="string" nullable="true"/>
+        <field name="addressLine1" type="string" nullable="true"/>
+        <field name="addressLine2" type="string" nullable="true"/>
+        <field name="locality" type="string" nullable="true"/>
+        <field name="dependentLocality" type="string" nullable="true"/>
+        <field name="administrativeArea" type="string" nullable="true"/>
+        <field name="postalCode" type="string" nullable="true"/>
+        <field name="sortingCode" type="string" nullable="true"/>
+        <field name="countryCode" type="string"/>
+    </entity>
+</doctrine-mapping>

@@ -1,7 +1,12 @@
 <?php
 return [
     'modules' => [
-        'Application',
+        // Local modules
+        'Ajasta\Address',
+        'Ajasta\Application',
+        'Ajasta\I18n',
+
+        // Vendor modules
         'SpiffyNavigation',
         'TwbBundle',
         'DoctrineModule',

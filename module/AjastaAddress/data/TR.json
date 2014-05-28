@@ -1,0 +1,1 @@
+{"key": "TR", "zipex": "01960,06101", "name": "TURKEY", "zip": "\\d{5}", "fmt": "%N%n%O%n%A%n%Z %C", "require": "ACZ", "posturl": "http://postakodu.ptt.gov.tr/", "id": "data/TR"}

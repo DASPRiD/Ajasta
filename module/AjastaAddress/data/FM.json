@@ -1,0 +1,1 @@
+{"upper": "ACNOS", "zipex": "96941,96944", "key": "FM", "zip": "(9694[1-4])(?:[ \\-](\\d{4}))?", "zip_name_type": "zip", "fmt": "%N%n%O%n%A%n%C %S %Z", "state_name_type": "state", "posturl": "http://zip4.usps.com/zip4/welcome.jsp", "require": "ACSZ", "id": "data/FM", "name": "MICRONESIA (Federated State of)"}

@@ -1,0 +1,1 @@
+{"key": "BG", "zipex": "1000,1700", "name": "BULGARIA (REP.)", "zip": "\\d{4}", "fmt": "%N%n%O%n%A%n%Z %C", "posturl": "http://www.bgpost.bg/?cid=5", "id": "data/BG"}

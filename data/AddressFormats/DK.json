@@ -1,1 +1,0 @@
-{"zipex": "8660,1566", "posturl": "http://www.postdanmark.dk/da/Privat/Kundeservice/postnummerkort/Sider/Find-postnummer.aspx", "zip": "\\d{4}", "require": "ACZ", "id": "data/DK", "key": "DK", "fmt": "%O%n%N%n%A%n%Z %C", "name": "DENMARK"}

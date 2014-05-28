@@ -1,0 +1,25 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <?php
+        echo $this->headTitle('Ajasta')->setSeparator(' - ');
+
+        echo $this->headLink()
+            ->prependStylesheet($this->basePath('vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css'))
+            ->prependStylesheet($this->basePath('vendor/bootstrap-3.1.1/css/bootstrap.min.css'));
+
+        echo $this->headScript()
+            ->prependFile($this->basePath('vendor/bootstrap-3.1.1/js/bootstrap.min.js'))
+            ->prependFile($this->basePath('vendor/jquery-2.1.1/jquery-2.1.1.min.js'));
+        ?>
+    </head>
+    <body>
+        <div class="container">
+            <?php echo $this->content; ?>
+        </div>
+
+        <?php echo $this->inlineScript() ?>
+    </body>
+</html>

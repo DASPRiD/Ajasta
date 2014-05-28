@@ -1,0 +1,46 @@
+<div class="page-header">
+    <a href="<?php echo $this->url('clients/edit', ['clientId' => $this->client->getId()]); ?>" class="btn btn-primary pull-right">Edit client</a>
+    <h1>Client: <?php echo $this->escapeHtml($this->client->getName()); ?></h1>
+</div>
+
+<dl class="dl-horizontal">
+    <dt>Language</dt>
+    <dd><?php echo $this->escapeHtml($this->displayLanguage($this->client->getLocale())); ?></dd>
+
+    <dt>Currency</dt>
+    <dd><?php echo $this->escapeHtml($this->displayCurrency($this->client->getCurrencyCode())); ?></dd>
+
+    <dt>Default unit</dt>
+    <dd>
+        <?php
+        $unit = $this->client->getDefaultUnit();
+
+        if ($unit === null) {
+            echo 'None';
+        } elseif ($unit === 'hours') {
+            echo 'Hours';
+        } else {
+            echo 'Days';
+        }
+        ?>
+    </dd>
+
+    <dt>Default unit price</dt>
+    <dd>
+        <?php
+        if ($this->client->getDefaultUnitPrice() === null) {
+            echo 'None';
+        } else {
+            echo $this->escapeHtml(
+                $this->currencyFormat(
+                    $this->client->getDefaultUnitPrice(),
+                    $this->client->getCurrencyCode()
+                )
+            );
+        }
+        ?>
+    </dd>
+
+    <dt>Address</dt>
+    <dd><?php echo $this->addressFormat($this->client->getAddress()); ?></dd>
+</dl>

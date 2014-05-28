@@ -1,0 +1,1 @@
+{"key": "MN", "zipex": "65030,65270", "name": "MONGOLIA", "zip": "\\d{5}", "fmt": "%N%n%O%n%A%n%S %C-%X%n%Z", "posturl": "http://www.zipcode.mn/", "id": "data/MN"}

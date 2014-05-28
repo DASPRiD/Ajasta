@@ -1,1 +1,0 @@
-{"upper": "ACX", "zipex": "97400", "posturl": "http://www.laposte.fr/Particulier/Utiliser-nos-outils-pratiques/Outils-et-documents/Trouvez-un-code-postal", "zip": "9[78]4\\d{2}", "require": "ACZ", "id": "data/RE", "key": "RE", "fmt": "%O%n%N%n%A%n%Z %C %X", "name": "REUNION"}

@@ -1,0 +1,1 @@
+{"upper": "ACX", "zipex": "97100", "key": "BL", "zip": "9[78][01]\\d{2}", "fmt": "%O%n%N%n%A%n%Z %C %X", "require": "ACZ", "posturl": "http://www.laposte.fr/Particulier/Utiliser-nos-outils-pratiques/Outils-et-documents/Trouvez-un-code-postal", "id": "data/BL", "name": "SAINT BARTHELEMY"}

@@ -1,1 +1,0 @@
-{"upper": "ACNOS", "zipex": "96910,96931", "posturl": "http://zip4.usps.com/zip4/welcome.jsp", "zip": "(969(?:[12]\\d|3[12]))(?:[ \\-](\\d{4}))?", "zip_name_type": "zip", "require": "ACSZ", "state_name_type": "state", "id": "data/GU", "key": "GU", "fmt": "%N%n%O%n%A%n%C %S %Z", "name": "GUAM"}

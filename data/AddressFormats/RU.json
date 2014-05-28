@@ -1,1 +1,0 @@
-{"upper": "AC", "zipex": "125075,247112,103375", "posturl": "http://info.russianpost.ru/servlet/department", "zip": "\\d{6}", "require": "ACZ", "id": "data/RU", "key": "RU", "fmt": "%Z %C  %n%A%n%O%n%N", "name": "RUSSIAN FEDERATION"}

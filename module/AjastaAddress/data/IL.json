@@ -1,0 +1,1 @@
+{"key": "IL", "zipex": "9614303", "name": "ISRAEL", "zip": "\\d{5}(?:\\d{2})?", "fmt": "%N%n%O%n%A%n%C %Z", "posturl": "http://www.israelpost.co.il/zipcode.nsf/demozip?openform", "id": "data/IL"}

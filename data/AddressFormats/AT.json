@@ -1,1 +1,0 @@
-{"zipex": "1010,3741", "posturl": "http://www.post.at/post_subsite_postleitzahlfinder.php", "zip": "\\d{4}", "require": "ACZ", "id": "data/AT", "key": "AT", "fmt": "%O%n%N%n%A%n%Z %C", "name": "AUSTRIA"}

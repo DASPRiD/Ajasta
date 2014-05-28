@@ -1,0 +1,1 @@
+{"key": "BE", "zipex": "4000,1000", "name": "BELGIUM", "zip": "\\d{4}", "fmt": "%O%n%N%n%A%n%Z %C", "require": "ACZ", "posturl": "http://www.post.be/site/nl/residential/customerservice/search/postal_codes.html", "id": "data/BE"}

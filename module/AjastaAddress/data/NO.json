@@ -1,0 +1,1 @@
+{"key": "NO", "zipex": "0025,0107,6631", "name": "NORWAY", "zip": "\\d{4}", "fmt": "%N%n%O%n%A%n%Z %C", "require": "ACZ", "posturl": "http://adressesok.posten.no/nb/postal_codes/search", "id": "data/NO"}

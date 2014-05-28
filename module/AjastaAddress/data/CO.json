@@ -1,0 +1,1 @@
+{"key": "CO", "zipex": "111221,130001,760011", "name": "COLOMBIA", "zip": "\\d{6}", "fmt": "%N%n%O%n%A%n%C, %S", "posturl": "http://www.codigopostal4-72.com.co/codigosPostales/", "id": "data/CO"}

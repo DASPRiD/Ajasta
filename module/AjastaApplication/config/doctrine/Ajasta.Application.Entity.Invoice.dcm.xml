@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Ajasta\Application\Entity\Invoice" table="invoice">
+        <id name="id" type="integer">
+            <generator strategy="AUTO"/>
+        </id>
+
+        <field name="locale" type="string"/>
+        <field name="currencyCode" type="string"/>
+        <field name="issueDate" type="date"/>
+        <field name="dueDate" type="date"/>
+        <field name="discount" type="decimal" precision="5" scale="2"/>
+        <field name="vat" type="decimal" precision="5" scale="2"/>
+
+        <many-to-one field="project" target-entity="Project"/>
+        <one-to-many field="items" target-entity="InvoiceItem" mapped-by="invoice"/>
+    </entity>
+</doctrine-mapping>

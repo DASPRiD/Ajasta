@@ -1,0 +1,1 @@
+{"key": "TN", "zipex": "1002,8129,3100,1030", "name": "TUNISIA", "zip": "\\d{4}", "fmt": "%N%n%O%n%A%n%Z %C", "posturl": "http://www.poste.tn/codes.php", "id": "data/TN"}

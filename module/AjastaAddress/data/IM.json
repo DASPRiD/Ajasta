@@ -1,0 +1,1 @@
+{"upper": "CZ", "zipex": "IM2 1AA,IM99 1PS", "key": "IM", "zip": "IM\\d[\\dA-Z]?[ ]?\\d[ABD-HJLN-UW-Z]{2}", "fmt": "%N%n%O%n%A%n%X%n%C%n%Z", "require": "ACZ", "posturl": "http://www.gov.im/post/postal/fr_main.asp", "id": "data/IM", "name": "ISLE OF MAN"}

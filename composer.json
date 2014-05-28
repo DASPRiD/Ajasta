@@ -1,6 +1,6 @@
 {
     "name": "dasprid/ajasta",
-    "description": "Invoicing application",
+    "description": "Ajasta is a simple invoicing application built with the latest technologies on the market.",
     "require": {
         "php": ">=5.4.0",
         "ext-bcmath": "*",
@@ -15,5 +15,12 @@
     },
     "require-dev": {
         "doctrine/migrations": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "Ajasta\\Address\\": "module/AjastaAddress/src",
+            "Ajasta\\Application\\": "module/AjastaApplication/src",
+            "Ajasta\\I18n\\": "module/AjastaI18n/src"
+        }
     }
 }
