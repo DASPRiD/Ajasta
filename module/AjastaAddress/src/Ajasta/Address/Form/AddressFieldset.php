@@ -3,7 +3,7 @@ namespace Ajasta\Address\Form;
 
 use Ajasta\Address\Entity\Address;
 use Ajasta\Address\Hydrator\AddressHydrator;
-use Zend\Filter\Null;
+use Zend\Filter\Null as NullFilter;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
@@ -121,90 +121,117 @@ class AddressFieldset extends Fieldset implements InputFilterProviderInterface
         return [
             'recipient' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'recipient']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'recipient']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'organization' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'organization']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'organization']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'addressLine1' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'addressLine1']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'addressLine1']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'addressLine2' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'addressLine2']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'addressLine2']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'locality' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'locality']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'locality']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'dependentLocality' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'dependentLocality']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'dependentLocality']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'administrativeArea' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'administrativeArea']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'administrativeArea']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'postalCode' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'postalCode']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'postalCode']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,
             ],
             'sortingCode' => [
                 'validators' => [
-                    ['name' => 'Ajasta\Address\Validator\AddressFieldValidator', 'options' => ['field' => 'sortingCode']],
+                    [
+                        'name' => 'Ajasta\Address\Validator\AddressFieldValidator',
+                        'options' => ['field' => 'sortingCode']
+                    ],
                 ],
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
                 'required' => true,
                 'continue_if_empty' => true,

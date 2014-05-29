@@ -209,7 +209,11 @@ class AddressService
                 }
 
                 if (!isset(static::$fieldMap[$char])) {
-                    throw new RuntimeException(sprintf('Unrecognized character "%s" in format pattern "%s"', $char, $format));
+                    throw new RuntimeException(sprintf(
+                        'Unrecognized character "%s" in format pattern "%s"',
+                        $char,
+                        $format
+                    ));
                 }
 
                 $parts[] = '%' . $char;

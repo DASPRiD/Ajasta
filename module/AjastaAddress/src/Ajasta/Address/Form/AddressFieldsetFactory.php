@@ -12,7 +12,10 @@ class AddressFieldsetFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $formElementManager)
     {
         return new AddressFieldset(
-            $formElementManager->getServiceLocator()->get('HydratorManager')->get('Ajasta\Address\Hydrator\AddressHydrator')
+            $formElementManager
+                ->getServiceLocator()
+                ->get('HydratorManager')
+                ->get('Ajasta\Address\Hydrator\AddressHydrator')
         );
     }
 }

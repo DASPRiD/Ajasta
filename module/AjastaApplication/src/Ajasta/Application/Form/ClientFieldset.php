@@ -2,7 +2,7 @@
 namespace Ajasta\Application\Form;
 
 use Ajasta\Application\Entity\Client;
-use Zend\Filter\Null;
+use Zend\Filter\Null as NullFilter;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
@@ -115,7 +115,7 @@ class ClientFieldset extends Fieldset implements InputFilterProviderInterface
             'defaultUnitPrice' => [
                 'allow_empty' => true,
                 'filters' => [
-                    ['name' => 'null', 'options' => ['type' => Null::TYPE_STRING]],
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
             ],
         ];

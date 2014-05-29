@@ -35,7 +35,12 @@ class Manager
             throw new InvalidArgumentException('Invalid currency code given');
         }
 
-        $names = $this->reader->getPathData($locale, '/ldml/numbers/currencies/currency[@type="' . $currencyCode . '"]/displayName[not(@count)]', '', $currencyCode);
+        $names = $this->reader->getPathData(
+            $locale,
+            '/ldml/numbers/currencies/currency[@type="' . $currencyCode . '"]/displayName[not(@count)]',
+            '',
+            $currencyCode
+        );
 
         if (!isset($names[$currencyCode])) {
             return $currencyCode;
@@ -52,7 +57,12 @@ class Manager
             throw new InvalidArgumentException('Invalid country code given');
         }
 
-        $names = $this->reader->getPathData($locale, '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]', '', $countryCode);
+        $names = $this->reader->getPathData(
+            $locale,
+            '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]',
+            '',
+            $countryCode
+        );
 
         if (!isset($names[$countryCode])) {
             return $countryCode;
