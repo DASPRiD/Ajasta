@@ -1,6 +1,8 @@
 Ajasta
 ======
 
+[![Build Status](https://api.travis-ci.org/DASPRiD/Ajasta.png?branch=master)](http://travis-ci.org/DASPRiD/Ajasta)
+
 Introduction
 ------------
 Ajasta is a simple invoicing application built with the latest technologies on

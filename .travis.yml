@@ -1,0 +1,12 @@
+language: php
+php:
+ - 5.4
+ - 5.5
+ - 5.6
+
+before_script:
+ - composer install --prefer-source
+
+script:
+ - vendor/bin/parallel-lint --exclude vendor/ .
+ - vendor/bin/phpcs --standard=psr2 --encoding=utf-8 --extensions=php module/ config/
