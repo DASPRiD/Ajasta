@@ -5,13 +5,17 @@
         "php": ">=5.4.0",
         "ext-bcmath": "*",
         "ext-intl": "*",
+
         "zendframework/zendframework": "dev-master as 2.3.2",
-        "spiffy/spiffy-navigation": ">=1.0.0",
+        "neilime/zf2-twb-bundle": "2.*@stable",
+
+        "doctrine/dbal": ">=2.5@dev",
+        "doctrine/orm": ">=2.5@dev",
         "doctrine/doctrine-orm-module": "0.*",
-        "tecnick.com/tcpdf": ">=6.0.0",
-        "setasign/fpdi": ">=1.4.2",
         "marc-mabe/php-enum": ">=1.2.0",
-        "neilime/zf2-twb-bundle": "2.*@stable"
+
+        "tecnick.com/tcpdf": ">=6.0.0",
+        "setasign/fpdi": ">=1.4.2"
     },
     "require-dev": {
         "doctrine/migrations": "dev-master",
@@ -21,8 +25,10 @@
     "autoload": {
         "psr-0": {
             "Ajasta\\Address\\": "module/AjastaAddress/src",
-            "Ajasta\\Application\\": "module/AjastaApplication/src",
-            "Ajasta\\I18n\\": "module/AjastaI18n/src"
+            "Ajasta\\Client\\": "module/AjastaClient/src",
+            "Ajasta\\Core\\": "module/AjastaCore/src",
+            "Ajasta\\I18n\\": "module/AjastaI18n/src",
+            "Ajasta\\Invoice\\": "module/AjastaInvoice/src"
         }
     }
 }

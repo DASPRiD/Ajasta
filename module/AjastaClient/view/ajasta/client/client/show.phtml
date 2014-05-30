@@ -1,0 +1,101 @@
+<div class="page-header">
+    <a href="<?php echo $this->url('clients/edit', ['clientId' => $this->client->getId()]); ?>" class="btn btn-primary pull-right">
+        <span class="glyphicon glyphicon-pencil"></span>
+        Edit client
+    </a>
+    <h1>Client: <?php echo $this->escapeHtml($this->client->getName()); ?></h1>
+</div>
+
+<dl class="dl-horizontal">
+    <dt>Language</dt>
+    <dd><?php echo $this->escapeHtml($this->displayLanguage($this->client->getLocale())); ?></dd>
+
+    <dt>Currency</dt>
+    <dd><?php echo $this->escapeHtml($this->displayCurrency($this->client->getCurrencyCode())); ?></dd>
+
+    <dt>Taxable</dt>
+    <dd><?php echo $this->escapeHtml($this->client->getTaxable() ? 'Yes': 'No'); ?></dd>
+
+    <dt>Default unit</dt>
+    <dd><?php echo $this->escapeHtml($this->displayUnit($this->client->getDefaultUnit())); ?></dd>
+
+    <dt>Default unit price</dt>
+    <dd><?php echo $this->escapeHtml($this->displayUnitPrice($this->client->getDefaultUnitPrice(), $this->client->getCurrencyCode())); ?></dd>
+
+    <dt>Address</dt>
+    <dd><?php echo $this->addressFormat($this->client->getAddress()); ?></dd>
+</dl>
+
+<h2>
+    Contacts
+    <a href="" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Add</a>
+</h2>
+
+<table id="contact-table"  class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Full name</th>
+            <th>Email address</th>
+            <th>Receives invoices</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+</table>
+
+<script type="text/javascript">
+$(document).on('ready', function(){
+    $('#contact-table').DataTable({
+        columnDefs: [
+            {searchable: true, orderable: true},
+            {searchable: true, orderable: true},
+            {searchable: false, orderable: true},
+            {searchable: false, orderable: false}
+        ],
+        order: [0, 'asc'],
+        stateSave: true
+    });
+});
+</script>
+
+<h2>
+    Projects
+    <a href="<?php echo $this->url('projects/create', ['clientId' => $this->client->getId()]); ?>" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span> Add</a>
+</h2>
+
+<table id="project-table"  class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Default unit</th>
+            <th>Default unit price</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($this->client->getProjects() as $project): ?>
+            <tr>
+                <td><?php echo $this->escapeHtml($project->getName()); ?></td>
+                <td><?php echo $this->escapeHtml($this->displayUnit($project->getDefaultUnit())); ?></td>
+                <td><?php echo $this->escapeHtml($this->displayUnitPrice($project->getDefaultUnitPrice(), $this->client->getCurrencyCode())); ?></td>
+                <td>
+                    <a href="<?php echo $this->url('projects/edit', ['projectId' => $project->getId()]); ?>">Edit</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<script type="text/javascript">
+$(document).on('ready', function(){
+    $('#project-table').DataTable({
+        columnDefs: [
+            {searchable: true, orderable: true},
+            {searchable: true, orderable: true},
+            {searchable: false, orderable: true},
+            {searchable: false, orderable: false}
+        ],
+        order: [0, 'asc'],
+        stateSave: true
+    });
+});
+</script>

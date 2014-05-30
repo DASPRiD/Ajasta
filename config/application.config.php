@@ -3,11 +3,12 @@ return [
     'modules' => [
         // Local modules
         'Ajasta\Address',
-        'Ajasta\Application',
+        'Ajasta\Client',
+        'Ajasta\Core',
         'Ajasta\I18n',
+        'Ajasta\Invoice',
 
         // Vendor modules
-        'SpiffyNavigation',
         'TwbBundle',
         'DoctrineModule',
         'DoctrineORMModule',
