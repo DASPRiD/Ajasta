@@ -29,7 +29,6 @@ This application is currently work in progress, and just here to demonstrate
 what's already implemented. Here's a (likely incomplete) list of what's still
 left to do:
 
-- Projects
 - Contacts
 - Invoices
 - Users (lowest priority, keep it protected with htpasswd for now)

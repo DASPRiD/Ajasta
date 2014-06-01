@@ -1,14 +1,14 @@
 <?php
-namespace Ajasta\Core\Form;
+namespace Ajasta\Invoice\Form;
 
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 
-class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
+class SettingsFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()
     {
-        parent::__construct('options');
+        parent::__construct('invoice');
     }
 
     public function init()
@@ -16,31 +16,7 @@ class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
         parent::init();
 
         $this->add([
-            'name' => 'invoice.email.sender-address',
-            'type' => 'email',
-            'options' => [
-                'label' => 'Sender address',
-                'column-size' => 'sm-4',
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'invoice.email.sender-name',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Sender address',
-                'column-size' => 'sm-4',
-            ],
-            'attributes' => [
-                'required' => true,
-            ],
-        ]);
-
-        $this->add([
-            'name' => 'invoice.default.value-added-tax',
+            'name' => 'default_vat',
             'type' => 'number',
             'options' => [
                 'label' => 'Default VAT',
@@ -55,7 +31,7 @@ class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'invoice.default.unit',
+            'name' => 'default_unit',
             'type' => 'Ajasta\Core\Form\Element\UnitSelect',
             'options' => [
                 'label' => 'Default unit',
@@ -67,7 +43,7 @@ class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'invoice.default.unit-price',
+            'name' => 'default_unit_price',
             'type' => 'number',
             'options' => [
                 'label' => 'Default unit price',
@@ -81,7 +57,7 @@ class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'invoice.invoice-incrementer',
+            'name' => 'invoice_incrementer',
             'type' => 'number',
             'options' => [
                 'label' => 'Invoice incrementer',
@@ -98,22 +74,16 @@ class OptionsFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'invoice.email.sender-address' => [
+            'default_vat' => [
                 'required' => true,
             ],
-            'invoice.email.sender-name' => [
+            'default_unit' => [
                 'required' => true,
             ],
-            'invoice.default.value-added-tax' => [
+            'default_unit_price' => [
                 'required' => true,
             ],
-            'invoice.default.unit' => [
-                'required' => true,
-            ],
-            'invoice.default.unit-price' => [
-                'required' => true,
-            ],
-            'invoice.invoice-incrementer' => [
+            'invoice_incrementer' => [
                 'allow_empty' => true,
             ],
         ];

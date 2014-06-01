@@ -1,12 +1,12 @@
 <?php
 namespace Ajasta\Core\Dbal\Type;
 
-use Ajasta\Core\Entity\OptionType;
+use Ajasta\Core\Entity\SettingType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 use InvalidArgumentException;
 
-class OptionTypeEnumType extends StringType
+class SettingTypeEnumType extends StringType
 {
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
@@ -14,14 +14,14 @@ class OptionTypeEnumType extends StringType
             return null;
         }
 
-        if (!$value instanceof OptionType) {
+        if (!$value instanceof SettingType) {
             throw new InvalidArgumentException(sprintf(
                 'Expected value of type OptionType, got %s',
                 is_object($value) ? get_class($value) : gettype($value)
             ));
         }
 
-        return $value->getName();
+        return $value->getValue();
     }
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
@@ -30,6 +30,6 @@ class OptionTypeEnumType extends StringType
             return null;
         }
 
-        return OptionType::getByName($value);
+        return SettingType::get($value);
     }
 }

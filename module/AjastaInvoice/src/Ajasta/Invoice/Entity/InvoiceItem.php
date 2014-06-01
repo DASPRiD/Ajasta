@@ -1,5 +1,5 @@
 <?php
-namespace Ajasta\Core\Entity;
+namespace Ajasta\Invoice\Entity;
 
 class InvoiceItem
 {

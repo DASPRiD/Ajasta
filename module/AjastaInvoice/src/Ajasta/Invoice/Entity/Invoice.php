@@ -1,5 +1,8 @@
 <?php
-namespace Ajasta\Core\Entity;
+namespace Ajasta\Invoice\Entity;
+
+use Ajasta\Client\Entity\Client;
+use Ajasta\Client\Entity\Project;
 
 class Invoice
 {
@@ -7,6 +10,11 @@ class Invoice
      * @var int
      */
     protected $id;
+
+    /**
+     * @var Client
+     */
+    protected $client;
 
     /**
      * @var Project

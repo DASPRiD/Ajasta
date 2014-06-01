@@ -4,19 +4,19 @@ namespace Ajasta\Core\Service;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class OptionServiceFactory implements FactoryInterface
+class SettingsServiceFactory implements FactoryInterface
 {
     /**
-     * @return OptionService
+     * @return SettingsService
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-        return new OptionService(
-            $serviceLocator->get('Config')['dynamic_option_defaults'],
+        return new SettingsService(
+            $serviceLocator->get('Config')['setting_defaults'],
             $objectManager,
-            $objectManager->getRepository('Ajasta\Core\Entity\Option')
+            $objectManager->getRepository('Ajasta\Core\Entity\Setting')
         );
     }
 }

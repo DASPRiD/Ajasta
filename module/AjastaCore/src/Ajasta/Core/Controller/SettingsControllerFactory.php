@@ -4,18 +4,18 @@ namespace Ajasta\Core\Controller;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class OptionControllerFactory implements FactoryInterface
+class SettingsControllerFactory implements FactoryInterface
 {
     /**
-     * @return OptionController
+     * @return SettingsController
      */
     public function createService(ServiceLocatorInterface $controllerManager)
     {
         $serviceLocator = $controllerManager->getServiceLocator();
 
-        return new OptionController(
-            $serviceLocator->get('Ajasta\Core\Service\OptionService'),
-            $serviceLocator->get('FormElementManager')->get('Ajasta\Core\Form\OptionForm')
+        return new SettingsController(
+            $serviceLocator->get('Ajasta\Core\Service\SettingsService'),
+            $serviceLocator->get('FormElementManager')->get('Ajasta\Core\Form\SettingsForm')
         );
     }
 }
