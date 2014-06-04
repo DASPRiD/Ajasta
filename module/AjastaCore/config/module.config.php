@@ -1,25 +1,5 @@
 <?php
 return [
-    'doctrine' => [
-        'driver' => [
-            'ajasta_core_entity' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\XmlDriver',
-                'paths' => __DIR__ . '/doctrine',
-            ],
-            'orm_default' => [
-                'drivers' => [
-                    'Ajasta\Core\Entity' => 'ajasta_core_entity',
-                ],
-            ],
-        ],
-        'configuration' => [
-            'orm_default' => [
-                'types' => [
-                    'settingTypeEnum' => 'Ajasta\Core\Dbal\Type\SettingTypeEnumType',
-                ],
-            ],
-        ],
-    ],
     'router' => [
         'routes' => [
             'home' => [
@@ -32,32 +12,16 @@ return [
                     ],
                 ],
             ],
-            'settings' => [
-                'type' => 'literal',
-                'options' => [
-                    'route'    => '/settings',
-                    'defaults' => [
-                        'controller' => 'Ajasta\Core\Controller\SettingsController',
-                        'action' => 'index',
-                    ],
-                ],
-            ],
         ],
     ],
     'navigation' => [
         'default' => [
             'home' => ['label' => 'Home', 'route' => 'home', 'order' => 100],
-            'settings' => ['label' => 'Settings', 'route' => 'settings', 'order' => 1000],
         ],
     ],
     'controllers' => [
         'invokables' => [
             'Ajasta\Core\Controller\IndexController' => 'Ajasta\Core\Controller\IndexController',
-        ],
-        'factories' => [
-            'Ajasta\Core\Controller\ClientController' => 'Ajasta\Core\Controller\ClientControllerFactory',
-            'Ajasta\Core\Controller\SettingsController' => 'Ajasta\Core\Controller\SettingsControllerFactory',
-            'Ajasta\Core\Controller\ProjectController' => 'Ajasta\Core\Controller\ProjectControllerFactory',
         ],
     ],
     'service_manager' => [
@@ -66,7 +30,6 @@ return [
             'Zend\Log\LoggerAbstractServiceFactory',
         ],
         'factories' => [
-            'Ajasta\Core\Service\SettingsService' => 'Ajasta\Core\Service\SettingsServiceFactory',
             'Ajasta\Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ],
         'aliases' => [
@@ -78,8 +41,6 @@ return [
             'Ajasta\Core\Form\Element\LocaleSelect' => 'Ajasta\Core\Form\Element\LocaleSelect',
             'Ajasta\Core\Form\Element\Toggle' => 'Ajasta\Core\Form\Element\Toggle',
             'Ajasta\Core\Form\Element\UnitSelect' => 'Ajasta\Core\Form\Element\UnitSelect',
-            'Ajasta\Core\Form\SettingsFieldset' => 'Ajasta\Core\Form\SettingsFieldset',
-            'Ajasta\Core\Form\SettingsForm' => 'Ajasta\Core\Form\SettingsForm',
         ],
         'factories' => [
             'Ajasta\Core\Form\Element\CurrencySelect' => 'Ajasta\Core\Form\Element\CurrencySelectFactory',
@@ -93,14 +54,14 @@ return [
     ],
     'view_manager' => [
         'display_not_found_reason' => true,
-        'display_exceptions'       => true,
-        'doctype'                  => 'HTML5',
-        'not_found_template'       => 'error/404',
-        'exception_template'       => 'error/index',
+        'display_exceptions' => true,
+        'doctype' => 'HTML5',
+        'not_found_template' => 'error/404',
+        'exception_template' => 'error/index',
         'template_map' => [
-            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
-            'error/404'               => __DIR__ . '/../view/error/404.phtml',
-            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+            'layout/layout' => __DIR__ . '/../view/layout/layout.phtml',
+            'error/404' => __DIR__ . '/../view/error/404.phtml',
+            'error/index' => __DIR__ . '/../view/error/index.phtml',
         ],
         'controller_map' => [
             'Ajasta\Core' => true,
@@ -110,12 +71,6 @@ return [
         ],
         'strategies' => [
             'ViewJsonStrategy',
-        ],
-    ],
-    'setting_defaults' => [
-        'core' => [
-            'email_sender_address' => ['type' => 'string', 'value' => 'ajasta@example.com'],
-            'email_sender_name' => ['type' => 'string', 'value' => 'Ajasta'],
         ],
     ],
 ];

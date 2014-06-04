@@ -16,4 +16,15 @@ return [
             ],
         ],
     ],
+    'ajasta' => [
+        'core' => [
+            'email_sender_address' => 'ajasta@example.com',
+            'email_sender_name' => 'Ajasta',
+        ],
+        'invoice' => [
+            'default_vat' => '0.0', // Decimal value, keep as string
+            'default_unit' => null, // Can be null, 'days' or 'hours'
+            'default_unit_price' => '0.0', // Decimal value, keep as string
+        ],
+    ],
 ];
