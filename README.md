@@ -16,12 +16,33 @@ The installation is currently based on the doctrine-module schema tool, this
 should be changed to doctrine migrations at a later point.
 
 - Create a database
-- Copy "local.php.dist" to "local.php" in the "/config/autoload" directory and
-  fill out all values
-- Run "composer install"
-- Run "vendor/bin/doctrine-module orm:schema-tool:update --force"
-- Point a virtual host to the "/public" directory
+- Copy ```local.php.dist``` to ```local.php``` in the ```/config/autoload```
+  directory and fill out all values
+- Run ```composer install```
+- Run ```php public/index.php orm:schema-tool:update --force```
+- Point a virtual host to the ```/public``` directory
 - Profit!
+
+Contributing
+------------
+If you want to contribute to the project, the above steps are usually enough, as
+long as you don't want to change the CSS or JavaScript. If you want to do the
+latter, you need to install Bower, NPM and grunt-cli. After that, run the
+following commands:
+
+ - ```bower install```
+ - ```npm install```
+
+This will get you ready to work on the assets (which are located in the assets
+folder). As long as you are working on those, just keep the following command
+running, which will automatically compile CSS and JavaScript when it changes:
+
+```grunt```
+
+If you update bower components to new versions, don't forget to run (and maybe
+update) the copy task:
+
+```grunt copy```
 
 Work in Progres
 ---------------

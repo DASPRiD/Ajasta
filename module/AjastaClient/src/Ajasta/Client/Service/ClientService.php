@@ -41,7 +41,15 @@ class ClientService
      */
     public function findAllActive()
     {
-        return $this->clientRepository->findAll();
+        return $this->clientRepository->findBy(['active' => true]);
+    }
+
+    /**
+     * @return Client[]
+     */
+    public function findAllArchived()
+    {
+        return $this->clientRepository->findBy(['active' => false]);
     }
 
     /**

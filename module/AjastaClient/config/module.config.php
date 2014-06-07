@@ -59,6 +59,39 @@ return [
                             ],
                         ],
                     ],
+                    'archive' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/archive/:clientId',
+                            'defaults' => [
+                                'action' => 'archive',
+                            ],
+                            'constraints' => [
+                                'clientId' => '\d+',
+                            ],
+                        ],
+                    ],
+                    'activate' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/activate/:clientId',
+                            'defaults' => [
+                                'action' => 'activate',
+                            ],
+                            'constraints' => [
+                                'clientId' => '\d+',
+                            ],
+                        ],
+                    ],
+                    'get-archived-clients' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/get-archived-clients',
+                            'defaults' => [
+                                'action' => 'get-archived-clients',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'projects' => [
@@ -134,6 +167,9 @@ return [
             'Ajasta\Client\Form\ClientForm' => 'Ajasta\Client\Form\ClientForm',
             'Ajasta\Client\Form\ProjectFieldset' => 'Ajasta\Client\Form\ProjectFieldset',
             'Ajasta\Client\Form\ProjectForm' => 'Ajasta\Client\Form\ProjectForm',
+        ],
+        'factories' => [
+            'Ajasta\Client\Form\Element\ClientSelect' => 'Ajasta\Client\Form\Element\ClientSelectFactory',
         ],
     ],
     'view_manager' => [

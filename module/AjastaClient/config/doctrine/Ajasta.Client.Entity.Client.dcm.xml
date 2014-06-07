@@ -16,6 +16,7 @@
         <field name="taxable" type="boolean"/>
         <field name="defaultUnit" type="string" nullable="true"/>
         <field name="defaultUnitPrice" type="decimal" precision="10" scale="2" nullable="true"/>
+        <field name="active" type="boolean"/>
 
         <one-to-one field="address" target-entity="Ajasta\Address\Entity\Address">
             <cascade>

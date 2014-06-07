@@ -24,6 +24,42 @@ return [
                         'action' => 'index',
                     ],
                 ],
+                'may_terminate' => true,
+                'child_routes' => [
+                    'create' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/create',
+                            'defaults' => [
+                                'action' => 'create',
+                            ],
+                        ],
+                    ],
+                    'edit' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/edit/:invoiceId',
+                            'defaults' => [
+                                'action' => 'edit',
+                            ],
+                            'constraints' => [
+                                'invoiceId' => '\d+',
+                            ],
+                        ],
+                    ],
+                    'show' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/show/:invoiceId',
+                            'defaults' => [
+                                'action' => 'show',
+                            ],
+                            'constraints' => [
+                                'invoiceId' => '\d+',
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ],
     ],
@@ -40,6 +76,13 @@ return [
     'service_manager' => [
         'factories' => [
             'Ajasta\Invoice\Service\InvoiceService' => 'Ajasta\Invoice\Service\InvoiceServiceFactory',
+        ],
+    ],
+    'form_elements' => [
+        'invokables' => [
+            'Ajasta\Invoice\Form\InvoiceFieldset' => 'Ajasta\Invoice\Form\InvoiceFieldset',
+            'Ajasta\Invoice\Form\InvoiceForm' => 'Ajasta\Invoice\Form\InvoiceForm',
+            'Ajasta\Invoice\Form\InvoiceItemFieldset' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
         ],
     ],
     'view_manager' => [

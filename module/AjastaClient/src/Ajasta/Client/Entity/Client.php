@@ -11,6 +11,11 @@ class Client
     protected $id;
 
     /**
+     * @var bool
+     */
+    protected $active = true;
+
+    /**
      * @var string
      */
     protected $name;
@@ -56,6 +61,22 @@ class Client
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getActive()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
     }
 
     /**

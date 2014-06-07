@@ -1,17 +1,16 @@
 <?php
-namespace Ajasta\Client\Form;
+namespace Ajasta\Invoice\Form;
 
-use Ajasta\Client\Entity\Project;
-use Zend\Filter\Null as NullFilter;
+use Ajasta\Invoice\Entity\InvoiceItem;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
-class ProjectFieldset extends Fieldset implements InputFilterProviderInterface
+class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()
     {
-        parent::__construct('project');
+        parent::__construct('invoiceItem');
     }
 
     public function init()
@@ -19,14 +18,13 @@ class ProjectFieldset extends Fieldset implements InputFilterProviderInterface
         parent::init();
 
         $this->setHydrator(new ClassMethodsHydrator(false));
-        $this->setObject(new Project());
+        $this->setObject(new InvoiceItem());
 
         $this->add([
-            'name' => 'name',
+            'name' => 'description',
             'type' => 'text',
             'options' => [
-                'label' => 'Name',
-                'column-size' => 'sm-4',
+                'label' => 'Description',
             ],
             'attributes' => [
                 'required' => true,
@@ -34,24 +32,37 @@ class ProjectFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'defaultUnit',
-            'type' => 'Ajasta\Core\Form\Element\UnitSelect',
+            'name' => 'quantity',
+            'type' => 'number',
             'options' => [
-                'label' => 'Default unit',
-                'column-size' => 'sm-2',
+                'label' => 'Quantity',
+            ],
+            'attributes' => [
+                'min' => '0',
+                'max' => '100',
+                'step' => '0.01',
+                'required' => true,
             ],
         ]);
 
         $this->add([
-            'name' => 'defaultUnitPrice',
+            'name' => 'unit',
+            'type' => 'Ajasta\Core\Form\Element\UnitSelect',
+            'options' => [
+                'label' => 'Unit',
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'unitPrice',
             'type' => 'number',
             'options' => [
-                'label' => 'Default unit price',
-                'column-size' => 'sm-2',
+                'label' => 'Unit price',
             ],
             'attributes' => [
                 'min' => '0',
                 'step' => '0.01',
+                'required' => true,
             ],
         ]);
     }
@@ -59,20 +70,20 @@ class ProjectFieldset extends Fieldset implements InputFilterProviderInterface
     public function getInputFilterSpecification()
     {
         return [
-            'name' => [
+            'description' => [
                 'required' => true,
             ],
-            'defaultUnit' => [
+            'quantity' => [
+                'required' => true,
+            ],
+            'unit' => [
                 'allow_empty' => true,
                 'filters' => [
                     ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
                 ],
             ],
-            'defaultUnitPrice' => [
-                'allow_empty' => true,
-                'filters' => [
-                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
-                ],
+            'unitPrice' => [
+                'required' => true,
             ],
         ];
     }

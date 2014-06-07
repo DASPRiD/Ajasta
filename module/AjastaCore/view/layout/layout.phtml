@@ -5,23 +5,8 @@
         <meta charset="utf-8">
         <?php
         echo $this->headTitle('Ajasta')->setSeparator(' - ');
-
-        echo $this->headLink()
-            ->prependStylesheet($this->basePath('css/main.css'))
-            ->prependStylesheet($this->basePath('vendor/bootstrap-switch-3.0.1/bootstrap-switch.min.css'))
-            ->prependStylesheet($this->basePath('vendor/chosen-1.1.0/chosen-bootstrap.min.css'))
-            ->prependStylesheet($this->basePath('vendor/datatables-1.10.0/css/dataTables.bootstrap.css'))
-            ->prependStylesheet($this->basePath('vendor/bootstrap-3.1.1/css/bootstrap-theme.min.css'))
-            ->prependStylesheet($this->basePath('vendor/bootstrap-3.1.1/css/bootstrap.min.css'));
-
-        echo $this->headScript()
-            ->prependFile($this->basePath('js/main.js'))
-            ->prependFile($this->basePath('vendor/bootstrap-switch-3.0.1/bootstrap-switch.min.js'))
-            ->prependFile($this->basePath('vendor/chosen-1.1.0/chosen.jquery.min.js'))
-            ->prependFile($this->basePath('vendor/datatables-1.10.0/js/dataTables.bootstrap.js'))
-            ->prependFile($this->basePath('vendor/datatables-1.10.0/js/jquery.dataTables.min.js'))
-            ->prependFile($this->basePath('vendor/bootstrap-3.1.1/js/bootstrap.min.js'))
-            ->prependFile($this->basePath('vendor/jquery-2.1.1/jquery-2.1.1.min.js'));
+        echo $this->headLink()->prependStylesheet($this->basePath('assets/stylesheets/main.css'));
+        echo $this->headScript()->prependFile($this->basePath('assets/javascript/main.js'));
         ?>
     </head>
     <body>

@@ -1,17 +1,17 @@
 <?php
-namespace Ajasta\Client\Form;
+namespace Ajasta\Invoice\Form;
 
-use Ajasta\Client\Entity\Client;
+use Ajasta\Invoice\Entity\Invoice;
 use Zend\Filter\Null as NullFilter;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
-class ClientFieldset extends Fieldset implements InputFilterProviderInterface
+class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
 {
     public function __construct()
     {
-        parent::__construct('client');
+        parent::__construct('invoice');
     }
 
     public function init()
@@ -19,17 +19,26 @@ class ClientFieldset extends Fieldset implements InputFilterProviderInterface
         parent::init();
 
         $this->setHydrator(new ClassMethodsHydrator(false));
-        $this->setObject(new Client());
+        $this->setObject(new Invoice());
 
         $this->add([
-            'name' => 'name',
-            'type' => 'text',
+            'name' => 'client',
+            'type' => 'Ajasta\Client\Form\Element\ClientSelect',
             'options' => [
-                'label' => 'Name',
+                'label' => 'Client',
                 'column-size' => 'sm-4',
             ],
             'attributes' => [
                 'required' => true,
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'project',
+            'type' => 'select',
+            'options' => [
+                'label' => 'Project',
+                'column-size' => 'sm-4',
             ],
         ]);
 
@@ -58,49 +67,76 @@ class ClientFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
         $this->add([
-            'name' => 'taxable',
-            'type' => 'Ajasta\Core\Form\Element\Toggle',
+            'name' => 'issueDate',
+            'type' => 'Ajasta\Core\Form\Element\DatePicker',
             'options' => [
-                'label' => 'Taxable',
-                'column-size' => 'sm-4',
+                'label' => 'Issue date',
+                'column-size' => 'sm-3',
+                'default-today' => true,
+            ],
+            'attributes' => [
+                'required' => true,
             ],
         ]);
 
         $this->add([
-            'name' => 'defaultUnit',
-            'type' => 'Ajasta\Core\Form\Element\UnitSelect',
+            'name' => 'dueDate',
+            'type' => 'Ajasta\Core\Form\Element\DatePicker',
             'options' => [
-                'label' => 'Default unit',
-                'column-size' => 'sm-2',
+                'label' => 'Due date',
+                'column-size' => 'sm-3',
             ],
         ]);
 
         $this->add([
-            'name' => 'defaultUnitPrice',
+            'name' => 'discount',
             'type' => 'number',
             'options' => [
-                'label' => 'Default unit price',
+                'label' => 'Discount',
                 'column-size' => 'sm-2',
+                'add-on-append' => '%',
             ],
             'attributes' => [
                 'min' => '0',
+                'max' => '100',
                 'step' => '0.01',
             ],
         ]);
 
         $this->add([
-            'type' => 'Ajasta\Address\Form\AddressFieldset',
-            'name' => 'address',
+            'name' => 'vat',
+            'type' => 'number',
             'options' => [
-                'label' => 'Address'
+                'label' => 'VAT',
+                'column-size' => 'sm-2',
+                'add-on-append' => '%',
+            ],
+            'attributes' => [
+                'min' => '0',
+                'max' => '100',
+                'step' => '0.01',
             ],
         ]);
+
+         $this->add([
+             'type' => 'collection',
+             'name' => 'invoiceItems',
+             'options' => [
+                 'label' => 'Items',
+                 'count' => 1,
+                 'should_create_template' => true,
+                 'allow_add' => true,
+                 'target_element' => [
+                     'type' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
+                 ],
+             ],
+         ]);
     }
 
     public function getInputFilterSpecification()
     {
         return [
-            'name' => [
+            'client' => [
                 'required' => true,
             ],
             'locale' => [
@@ -109,20 +145,8 @@ class ClientFieldset extends Fieldset implements InputFilterProviderInterface
             'currencyCode' => [
                 'required' => true,
             ],
-            'taxable' => [
+            'issueDate' => [
                 'required' => true,
-            ],
-            'defaultUnit' => [
-                'allow_empty' => true,
-                'filters' => [
-                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
-                ],
-            ],
-            'defaultUnitPrice' => [
-                'allow_empty' => true,
-                'filters' => [
-                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
-                ],
             ],
         ];
     }

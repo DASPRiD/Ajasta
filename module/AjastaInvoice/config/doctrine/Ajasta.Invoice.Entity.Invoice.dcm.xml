@@ -13,9 +13,9 @@
         <field name="locale" type="string"/>
         <field name="currencyCode" type="string"/>
         <field name="issueDate" type="date"/>
-        <field name="dueDate" type="date"/>
-        <field name="discount" type="decimal" precision="5" scale="2"/>
-        <field name="vat" type="decimal" precision="5" scale="2"/>
+        <field name="dueDate" type="date" nullable="true"/>
+        <field name="discount" type="decimal" precision="5" scale="2" nullable="true"/>
+        <field name="vat" type="decimal" precision="5" scale="2" nullable="true"/>
 
         <many-to-one field="client" target-entity="Ajasta\Client\Entity\Client"/>
         <many-to-one field="project" target-entity="Ajasta\Client\Entity\Project"/>
