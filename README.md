@@ -37,12 +37,16 @@ This will get you ready to work on the assets (which are located in the assets
 folder). As long as you are working on those, just keep the following command
 running, which will automatically compile CSS and JavaScript when it changes:
 
-```grunt```
+```
+grunt
+```
 
 If you update bower components to new versions, don't forget to run (and maybe
 update) the copy task:
 
-```grunt copy```
+```
+grunt copy
+```
 
 Work in Progres
 ---------------
