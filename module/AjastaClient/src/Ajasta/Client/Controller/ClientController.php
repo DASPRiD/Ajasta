@@ -135,4 +135,37 @@ class ClientController extends AbstractActionController
 
         return new JsonModel(['clients' => $clients]);
     }
+
+    public function getDataAction()
+    {
+        $client = $this->clientService->find($this->params('clientId'));
+
+        if ($client === null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $data = [
+            'id'               => $client->getId(),
+            'active'           => $client->getActive(),
+            'name'             => $client->getName(),
+            'locale'           => $client->getLocale(),
+            'currencyCode'     => $client->getCurrencyCode(),
+            'taxable'          => $client->getTaxable(),
+            'defaultUnit'      => $client->getDefaultUnit(),
+            'defaultUnitPrice' => $client->getDefaultUnitPrice(),
+            'projects'         => [],
+        ];
+
+        foreach ($client->getProjects() as $project) {
+            $data['projects'][$project->getId()] = [
+                'id'               => $project->getId(),
+                'name'             => $project->getName(),
+                'defaultUnit'      => $project->getDefaultUnit(),
+                'defaultUnitPrice' => $project->getDefaultUnitPrice(),
+            ];
+        }
+
+        return new JsonModel($data);
+    }
 }

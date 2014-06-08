@@ -119,8 +119,8 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
          $this->add([
-             'type' => 'collection',
              'name' => 'invoiceItems',
+             'type' => 'collection',
              'options' => [
                  'label' => 'Items',
                  'count' => 1,
@@ -130,6 +130,9 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
                      'type' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
                  ],
              ],
+             'attributes' => [
+                 'id' => 'invoiceItems',
+             ],
          ]);
     }
 
@@ -138,6 +141,9 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
         return [
             'client' => [
                 'required' => true,
+            ],
+            'project' => [
+                'required' => false,
             ],
             'locale' => [
                 'required' => true,

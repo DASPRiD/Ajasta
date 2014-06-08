@@ -5,3 +5,13 @@
 <?php
 $this->formRow()->setLabelAttributes(['class' => 'col-sm-2']);
 echo $this->form($this->form);
+?>
+
+<script type="text/javascript">
+$('#invoiceItems').sortableItems();
+$('select[name="invoice[client]"]').updateFormFromClient(
+    '<?php echo $this->escapeJs($this->url('clients/get-data', ['clientId' => ''])); ?>',
+    <?php echo json_encode($this->invoiceOptions()); ?>,
+    $('#invoiceItems')
+);
+</script>

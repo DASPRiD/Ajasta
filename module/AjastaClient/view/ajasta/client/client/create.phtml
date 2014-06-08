@@ -8,8 +8,7 @@ echo $this->form($this->form);
 ?>
 
 <script type="text/javascript">
-dynamicAddressFields(
-    $('select[name="client[address][countryCode]"]'),
+$('select[name="client[address][countryCode]"]').dynamicAddressFields(
     '<?php echo $this->escapeJs($this->url('get-address-fields-for-country', ['countryCode' => ''])); ?>'
 );
 </script>

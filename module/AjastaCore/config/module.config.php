@@ -38,6 +38,7 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
+            'Ajasta\Core\Form\Element\DatePicker' => 'Ajasta\Core\Form\Element\DatePicker',
             'Ajasta\Core\Form\Element\LocaleSelect' => 'Ajasta\Core\Form\Element\LocaleSelect',
             'Ajasta\Core\Form\Element\Toggle' => 'Ajasta\Core\Form\Element\Toggle',
             'Ajasta\Core\Form\Element\UnitSelect' => 'Ajasta\Core\Form\Element\UnitSelect',

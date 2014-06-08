@@ -39,7 +39,8 @@ class InvoiceController extends AbstractActionController
     {
         if ($this->getRequest()->isPost()) {
             $this->invoiceForm->setData($this->getRequest()->getPost());
-
+print_r($this->getRequest()->getPost());
+exit;
             if ($this->invoiceForm->isValid()) {
                 $invoice = $this->invoiceForm->getData();
                 $this->invoiceService->persist($invoice);

@@ -21,8 +21,8 @@ class Module
             ->get('form_element');
 
         $formElementHelper
-            ->addClass('Ajasta\Core\Form\Element\Toggle', 'Ajasta\Core\Form\View\Helper\FormToggle')
-            ->addClass('Ajasta\Core\Form\Element\DatePicker', 'Ajasta\Core\Form\View\Helper\FormDatePicker');
+            ->addClass('Ajasta\Core\Form\Element\DatePicker', 'Ajasta\Core\Form\View\Helper\FormDatePicker')
+            ->addClass('Ajasta\Core\Form\Element\Toggle', 'Ajasta\Core\Form\View\Helper\FormToggle');
 
         // Automatically redirect trailing slash requests
         $event

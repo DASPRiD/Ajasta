@@ -85,6 +85,11 @@ return [
             'Ajasta\Invoice\Form\InvoiceItemFieldset' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
         ],
     ],
+    'view_helpers' => [
+        'factories' => [
+            'invoiceOptions' => 'Ajasta\Invoice\View\Helper\InvoiceOptionsFactory',
+        ],
+    ],
     'view_manager' => [
         'controller_map' => [
             'Ajasta\Invoice' => true,

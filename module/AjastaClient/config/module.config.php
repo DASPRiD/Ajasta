@@ -92,6 +92,18 @@ return [
                             ],
                         ],
                     ],
+                    'get-data' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/get-data/:clientId',
+                            'defaults' => [
+                                'action' => 'get-data',
+                            ],
+                            'constraints' => [
+                                'clientId' => '\d+',
+                            ],
+                        ],
+                    ],
                 ],
             ],
             'projects' => [

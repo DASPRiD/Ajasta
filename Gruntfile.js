@@ -44,6 +44,10 @@ module.exports = function(grunt) {
             main: {
                 src: [
                     './bower_components/jquery/dist/jquery.js',
+                    './bower_components/jquery-ui/ui/jquery.ui.core.js',
+                    './bower_components/jquery-ui/ui/jquery.ui.widget.js',
+                    './bower_components/jquery-ui/ui/jquery.ui.mouse.js',
+                    './bower_components/jquery-ui/ui/jquery.ui.sortable.js',
                     './bower_components/bootstrap/dist/js/bootstrap.js',
                     './bower_components/datatables/media/js/jquery.dataTables.js',
                     './bower_components/datatables/examples/resources/bootstrap/3/dataTables.bootstrap.js',
@@ -70,6 +74,7 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     './bower_components/jquery/jquery.js',
+                    './bower_components/jquery-ui/ui/jquery-ui.js',
                     './bower_components/bootstrap/dist/js/bootstrap.js',
                     './bower_components/Bootstrap-DatePicker/bootstrap-datepicker.js',
                     './bower_components/boostrap-switch/dist/js/bootstrap-switch.js',

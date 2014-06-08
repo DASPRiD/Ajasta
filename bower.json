@@ -1,11 +1,12 @@
 {
-    "name": "ajasta",
-    "dependencies": {
-        "bootstrap": "~3.1.1",
-        "Bootstrap-DatePicker": "~0.1.0",
-        "bootstrap-switch": "~3.0.1",
-        "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
-        "datatables": "~1.10.0",
-        "bootstrap-chosen": "*"
-    }
+  "name": "ajasta",
+  "dependencies": {
+    "bootstrap": "~3.1.1",
+    "Bootstrap-DatePicker": "~0.1.0",
+    "bootstrap-switch": "~3.0.1",
+    "chosen": "https://github.com/harvesthq/chosen/releases/download/v1.1.0/chosen_v1.1.0.zip",
+    "datatables": "~1.10.0",
+    "bootstrap-chosen": "*",
+    "jquery-ui": "~1.10.4"
+  }
 }

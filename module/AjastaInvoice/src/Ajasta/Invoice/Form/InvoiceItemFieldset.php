@@ -25,6 +25,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'text',
             'options' => [
                 'label' => 'Description',
+                'column-size' => 'sm-4',
             ],
             'attributes' => [
                 'required' => true,
@@ -36,6 +37,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'number',
             'options' => [
                 'label' => 'Quantity',
+                'column-size' => 'sm-4',
             ],
             'attributes' => [
                 'min' => '0',
@@ -50,6 +52,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'Ajasta\Core\Form\Element\UnitSelect',
             'options' => [
                 'label' => 'Unit',
+                'column-size' => 'sm-4',
             ],
         ]);
 
@@ -58,6 +61,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'number',
             'options' => [
                 'label' => 'Unit price',
+                'column-size' => 'sm-4',
             ],
             'attributes' => [
                 'min' => '0',
