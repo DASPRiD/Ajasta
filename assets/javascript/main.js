@@ -60,6 +60,24 @@
             $(this).closest('tr').remove();
         }
 
+        function addInputCell(row, input){
+            var td = $('<td/>');
+            row.append(td);
+
+            var formGroup = input.closest('div.form-group');
+
+            if (formGroup.hasClass('has-error')) {
+                td.addClass('has-error');
+            }
+
+            td.append(input).append(formGroup.find('ul.help-block'));
+        }
+
+        function updateElementIndex(element, index)
+        {
+            return element.attr('name', element.attr('name').replace('__index__', index));
+        }
+
         $.fn.sortableItems = function(defaults){
             if (defaults !== undefined) {
                 this.data('updateDefaults')(defaults);
@@ -88,7 +106,8 @@
                 var tbody = table.children('tbody');
 
                 var removeButton = $('<a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-minus"/></a>');
-                var sortButton = $('<a href="#" class="btn btn-default btn-sm sort"><span class="glyphicon glyphicon-sort"/></a>');
+                var sortButton   = $('<a href="#" class="btn btn-default btn-sm sort"><span class="glyphicon glyphicon-sort"/></a>');
+                var currentIndex = 0;
 
                 var addButton = $('<a href="#" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"/></a>');
                 addButton.on('click', function(event){
@@ -96,11 +115,12 @@
 
                     var row = $('<tr/>');
                     row.append($('<td/>').append(removeButton.clone().on('click', removeItem)).append(' ').append(sortButton.clone()));
-                    row.append($('<td/>').append(templateElements.description.clone()));
-                    row.append($('<td/>').append(templateElements.quantity.clone()));
-                    row.append($('<td/>').append(templateElements.unit.clone()));
-                    row.append($('<td/>').append(templateElements.unitPrice.clone()));
+                    row.append($('<td/>').append(updateElementIndex(templateElements.description.clone(), currentIndex)));
+                    row.append($('<td/>').append(updateElementIndex(templateElements.quantity.clone(), currentIndex)));
+                    row.append($('<td/>').append(updateElementIndex(templateElements.unit.clone(), currentIndex)));
+                    row.append($('<td/>').append(updateElementIndex(templateElements.unitPrice.clone(), currentIndex)));
                     tbody.append(row);
+                    currentIndex++;
 
                     row.find('select[name*="[unit]"]').val(defaultUnit).chosen();
                     row.find('input[name*="[unitPrice]"]').val(defaultUnitPrice);
@@ -116,13 +136,14 @@
                     var fieldset = $(this);
                     var row = $('<tr/>');
                     row.append($('<td/>').append(removeButton.clone().on('click', removeItem)).append(' ').append(sortButton.clone()));
-                    row.append($('<td/>').append(fieldset.find('input[name*="[description]"]')));
-                    row.append($('<td/>').append(fieldset.find('input[name*="[quantity]"]')));
-                    row.append($('<td/>').append(fieldset.find('select[name*="[unit]"]')));
-                    row.append($('<td/>').append(fieldset.find('input[name*="[unitPrice]"]')));
+                    addInputCell(row, fieldset.find('input[name*="[description]"]'));
+                    addInputCell(row, fieldset.find('input[name*="[quantity]"]'));
+                    addInputCell(row, fieldset.find('select[name*="[unit]"]'));
+                    addInputCell(row, fieldset.find('input[name*="[unitPrice]"]'));
                     tbody.append(row);
                     row.find('select[name*="[unit]"]').chosen();
                     fieldset.remove();
+                    currentIndex++;
                 });
 
                 tbody.sortable({

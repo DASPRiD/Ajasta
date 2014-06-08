@@ -14,6 +14,8 @@
         <field name="defaultUnit" type="string" nullable="true"/>
         <field name="defaultUnitPrice" type="decimal" precision="10" scale="2" nullable="true"/>
 
-        <many-to-one field="client" target-entity="Client" inversed-by="projects"/>
+        <many-to-one field="client" target-entity="Client" inversed-by="projects">
+            <join-column on-delete="CASCADE"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

@@ -5,7 +5,6 @@ use Ajasta\Invoice\Entity\Invoice;
 use Zend\Filter\Null as NullFilter;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
-use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
 {
@@ -18,7 +17,6 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
     {
         parent::init();
 
-        $this->setHydrator(new ClassMethodsHydrator(false));
         $this->setObject(new Invoice());
 
         $this->add([
@@ -119,13 +117,12 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
         ]);
 
          $this->add([
-             'name' => 'invoiceItems',
+             'name' => 'items',
              'type' => 'collection',
              'options' => [
                  'label' => 'Items',
                  'count' => 1,
                  'should_create_template' => true,
-                 'allow_add' => true,
                  'target_element' => [
                      'type' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
                  ],
@@ -144,6 +141,10 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'project' => [
                 'required' => false,
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
+                ],
             ],
             'locale' => [
                 'required' => true,
@@ -153,6 +154,18 @@ class InvoiceFieldset extends Fieldset implements InputFilterProviderInterface
             ],
             'issueDate' => [
                 'required' => true,
+            ],
+            'discount' => [
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
+                ],
+            ],
+            'vat' => [
+                'allow_empty' => true,
+                'filters' => [
+                    ['name' => 'null', 'options' => ['type' => NullFilter::TYPE_STRING]],
+                ],
             ],
         ];
     }

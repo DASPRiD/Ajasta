@@ -80,9 +80,16 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            'Ajasta\Invoice\Form\InvoiceFieldset' => 'Ajasta\Invoice\Form\InvoiceFieldset',
             'Ajasta\Invoice\Form\InvoiceForm' => 'Ajasta\Invoice\Form\InvoiceForm',
             'Ajasta\Invoice\Form\InvoiceItemFieldset' => 'Ajasta\Invoice\Form\InvoiceItemFieldset',
+        ],
+        'factories' => [
+            'Ajasta\Invoice\Form\InvoiceFieldset' => 'Ajasta\Invoice\Form\InvoiceFieldsetFactory',
+        ],
+    ],
+    'hydrators' => [
+        'factories' => [
+            'Ajasta\Invoice\Hydrator\InvoiceHydrator' => 'Ajasta\Invoice\Hydrator\InvoiceHydratorFactory',
         ],
     ],
     'view_helpers' => [

@@ -1,5 +1,15 @@
 <?php
 return [
+    'doctrine' => [
+        'configuration' => [
+            'orm_default' => [
+                'types' => [
+                    'date' => 'Ajasta\Core\Dbal\Type\UtcDateType',
+                    'datetime' => 'Ajasta\Core\Dbal\Type\UtcDateTimeType',
+                ],
+            ],
+        ],
+    ],
     'router' => [
         'routes' => [
             'home' => [

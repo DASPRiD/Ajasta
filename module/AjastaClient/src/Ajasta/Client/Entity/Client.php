@@ -2,6 +2,7 @@
 namespace Ajasta\Client\Entity;
 
 use Ajasta\Address\Entity\Address;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class Client
 {
@@ -53,7 +54,12 @@ class Client
     /**
      * @var Project[]
      */
-    protected $projects = [];
+    protected $projects;
+
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
 
     /**
      * @return id

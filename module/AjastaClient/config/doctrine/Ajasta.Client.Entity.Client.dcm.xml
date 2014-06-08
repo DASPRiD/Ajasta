@@ -20,9 +20,9 @@
 
         <one-to-one field="address" target-entity="Ajasta\Address\Entity\Address">
             <cascade>
-                <cascade-remove/>
                 <cascade-persist/>
             </cascade>
+            <join-column on-delete="CASCADE"/>
         </one-to-one>
         <one-to-many field="projects" target-entity="Project" mapped-by="client"/>
     </entity>

@@ -10,11 +10,14 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="position" type="integer"/>
         <field name="description" type="string"/>
         <field name="quantity" type="decimal" precision="5" scale="2"/>
         <field name="unit" type="string"/>
         <field name="unitPrice" type="decimal" precision="5" scale="2"/>
 
-        <many-to-one field="invoice" target-entity="Invoice" inversed-by="items"/>
+        <many-to-one field="invoice" target-entity="Invoice" inversed-by="items">
+            <join-column on-delete="CASCADE"/>
+        </many-to-one>
     </entity>
 </doctrine-mapping>

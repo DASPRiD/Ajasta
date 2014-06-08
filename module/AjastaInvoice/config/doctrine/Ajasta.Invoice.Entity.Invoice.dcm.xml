@@ -19,6 +19,13 @@
 
         <many-to-one field="client" target-entity="Ajasta\Client\Entity\Client"/>
         <many-to-one field="project" target-entity="Ajasta\Client\Entity\Project"/>
-        <one-to-many field="items" target-entity="InvoiceItem" mapped-by="invoice"/>
+        <one-to-many field="items" target-entity="InvoiceItem" mapped-by="invoice" orphan-removal="true">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <order-by>
+                <order-by-field name="position" direction="asc"/>
+            </order-by>
+        </one-to-many>
     </entity>
 </doctrine-mapping>

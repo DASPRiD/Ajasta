@@ -2,6 +2,7 @@
 namespace Ajasta\Invoice\Form;
 
 use Ajasta\Invoice\Entity\InvoiceItem;
+use Zend\Filter\Null as NullFilter;
 use Zend\Form\Fieldset;
 use Zend\InputFilter\InputFilterProviderInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
@@ -37,7 +38,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'number',
             'options' => [
                 'label' => 'Quantity',
-                'column-size' => 'sm-4',
+                'column-size' => 'sm-2',
             ],
             'attributes' => [
                 'min' => '0',
@@ -52,7 +53,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'Ajasta\Core\Form\Element\UnitSelect',
             'options' => [
                 'label' => 'Unit',
-                'column-size' => 'sm-4',
+                'column-size' => 'sm-2',
             ],
         ]);
 
@@ -61,7 +62,7 @@ class InvoiceItemFieldset extends Fieldset implements InputFilterProviderInterfa
             'type' => 'number',
             'options' => [
                 'label' => 'Unit price',
-                'column-size' => 'sm-4',
+                'column-size' => 'sm-2',
             ],
             'attributes' => [
                 'min' => '0',
