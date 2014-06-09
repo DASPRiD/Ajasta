@@ -12,16 +12,18 @@ system allows you to have your invoices look exactly the way you want them to.
 
 Installation
 ------------
-The installation is currently based on the doctrine-module schema tool, this
-should be changed to doctrine migrations at a later point.
+The basic installations requires two tools to run, namely:
+ - composer (https://getcomposer.org/)
+ - Liquibase (http://www.liquibase.org/)
 
-- Create a database
-- Copy ```local.php.dist``` to ```local.php``` in the ```/config/autoload```
-  directory and fill out all values
-- Run ```composer install```
-- Run ```php public/index.php orm:schema-tool:update --force```
-- Point a virtual host to the ```/public``` directory
-- Profit!
+After you have installed those tools, execute the following steps:
+ - Create a database
+ - Copy ```local.php.dist``` to ```local.php``` in the ```/config/autoload```
+   directory and fill out all values
+ - Run ```composer install```
+ - Run ```liquibase update``` on ```db/db.changelog-master.xml```
+ - Point a virtual host to the ```/public``` directory
+ - Profit! (seriously, start writing invoices)
 
 Contributing
 ------------

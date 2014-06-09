@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.2.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext
+                        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="ajasta/db/db.changelog-1.0.xml"
+>
+    <changeSet author="dasprid (generated)" id="1402273926726-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="addressLine1" type="VARCHAR(255)"/>
+            <column name="addressLine2" type="VARCHAR(255)"/>
+            <column name="countryCode" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="recipient" type="VARCHAR(255)"/>
+            <column name="organization" type="VARCHAR(255)"/>
+            <column name="locality" type="VARCHAR(255)"/>
+            <column name="dependentLocality" type="VARCHAR(255)"/>
+            <column name="administrativeArea" type="VARCHAR(255)"/>
+            <column name="postalCode" type="VARCHAR(255)"/>
+            <column name="sortingCode" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-2">
+        <createTable tableName="client">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="address_id" type="INT(10)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locale" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currencyCode" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="defaultUnit" type="VARCHAR(255)"/>
+            <column name="defaultUnitPrice" type="DECIMAL(10, 2)"/>
+            <column name="taxable" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BIT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-3">
+        <createTable tableName="invoice">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="project_id" type="INT(10)"/>
+            <column name="locale" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currencyCode" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="issueDate" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dueDate" type="date"/>
+            <column name="discount" type="DECIMAL(5, 2)"/>
+            <column name="vat" type="DECIMAL(5, 2)"/>
+            <column name="client_id" type="INT(10)"/>
+            <column name="invoiceNumber" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-4">
+        <createTable tableName="invoiceItem">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="invoice_id" type="INT(10)"/>
+            <column name="description" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="DECIMAL(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unitPrice" type="DECIMAL(5, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-5">
+        <createTable tableName="invoiceNumberIncrementer">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="value" type="INT(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-6">
+        <createTable tableName="project">
+            <column autoIncrement="true" name="id" type="INT(10)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="client_id" type="INT(10)"/>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="defaultUnit" type="VARCHAR(255)"/>
+            <column name="defaultUnitPrice" type="DECIMAL(10, 2)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-7">
+        <addUniqueConstraint columnNames="address_id" constraintName="UNIQ_C7440455F5B7AF75" deferrable="false" disabled="false" initiallyDeferred="false" tableName="client"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-8">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="project" constraintName="FK_2FB3D0EE19EB6921" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-9">
+        <addForeignKeyConstraint baseColumnNames="invoice_id" baseTableName="invoiceItem" constraintName="FK_5AB3FC192989F1FD" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="invoice"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-10">
+        <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="invoice" constraintName="FK_90651744166D1F9C" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-11">
+        <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="invoice" constraintName="FK_9065174419EB6921" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402273926726-12">
+        <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="client" constraintName="FK_C7440455F5B7AF75" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+
+    <changeSet author="dasprid" id="2014-06-09-1">
+        <insert tableName="invoiceNumberIncrementer">
+            <column name="id" value="1"/>
+            <column name="value" value="1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
