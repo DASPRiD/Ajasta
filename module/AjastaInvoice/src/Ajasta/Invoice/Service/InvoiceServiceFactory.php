@@ -15,7 +15,8 @@ class InvoiceServiceFactory implements FactoryInterface
 
         return new InvoiceService(
             $objectManager,
-            $objectManager->getRepository('Ajasta\Invoice\Entity\Invoice')
+            $objectManager->getRepository('Ajasta\Invoice\Entity\Invoice'),
+            $serviceLocator->get('Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface')
         );
     }
 }

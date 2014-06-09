@@ -16,15 +16,32 @@ return [
             ],
         ],
     ],
-    'ajasta' => [
-        'core' => [
-            'email_sender_address' => 'ajasta@example.com',
-            'email_sender_name' => 'Ajasta',
-        ],
-        'invoice' => [
-            'default_vat' => '0.0', // Decimal value, keep as string
-            'default_unit' => null, // Can be null, 'days' or 'hours'
-            'default_unit_price' => '0.0', // Decimal value, keep as string
-        ],
-    ],
+//    'ajasta' => [
+//        // General options
+//        'core' => [
+//            // Email address displayed as sender
+//            'email_sender_address' => 'ajasta@example.com',
+//
+//            // Name displayed as sender
+//            'email_sender_name' => 'Ajasta',
+//        ],
+//        // Invoice options
+//        'invoice' => [
+//            // Decimal value, keep as string
+//            'default_vat' => '0.0',
+//
+//            // Can be null, 'days' or 'hours'
+//            'default_unit' => null,
+//
+//            // Decimal value, keep as string
+//            'default_unit_price' => '70.0',
+//
+//            // sprintf() formatting for invoice numbers. The following values are available:
+//            // %1$s: invoice number incrementer
+//            // %2$s: 4-digit year of the issue date
+//            // %3$s: 2-digit month of the issue date
+//            // %4$s: 2-digit day of the issue date
+//            'invoice_number_format' => '%2$s%1$s',
+//        ],
+//    ],
 ];

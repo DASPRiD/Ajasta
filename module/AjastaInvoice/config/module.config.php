@@ -75,6 +75,11 @@ return [
     ],
     'service_manager' => [
         'factories' => [
+            'Ajasta\Invoice\Options' => 'Ajasta\Invoice\OptionsFactory',
+            'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface'
+                => 'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorFactory',
+            'Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface'
+                => 'Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyFactory',
             'Ajasta\Invoice\Service\InvoiceService' => 'Ajasta\Invoice\Service\InvoiceServiceFactory',
         ],
     ],

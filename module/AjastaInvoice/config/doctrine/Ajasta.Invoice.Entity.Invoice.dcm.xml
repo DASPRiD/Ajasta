@@ -10,6 +10,7 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <field name="invoiceNumber" type="string"/>
         <field name="locale" type="string"/>
         <field name="currencyCode" type="string"/>
         <field name="issueDate" type="date"/>

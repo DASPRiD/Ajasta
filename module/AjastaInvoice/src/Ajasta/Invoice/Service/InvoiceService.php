@@ -2,6 +2,7 @@
 namespace Ajasta\Invoice\Service;
 
 use Ajasta\Invoice\Entity\Invoice;
+use Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface as InvoicePersistenceStrategyInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
 
@@ -18,13 +19,23 @@ class InvoiceService
     protected $invoiceRepository;
 
     /**
-     * @param ObjectManager    $objectManager
-     * @param ObjectRepository $invoiceRepository
+     * @var InvoicePersistenceStrategyInterface
      */
-    public function __construct(ObjectManager $objectManager, ObjectRepository $invoiceRepository)
-    {
-        $this->objectManager     = $objectManager;
-        $this->invoiceRepository = $invoiceRepository;
+    protected $invoicePersistenceStrategy;
+
+    /**
+     * @param ObjectManager                       $objectManager
+     * @param ObjectRepository                    $invoiceRepository
+     * @param InvoicePersistenceStrategyInterface $invoicePersistenceStrategy
+     */
+    public function __construct(
+        ObjectManager $objectManager,
+        ObjectRepository $invoiceRepository,
+        InvoicePersistenceStrategyInterface $invoicePersistenceStrategy
+    ) {
+        $this->objectManager              = $objectManager;
+        $this->invoiceRepository          = $invoiceRepository;
+        $this->invoicePersistenceStrategy = $invoicePersistenceStrategy;
     }
 
     /**
@@ -49,7 +60,6 @@ class InvoiceService
      */
     public function persist(Invoice $invoice)
     {
-        $this->objectManager->persist($invoice);
-        $this->objectManager->flush();
+        $this->invoicePersistenceStrategy->persist($invoice);
     }
 }

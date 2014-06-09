@@ -16,6 +16,11 @@ class Invoice
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $invoiceNumber;
+
+    /**
      * @var Client
      */
     protected $client;
@@ -71,6 +76,22 @@ class Invoice
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvoiceNumber()
+    {
+        return $this->invoiceNumber;
+    }
+
+    /**
+     * @param string $invoiceNumber
+     */
+    public function setInvoiceNumber($invoiceNumber)
+    {
+        $this->invoiceNumber = $invoiceNumber;
     }
 
     /**
