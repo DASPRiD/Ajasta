@@ -11,6 +11,7 @@
         </id>
 
         <field name="invoiceNumber" type="string"/>
+        <field name="status" type="Ajasta\Invoice\Entity\StatusEnum"/>
         <field name="locale" type="string"/>
         <field name="currencyCode" type="string"/>
         <field name="issueDate" type="date"/>

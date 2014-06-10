@@ -21,6 +21,11 @@ class Invoice
     protected $invoiceNumber;
 
     /**
+     * @var StatusEnum
+     */
+    protected $status;
+
+    /**
      * @var Client
      */
     protected $client;
@@ -67,7 +72,8 @@ class Invoice
 
     public function __construct()
     {
-        $this->items = new ArrayCollection();
+        $this->status = StatusEnum::DRAFT();
+        $this->items  = new ArrayCollection();
     }
 
     /**
@@ -92,6 +98,22 @@ class Invoice
     public function setInvoiceNumber($invoiceNumber)
     {
         $this->invoiceNumber = $invoiceNumber;
+    }
+
+    /**
+     * @return StatusEnum
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param StatusEnum $status
+     */
+    public function setStatus(StatusEnum $status)
+    {
+        $this->status = $status;
     }
 
     /**

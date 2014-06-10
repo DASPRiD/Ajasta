@@ -12,6 +12,13 @@ return [
                 ],
             ],
         ],
+        'configuration' => [
+            'orm_default' => [
+                'types' => [
+                    'Ajasta\Invoice\Entity\StatusEnum' => 'Ajasta\Invoice\Dbal\Type\StatusEnumType',
+                ],
+            ],
+        ],
     ],
     'router' => [
         'routes' => [

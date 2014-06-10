@@ -148,4 +148,12 @@
             <column name="value" value="1"/>
         </insert>
     </changeSet>
+
+    <changeSet author="dasprid (generated)" id="1402358797900-1">
+        <addColumn tableName="invoice">
+            <column name="status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
