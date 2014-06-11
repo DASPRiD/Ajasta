@@ -10,6 +10,11 @@ use Zend\Stdlib\ArrayUtils;
 
 class Invoice
 {
+    const STATUS_DRAFT = 'draft';
+    const STATUS_SENT  = 'sent';
+    const STATUS_LATE  = 'late';
+    const STATUS_PAID  = 'paid';
+
     /**
      * @var int
      */
@@ -19,11 +24,6 @@ class Invoice
      * @var string
      */
     protected $invoiceNumber;
-
-    /**
-     * @var StatusEnum
-     */
-    protected $status;
 
     /**
      * @var Client
@@ -56,6 +56,16 @@ class Invoice
     protected $dueDate;
 
     /**
+     * @var DateTime|null
+     */
+    protected $sendDate;
+
+    /**
+     * @var DateTime|null
+     */
+    protected $payDate;
+
+    /**
      * @var decimal|null
      */
     protected $discount;
@@ -72,7 +82,6 @@ class Invoice
 
     public function __construct()
     {
-        $this->status = StatusEnum::DRAFT();
         $this->items  = new ArrayCollection();
     }
 
@@ -98,22 +107,6 @@ class Invoice
     public function setInvoiceNumber($invoiceNumber)
     {
         $this->invoiceNumber = $invoiceNumber;
-    }
-
-    /**
-     * @return StatusEnum
-     */
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    /**
-     * @param StatusEnum $status
-     */
-    public function setStatus(StatusEnum $status)
-    {
-        $this->status = $status;
     }
 
     /**
@@ -213,6 +206,39 @@ class Invoice
     }
 
     /**
+     * @return DateTime|null
+     */
+    public function getSendDate()
+    {
+        return $this->sendDate;
+    }
+
+    /**
+     * @param DateTime|null $sendDate
+     */
+    public function setSendDate(DateTime $sendDate = null)
+    {
+        $this->sendDate = $sendDate;
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getPayDate()
+    {
+        return $this->payDate;
+    }
+
+    /**
+     * @param DateTime|null $payDate
+     */
+    public function setPayDate(DateTime $payDate = null)
+    {
+        $this->payDate = $payDate;
+    }
+
+
+    /**
      * @return decimal|null
      */
     public function getDiscount()
@@ -285,6 +311,26 @@ class Invoice
                 $this->items->add($item);
             }
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        if ($this->payDate !== null) {
+            return self::STATUS_PAID;
+        }
+
+        if ($this->dueDate !== null && $this->dueDate < new DateTime()) {
+            return self::STATUS_LATE;
+        }
+
+        if ($this->sendDate !== null) {
+            return self::STATUS_SENT;
+        }
+
+        return self::STATUS_DRAFT;
     }
 
     /**

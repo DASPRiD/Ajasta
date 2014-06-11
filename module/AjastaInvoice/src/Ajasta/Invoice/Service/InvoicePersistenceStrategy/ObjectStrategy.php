@@ -53,7 +53,8 @@ class ObjectStrategy implements StrategyInterface
                 )
             );
 
-            $this->objectManager->persist($invoice);
+            $invoiceNumberIncrememter->incrementValue();
+            $this->objectManager->persist($invoiceNumberIncrememter);
         }
 
         $this->objectManager->persist($invoice);

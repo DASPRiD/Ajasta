@@ -6,37 +6,81 @@
     <h1>Invoices</h1>
 </div>
 
-<table id="client-table"  class="table table-striped table-bordered">
+<div class="btn-group pull-right" id="status-filter">
+    <button type="button" data-filter="" class="btn btn-sm btn-primary">All</button>
+    <button type="button" data-filter="draft" class="btn btn-sm btn-default">Draft</button>
+    <button type="button" data-filter="sent" class="btn btn-sm btn-default">Sent</button>
+    <button type="button" data-filter="late" class="btn btn-sm btn-default">Late</button>
+    <button type="button" data-filter="paid" class="btn btn-sm btn-default">Paid</button>
+</div>
+
+<table id="invoice-table"  class="table table-striped table-bordered table-hover">
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Client</th>
-            <th>Options</th>
+            <th class="col-status">Status</th>
+            <th class="col-issue-date">Issue date</th>
+            <th class="col-id">ID</th>
+            <th class="col-client">Client</th>
+            <th class="col-amount">Amount</th>
+            <th class="col-options">Options</th>
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($this->invoices as $invoice): ?>
-            <tr>
-                <td><?php echo $this->escapeHtml($client->getName()); ?></td>
-                <td><?php echo $this->escapeHtml($this->displayLanguage($client->getLocale())); ?></td>
-                <td>
-                    <a href="<?php echo $this->url('clients/show', ['clientId' => $client->getId()]); ?>">Show</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
     </tbody>
 </table>
 
 <script type="text/javascript">
 $(document).on('ready', function(){
-    $('#client-table').DataTable({
-        columnDefs: [
-            {searchable: true, orderable: true},
-            {searchable: true, orderable: true},
-            {searchable: false, orderable: false}
+    var table = $('#invoice-table').DataTable({
+        columns: [
+            {class: 'col-status'},
+            {class: 'col-issue-date'},
+            {class: 'col-id'},
+            {class: 'col-client'},
+            {class: 'col-amount'},
+            {class: 'col-options'}
         ],
-        order: [0, 'asc'],
-        stateSave: true
+        autoWidth: false,
+        ordering: false,
+        searching: true,
+        stateSave: true,
+        serverSide: true,
+        ajax: {
+            url: '<?php echo $this->escapeJs($this->url('invoices/get-datatable-rows')); ?>',
+            type: 'POST'
+        }
     });
+
+    var statusFilter  = $('#status-filter');
+    var statusButtons = statusFilter.children('button');
+
+    statusButtons.on('click', function(){
+        var button = $(this);
+
+        if (button.hasClass('btn-primary')) {
+            return;
+        }
+
+        statusButtons.filter('.btn-primary').removeClass('btn-primary').addClass('btn-default');
+        button.removeClass('btn-default').addClass('btn-primary');
+
+        table.column(0).search(button.data('filter'));
+        table.draw();
+    });
+
+    var currentStatusFilter = table.column(0).search()[0];
+
+    if (currentStatusFilter) {
+        statusButtons
+            .filter('[data-filter=""]')
+            .removeClass('btn-primary')
+            .addClass('btn-default');
+        statusButtons
+            .filter('[data-filter="' + currentStatusFilter + '"]')
+            .removeClass('btn-default')
+            .addClass('btn-primary');
+    }
+
+    $('#invoice-table_filter').replaceWith(statusFilter);
 });
 </script>

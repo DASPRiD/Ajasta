@@ -56,7 +56,8 @@ class EntityStrategy implements StrategyInterface
                     )
                 );
 
-                $this->entityManager->persist($invoice);
+                $invoiceNumberIncrememter->incrementValue();
+                $this->entityManager->persist($invoiceNumberIncrememter);
             }
 
             $this->entityManager->persist($invoice);

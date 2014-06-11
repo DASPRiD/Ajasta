@@ -15,7 +15,8 @@ class InvoiceControllerFactory implements FactoryInterface
 
         return new InvoiceController(
             $serviceLocator->get('Ajasta\Invoice\Service\InvoiceService'),
-            $serviceLocator->get('FormElementManager')->get('Ajasta\Invoice\Form\InvoiceForm')
+            $serviceLocator->get('FormElementManager')->get('Ajasta\Invoice\Form\InvoiceForm'),
+            $serviceLocator->get('Ajasta\Invoice\Datatable\Formatter')
         );
     }
 }

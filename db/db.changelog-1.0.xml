@@ -9,7 +9,7 @@
                         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
     logicalFilePath="ajasta/db/db.changelog-1.0.xml"
 >
-    <changeSet author="dasprid (generated)" id="1402273926726-1">
+    <changeSet author="dasprid (generated)" id="1402514970957-1">
         <createTable tableName="address">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -28,7 +28,7 @@
             <column name="sortingCode" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-2">
+    <changeSet author="dasprid (generated)" id="1402514970957-2">
         <createTable tableName="client">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -53,7 +53,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-3">
+    <changeSet author="dasprid (generated)" id="1402514970957-3">
         <createTable tableName="invoice">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -75,9 +75,11 @@
             <column name="invoiceNumber" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="sendDate" type="date"/>
+            <column name="payDate" type="date"/>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-4">
+    <changeSet author="dasprid (generated)" id="1402514970957-4">
         <createTable tableName="invoiceItem">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -89,9 +91,7 @@
             <column name="quantity" type="DECIMAL(5, 2)">
                 <constraints nullable="false"/>
             </column>
-            <column name="unit" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="unit" type="VARCHAR(255)"/>
             <column name="unitPrice" type="DECIMAL(5, 2)">
                 <constraints nullable="false"/>
             </column>
@@ -100,7 +100,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-5">
+    <changeSet author="dasprid (generated)" id="1402514970957-5">
         <createTable tableName="invoiceNumberIncrementer">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -110,7 +110,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-6">
+    <changeSet author="dasprid (generated)" id="1402514970957-6">
         <createTable tableName="project">
             <column autoIncrement="true" name="id" type="INT(10)">
                 <constraints primaryKey="true"/>
@@ -123,23 +123,33 @@
             <column name="defaultUnitPrice" type="DECIMAL(10, 2)"/>
         </createTable>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-7">
+    <changeSet author="dasprid (generated)" id="1402514970957-7">
         <addUniqueConstraint columnNames="address_id" constraintName="UNIQ_C7440455F5B7AF75" deferrable="false" disabled="false" initiallyDeferred="false" tableName="client"/>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-8">
+    <changeSet author="dasprid (generated)" id="1402514970957-8">
+        <addUniqueConstraint columnNames="invoiceNumber" constraintName="invoiceNumber" deferrable="false" disabled="false" initiallyDeferred="false" tableName="invoice"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402514970957-9">
         <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="project" constraintName="FK_2FB3D0EE19EB6921" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client"/>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-9">
+    <changeSet author="dasprid (generated)" id="1402514970957-10">
         <addForeignKeyConstraint baseColumnNames="invoice_id" baseTableName="invoiceItem" constraintName="FK_5AB3FC192989F1FD" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="invoice"/>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-10">
+    <changeSet author="dasprid (generated)" id="1402514970957-11">
         <addForeignKeyConstraint baseColumnNames="project_id" baseTableName="invoice" constraintName="FK_90651744166D1F9C" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="project"/>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-11">
+    <changeSet author="dasprid (generated)" id="1402514970957-12">
         <addForeignKeyConstraint baseColumnNames="client_id" baseTableName="invoice" constraintName="FK_9065174419EB6921" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="client"/>
     </changeSet>
-    <changeSet author="dasprid (generated)" id="1402273926726-12">
+    <changeSet author="dasprid (generated)" id="1402514970957-13">
         <addForeignKeyConstraint baseColumnNames="address_id" baseTableName="client" constraintName="FK_C7440455F5B7AF75" deferrable="false" initiallyDeferred="false" onDelete="CASCADE" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="dasprid (generated)" id="1402514970957-14">
+        <createIndex indexName="searchDates" tableName="invoice" unique="false">
+            <column name="payDate"/>
+            <column name="dueDate"/>
+            <column name="sendDate"/>
+        </createIndex>
     </changeSet>
 
     <changeSet author="dasprid" id="2014-06-09-1">
@@ -147,13 +157,5 @@
             <column name="id" value="1"/>
             <column name="value" value="1"/>
         </insert>
-    </changeSet>
-
-    <changeSet author="dasprid (generated)" id="1402358797900-1">
-        <addColumn tableName="invoice">
-            <column name="status" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-        </addColumn>
     </changeSet>
 </databaseChangeLog>

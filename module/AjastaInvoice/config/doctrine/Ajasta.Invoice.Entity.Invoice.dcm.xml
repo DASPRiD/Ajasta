@@ -10,12 +10,21 @@
             <generator strategy="AUTO"/>
         </id>
 
+        <indexes>
+            <index columns="payDate,dueDate,sendDate" name="searchDates"/>
+        </indexes>
+
+        <unique-constraints>
+            <unique-constraint columns="invoiceNumber" name="invoiceNumber"/>
+        </unique-constraints>
+
         <field name="invoiceNumber" type="string"/>
-        <field name="status" type="Ajasta\Invoice\Entity\StatusEnum"/>
         <field name="locale" type="string"/>
         <field name="currencyCode" type="string"/>
         <field name="issueDate" type="date"/>
         <field name="dueDate" type="date" nullable="true"/>
+        <field name="sendDate" type="date" nullable="true"/>
+        <field name="payDate" type="date" nullable="true"/>
         <field name="discount" type="decimal" precision="5" scale="2" nullable="true"/>
         <field name="vat" type="decimal" precision="5" scale="2" nullable="true"/>
 

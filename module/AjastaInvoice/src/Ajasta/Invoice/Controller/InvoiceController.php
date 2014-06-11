@@ -1,9 +1,12 @@
 <?php
 namespace Ajasta\Invoice\Controller;
 
+use Ajasta\Invoice\Datatable\Formatter as DatatableFormatter;
+use Ajasta\Invoice\Entity\Invoice;
 use Ajasta\Invoice\Service\InvoiceService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class InvoiceController extends AbstractActionController
@@ -19,20 +22,51 @@ class InvoiceController extends AbstractActionController
     protected $invoiceForm;
 
     /**
+     * @var DatatableFormatter
+     */
+    protected $datatableFormatter;
+
+    /**
      * @param InvoiceService $invoiceService
      * @param FormInterface  $invoiceForm
      */
-    public function __construct(InvoiceService $invoiceService, FormInterface $invoiceForm)
-    {
-        $this->invoiceService = $invoiceService;
-        $this->invoiceForm    = $invoiceForm;
+    public function __construct(
+        InvoiceService $invoiceService,
+        FormInterface $invoiceForm,
+        DatatableFormatter $datatableFormatter
+    ) {
+        $this->invoiceService     = $invoiceService;
+        $this->invoiceForm        = $invoiceForm;
+        $this->datatableFormatter = $datatableFormatter;
     }
 
     public function indexAction()
     {
-        return new ViewModel([
-            'invoices' => $this->invoiceService->findAll(),
-        ]);
+        return new ViewModel();
+    }
+
+    public function getDatatableRowsAction()
+    {
+        $columns = $this->params()->fromPost('columns');
+
+        $paginationResult = $this->invoiceService->paginate(
+            $this->params()->fromPost('start'),
+            $this->params()->fromPost('length'),
+            (!empty($columns[0]['search']['value']) ? $columns[0]['search']['value'] : null)
+        );
+
+        $response = [
+            'draw'            => $this->params()->fromPost('draw'),
+            'recordsTotal'    => $paginationResult->getNumTotalResults(),
+            'recordsFiltered' => $paginationResult->getNumFilteredResults(),
+            'data'            => [],
+        ];
+
+        foreach ($paginationResult->getResults() as $invoice) {
+            $response['data'][] = $this->datatableFormatter->format($invoice);
+        }
+
+        return new JsonModel($response);
     }
 
     public function createAction()

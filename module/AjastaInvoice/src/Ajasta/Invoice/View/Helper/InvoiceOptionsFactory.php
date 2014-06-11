@@ -11,12 +11,12 @@ class InvoiceOptionsFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $viewHelperManager)
     {
-        $config = $viewHelperManager->getServiceLocator()->get('Config')['ajasta']['invoice'];
+        $options = $viewHelperManager->getServiceLocator()->get('Ajasta\Invoice\Options');
 
         return new InvoiceOptions(
-            $config['default_vat'],
-            $config['default_unit'],
-            $config['default_unit_price']
+            $options->getDefaultVat(),
+            $options->getDefaultUnit(),
+            $options->getDefaultUnitPrice()
         );
     }
 }

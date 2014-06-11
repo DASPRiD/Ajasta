@@ -2,6 +2,8 @@
 namespace Ajasta\Invoice\Service;
 
 use Ajasta\Invoice\Entity\Invoice;
+use Ajasta\Invoice\Service\InvoicePaginationStrategy\PaginationResult;
+use Ajasta\Invoice\Service\InvoicePaginationStrategy\StrategyInterface as InvoicePaginationStrategyInterface;
 use Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface as InvoicePersistenceStrategyInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\Persistence\ObjectRepository;
@@ -24,18 +26,26 @@ class InvoiceService
     protected $invoicePersistenceStrategy;
 
     /**
+     * @var InvoicePaginationStrategyInterface
+     */
+    protected $invoicePaginationStrategy;
+
+    /**
      * @param ObjectManager                       $objectManager
      * @param ObjectRepository                    $invoiceRepository
      * @param InvoicePersistenceStrategyInterface $invoicePersistenceStrategy
+     * @param InvoicePaginationStrategyInterface  $invoicePaginationStrategy
      */
     public function __construct(
         ObjectManager $objectManager,
         ObjectRepository $invoiceRepository,
-        InvoicePersistenceStrategyInterface $invoicePersistenceStrategy
+        InvoicePersistenceStrategyInterface $invoicePersistenceStrategy,
+        InvoicePaginationStrategyInterface $invoicePaginationStrategy
     ) {
         $this->objectManager              = $objectManager;
         $this->invoiceRepository          = $invoiceRepository;
         $this->invoicePersistenceStrategy = $invoicePersistenceStrategy;
+        $this->invoicePaginationStrategy  = $invoicePaginationStrategy;
     }
 
     /**
@@ -48,11 +58,14 @@ class InvoiceService
     }
 
     /**
-     * @return Invoice[]
+     * @param  int         $offset
+     * @param  int         $limit
+     * @param  string|null $status
+     * @return PaginationResult
      */
-    public function findAll()
+    public function paginate($offset, $limit, $status = null)
     {
-        return $this->invoiceRepository->findAll();
+        return $this->invoicePaginationStrategy->paginate($offset, $limit, $status);
     }
 
     /**

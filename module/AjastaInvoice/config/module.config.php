@@ -12,13 +12,6 @@ return [
                 ],
             ],
         ],
-        'configuration' => [
-            'orm_default' => [
-                'types' => [
-                    'Ajasta\Invoice\Entity\StatusEnum' => 'Ajasta\Invoice\Dbal\Type\StatusEnumType',
-                ],
-            ],
-        ],
     ],
     'router' => [
         'routes' => [
@@ -33,6 +26,15 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'get-datatable-rows' => [
+                        'type' => 'literal',
+                        'options' => [
+                            'route' => '/get-datatable-rows',
+                            'defaults' => [
+                                'action' => 'get-datatable-rows',
+                            ],
+                        ],
+                    ],
                     'create' => [
                         'type' => 'literal',
                         'options' => [
@@ -82,9 +84,12 @@ return [
     ],
     'service_manager' => [
         'factories' => [
+            'Ajasta\Invoice\Datatable\Formatter' => 'Ajasta\Invoice\Datatable\FormatterFactory',
             'Ajasta\Invoice\Options' => 'Ajasta\Invoice\OptionsFactory',
             'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface'
                 => 'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorFactory',
+            'Ajasta\Invoice\Service\InvoicePaginationStrategy\StrategyInterface'
+                => 'Ajasta\Invoice\Service\InvoicePaginationStrategy\StrategyFactory',
             'Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface'
                 => 'Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyFactory',
             'Ajasta\Invoice\Service\InvoiceService' => 'Ajasta\Invoice\Service\InvoiceServiceFactory',
