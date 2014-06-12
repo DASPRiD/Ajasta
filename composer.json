@@ -11,16 +11,11 @@
 
         "doctrine/dbal": ">=2.5@dev",
         "doctrine/orm": ">=2.5@dev",
-        "doctrine/doctrine-orm-module": "0.*",
-        "marc-mabe/php-enum": ">=1.2.0",
-
-        "tecnick.com/tcpdf": ">=6.0.0",
-        "setasign/fpdi": ">=1.4.2"
+        "doctrine/doctrine-orm-module": "0.*"
     },
     "require-dev": {
         "doctrine/migrations": "dev-master",
-        "squizlabs/php_codesniffer": "2.0.*@dev",
-        "jakub-onderka/php-parallel-lint": "0.*"
+        "squizlabs/php_codesniffer": "2.0.*@dev"
     },
     "autoload": {
         "psr-0": {
