@@ -34,14 +34,14 @@ Those were all the prerequisites. Everything left is setting up the database:
  - Copy ```local.php.dist``` to ```local.php``` in the ```/config/autoload```
    directory and fill out all values
  - Run Liquibase (in this example with the MySQL driver):
-   ```
-   liquibase --driver=com.mysql.jdbc.Driver
-             --url="jdbc:mysql://localhost/DATABASE"
-             --username=USERNAME
-             --password=PASSWORD
-             --changeLogFile=db/db.changelog-master.xml
-             update
-   ```
+```sh
+liquibase --driver=com.mysql.jdbc.Driver \
+          --url="jdbc:mysql://localhost/DATABASE" \
+          --username=USERNAME \
+          --password=PASSWORD \
+          --changeLogFile=db/db.changelog-master.xml \
+          update
+```
 
 That's pretty much all. Now just set up a virtual host and point it to the
 ```/public``` directory. And for the obligatory last step:
@@ -54,7 +54,7 @@ If you want to contribute to the project, the above steps are usually enough. If
 you want to work on the JavaScript or stylesheets, there is a helpful grunt task
 which will watch for changes and automatically compiles:
 
-```grunt watch``` (this is the default task, you can also just run grunt)
+```grunt watch``` (this is the default task, you can also just run ```grunt```)
 
 Work in Progres
 ---------------
