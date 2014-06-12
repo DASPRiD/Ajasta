@@ -36,10 +36,12 @@ return [
     ],
     'service_manager' => [
         'abstract_factories' => [
+            'Ajasta\Core\Repository\AbstractRepositoryFactory',
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ],
         'factories' => [
+            'Ajasta\Core\TransactionalManager' => 'Ajasta\Core\TransactionalManagerFactory',
             'Ajasta\Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ],
         'aliases' => [

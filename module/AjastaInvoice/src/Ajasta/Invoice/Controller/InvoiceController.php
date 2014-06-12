@@ -2,7 +2,7 @@
 namespace Ajasta\Invoice\Controller;
 
 use Ajasta\Invoice\Datatable\Formatter as DatatableFormatter;
-use Ajasta\Invoice\Entity\Invoice;
+use Ajasta\Invoice\Repository\InvoiceRepository;
 use Ajasta\Invoice\Service\InvoiceService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -11,6 +11,11 @@ use Zend\View\Model\ViewModel;
 
 class InvoiceController extends AbstractActionController
 {
+    /**
+     * @var InvoiceRepository
+     */
+    protected $invoiceRepository;
+
     /**
      * @var InvoiceService
      */
@@ -27,14 +32,18 @@ class InvoiceController extends AbstractActionController
     protected $datatableFormatter;
 
     /**
-     * @param InvoiceService $invoiceService
-     * @param FormInterface  $invoiceForm
+     * @param InvoiceRepository  $invoiceRepository
+     * @param InvoiceService     $invoiceService
+     * @param FormInterface      $invoiceForm
+     * @param DatatableFormatter $datatableFormatter
      */
     public function __construct(
+        InvoiceRepository $invoiceRepository,
         InvoiceService $invoiceService,
         FormInterface $invoiceForm,
         DatatableFormatter $datatableFormatter
     ) {
+        $this->invoiceRepository  = $invoiceRepository;
         $this->invoiceService     = $invoiceService;
         $this->invoiceForm        = $invoiceForm;
         $this->datatableFormatter = $datatableFormatter;
@@ -49,7 +58,7 @@ class InvoiceController extends AbstractActionController
     {
         $columns = $this->params()->fromPost('columns');
 
-        $paginationResult = $this->invoiceService->paginate(
+        $paginationResult = $this->invoiceRepository->paginateAll(
             $this->params()->fromPost('start'),
             $this->params()->fromPost('length'),
             (!empty($columns[0]['search']['value']) ? $columns[0]['search']['value'] : null)
@@ -57,8 +66,8 @@ class InvoiceController extends AbstractActionController
 
         $response = [
             'draw'            => $this->params()->fromPost('draw'),
-            'recordsTotal'    => $paginationResult->getNumTotalResults(),
-            'recordsFiltered' => $paginationResult->getNumFilteredResults(),
+            'recordsTotal'    => $this->invoiceRepository->countAll(),
+            'recordsFiltered' => $paginationResult->getNumTotalResults(),
             'data'            => [],
         ];
 
@@ -88,7 +97,7 @@ class InvoiceController extends AbstractActionController
 
     public function editAction()
     {
-        $invoice = $this->invoiceService->find($this->params('invoiceId'));
+        $invoice = $this->invoiceRepository->find($this->params('invoiceId'));
 
         if ($invoice === null) {
             $this->getResponse()->setStatusCode(404);
@@ -113,7 +122,7 @@ class InvoiceController extends AbstractActionController
 
     public function showAction()
     {
-        $invoice = $this->invoiceService->find($this->params('invoiceId'));
+        $invoice = $this->invoiceRepository->find($this->params('invoiceId'));
 
         if ($invoice === null) {
             $this->getResponse()->setStatusCode(404);

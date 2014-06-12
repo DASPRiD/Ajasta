@@ -1,14 +1,13 @@
 <?php
-namespace Ajasta\Invoice\Service\InvoicePaginationStrategy;
+namespace Ajasta\Core\Repository;
 
-use Ajasta\Invoice\Entity\Invoice;
 use InvalidArgumentException;
 use Traversable;
 
 class PaginationResult
 {
     /**
-     * @var Invoice[]
+     * @var array|Traversable
      */
     protected $results;
 
@@ -23,12 +22,11 @@ class PaginationResult
     protected $numFilteredResults;
 
     /**
-     * @param  Invoice[] $results
-     * @param  int       $numTotalResults
-     * @param  int       $numFilteredResults
+     * @param  array|Traversable $results
+     * @param  int               $numTotalResults
      * @throws InvalidArgumentException
      */
-    public function __construct($results, $numTotalResults, $numFilteredResults)
+    public function __construct($results, $numTotalResults)
     {
         if (!is_array($results) && !$results instanceof Traversable) {
             throw new InvalidArgumentException(sprintf(
@@ -37,9 +35,8 @@ class PaginationResult
             ));
         }
 
-        $this->results            = $results;
-        $this->numTotalResults    = $numTotalResults;
-        $this->numFilteredResults = $numFilteredResults;
+        $this->results         = $results;
+        $this->numTotalResults = $numTotalResults;
     }
 
     /**
@@ -56,13 +53,5 @@ class PaginationResult
     public function getNumTotalResults()
     {
         return $this->numTotalResults;
-    }
-
-    /**
-     * @return int
-     */
-    public function getNumFilteredResults()
-    {
-        return $this->numFilteredResults;
     }
 }

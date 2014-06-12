@@ -1,28 +1,45 @@
 <?php
-namespace Ajasta\Invoice\Service\InvoicePaginationStrategy;
+namespace Ajasta\Invoice\Repository;
 
+use Ajasta\Core\Repository\PaginationResult;
+use Ajasta\Invoice\Entity\Invoice;
 use DateTime;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
-class EntityStrategy implements StrategyInterface
+class InvoiceRepository
 {
     /**
      * @var EntityRepository
      */
-    protected $invoiceRepository;
+    protected $entityRepository;
 
     /**
-     * @param EntityRepository $invoiceRepository
+     * @param EntityRepository $entityRepsitory
      */
-    public function __construct(EntityRepository $invoiceRepository)
+    public function __construct(EntityRepository $entityRepsitory)
     {
-        $this->invoiceRepository = $invoiceRepository;
+        $this->entityRepository = $entityRepsitory;
     }
 
-    public function paginate($offset, $limit, $status = null)
+    /**
+     * @param  int $id
+     * @return Invoice|null
+     */
+    public function find($id)
     {
-        $queryBuilder = $this->invoiceRepository->createQueryBuilder('invoice');
+        return $this->entityRepository->find($id);
+    }
+
+    /**
+     * @param  int         $offset
+     * @param  int         $limit
+     * @param  string|null $status
+     * @return PaginationResult
+     */
+    public function paginateAll($offset, $limit, $status = null)
+    {
+        $queryBuilder = $this->entityRepository->createQueryBuilder('invoice');
         $queryBuilder->innerJoin('invoice.client', 'client');
         $queryBuilder->setFirstResult($offset);
         $queryBuilder->setMaxResults($limit);
@@ -59,7 +76,6 @@ class EntityStrategy implements StrategyInterface
 
         return new PaginationResult(
             $paginator->getIterator(),
-            $this->getTotalResults(),
             $paginator->count()
         );
     }
@@ -67,9 +83,9 @@ class EntityStrategy implements StrategyInterface
     /**
      * @return int
      */
-    protected function getTotalResults()
+    public function countAll()
     {
-        $queryBuilder = $this->invoiceRepository->createQueryBuilder('invoice');
+        $queryBuilder = $this->entityRepository->createQueryBuilder('invoice');
         $queryBuilder->select('COUNT(invoice.id)');
 
         return $queryBuilder->getQuery()->getSingleScalarResult();

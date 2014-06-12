@@ -2,11 +2,10 @@
 namespace Ajasta\Invoice\Service;
 
 use Ajasta\Invoice\Entity\Invoice;
-use Ajasta\Invoice\Service\InvoicePaginationStrategy\PaginationResult;
-use Ajasta\Invoice\Service\InvoicePaginationStrategy\StrategyInterface as InvoicePaginationStrategyInterface;
-use Ajasta\Invoice\Service\InvoicePersistenceStrategy\StrategyInterface as InvoicePersistenceStrategyInterface;
+use Ajasta\Invoice\Entity\InvoiceNumberIncrementer;
+use Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository;
+use Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class InvoiceService
 {
@@ -16,56 +15,36 @@ class InvoiceService
     protected $objectManager;
 
     /**
-     * @var ObjectRepository
+     * @var callable
      */
-    protected $invoiceRepository;
+    protected $transactionalManager;
 
     /**
-     * @var InvoicePersistenceStrategyInterface
+     * @var InvoiceNumberIncrementerRepository
      */
-    protected $invoicePersistenceStrategy;
+    protected $invoiceNumberIncrementerRepository;
 
     /**
-     * @var InvoicePaginationStrategyInterface
+     * @var GeneratorInterface
      */
-    protected $invoicePaginationStrategy;
+    protected $invoiceNumberGenerator;
 
     /**
-     * @param ObjectManager                       $objectManager
-     * @param ObjectRepository                    $invoiceRepository
-     * @param InvoicePersistenceStrategyInterface $invoicePersistenceStrategy
-     * @param InvoicePaginationStrategyInterface  $invoicePaginationStrategy
+     * @param ObjectManager                      $objectManager
+     * @param callable                           $transactionalManager
+     * @param InvoiceNumberIncrementerRepository $invoiceNumberIncrementerRepository
+     * @param GeneratorInterface                 $invoiceNumberGenerator
      */
     public function __construct(
         ObjectManager $objectManager,
-        ObjectRepository $invoiceRepository,
-        InvoicePersistenceStrategyInterface $invoicePersistenceStrategy,
-        InvoicePaginationStrategyInterface $invoicePaginationStrategy
+        callable $transactionalManager,
+        InvoiceNumberIncrementerRepository $invoiceNumberIncrementerRepository,
+        GeneratorInterface $invoiceNumberGenerator
     ) {
-        $this->objectManager              = $objectManager;
-        $this->invoiceRepository          = $invoiceRepository;
-        $this->invoicePersistenceStrategy = $invoicePersistenceStrategy;
-        $this->invoicePaginationStrategy  = $invoicePaginationStrategy;
-    }
-
-    /**
-     * @param  int $invoiceId
-     * @return Invoice|null
-     */
-    public function find($invoiceId)
-    {
-        return $this->invoiceRepository->find($invoiceId);
-    }
-
-    /**
-     * @param  int         $offset
-     * @param  int         $limit
-     * @param  string|null $status
-     * @return PaginationResult
-     */
-    public function paginate($offset, $limit, $status = null)
-    {
-        return $this->invoicePaginationStrategy->paginate($offset, $limit, $status);
+        $this->objectManager                      = $objectManager;
+        $this->transactionalManager               = $transactionalManager;
+        $this->invoiceNumberIncrementerRepository = $invoiceNumberIncrementerRepository;
+        $this->invoiceNumberGenerator             = $invoiceNumberGenerator;
     }
 
     /**
@@ -73,6 +52,28 @@ class InvoiceService
      */
     public function persist(Invoice $invoice)
     {
-        $this->invoicePersistenceStrategy->persist($invoice);
+        if ($invoice->getInvoiceNumber() !== null) {
+            $this->objectManager->persist($invoice);
+            $this->objectManager->flush();
+            return;
+        }
+
+        $transactionalManager = $this->transactionalManager;
+        $transactionalManager(function () use ($invoice) {
+            $invoiceNumberIncrememter = $this->invoiceNumberIncrementerRepository->findWithWriteLock(
+                InvoiceNumberIncrementer::ID
+            );
+
+            $invoice->setInvoiceNumber(
+                $this->invoiceNumberGenerator->generate(
+                    $invoice,
+                    $invoiceNumberIncrememter->getValue()
+                )
+            );
+
+            $invoiceNumberIncrememter->incrementValue();
+            $this->objectManager->persist($invoiceNumberIncrememter);
+            $this->objectManager->persist($invoice);
+        });
     }
 }
