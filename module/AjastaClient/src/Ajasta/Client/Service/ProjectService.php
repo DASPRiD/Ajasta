@@ -3,7 +3,6 @@ namespace Ajasta\Client\Service;
 
 use Ajasta\Client\Entity\Project;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class ProjectService
 {
@@ -13,27 +12,11 @@ class ProjectService
     protected $objectManager;
 
     /**
-     * @var ObjectRepository
+     * @param ObjectManager $objectManager
      */
-    protected $projectRepository;
-
-    /**
-     * @param ObjectManager    $objectManager
-     * @param ObjectRepository $projectRepository
-     */
-    public function __construct(ObjectManager $objectManager, ObjectRepository $projectRepository)
+    public function __construct(ObjectManager $objectManager)
     {
-        $this->objectManager     = $objectManager;
-        $this->projectRepository = $projectRepository;
-    }
-
-    /**
-     * @param  int $projectId
-     * @return Project|null
-     */
-    public function find($projectId)
-    {
-        return $this->projectRepository->find($projectId);
+        $this->objectManager = $objectManager;
     }
 
     /**

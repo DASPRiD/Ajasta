@@ -11,11 +11,6 @@ class ClientServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-
-        return new ClientService(
-            $objectManager,
-            $objectManager->getRepository('Ajasta\Client\Entity\Client')
-        );
+        return new ClientService($serviceLocator->get('doctrine.entitymanager.orm_default'));
     }
 }

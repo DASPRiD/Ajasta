@@ -14,6 +14,7 @@ class ClientControllerFactory implements FactoryInterface
         $serviceLocator = $controllerManager->getServiceLocator();
 
         return new ClientController(
+            $serviceLocator->get('Ajasta\Client\Repository\ClientRepository'),
             $serviceLocator->get('Ajasta\Client\Service\ClientService'),
             $serviceLocator->get('FormElementManager')->get('Ajasta\Client\Form\ClientForm')
         );

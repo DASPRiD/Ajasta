@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Client\Controller;
 
+use Ajasta\Client\Repository\ClientRepository;
 use Ajasta\Client\Service\ClientService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -9,6 +10,11 @@ use Zend\View\Model\ViewModel;
 
 class ClientController extends AbstractActionController
 {
+    /**
+     * @var ClientRepository
+     */
+    protected $clientRepository;
+
     /**
      * @var ClientService
      */
@@ -20,19 +26,24 @@ class ClientController extends AbstractActionController
     protected $clientForm;
 
     /**
-     * @param ClientService $clientService
-     * @param FormInterface $clientForm
+     * @param ClientRepository $clientRepository
+     * @param ClientService    $clientService
+     * @param FormInterface    $clientForm
      */
-    public function __construct(ClientService $clientService, FormInterface $clientForm)
-    {
-        $this->clientService = $clientService;
-        $this->clientForm    = $clientForm;
+    public function __construct(
+        ClientRepository $clientRepository,
+        ClientService $clientService,
+        FormInterface $clientForm
+    ) {
+        $this->clientRepository = $clientRepository;
+        $this->clientService    = $clientService;
+        $this->clientForm       = $clientForm;
     }
 
     public function indexAction()
     {
         return new ViewModel([
-            'clients' => $this->clientService->findAllActive(),
+            'clients' => $this->clientRepository->findAllActive(),
         ]);
     }
 
@@ -55,7 +66,7 @@ class ClientController extends AbstractActionController
 
     public function editAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);
@@ -80,7 +91,7 @@ class ClientController extends AbstractActionController
 
     public function showAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);
@@ -94,30 +105,28 @@ class ClientController extends AbstractActionController
 
     public function archiveAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);
             return;
         }
 
-        $client->setActive(false);
-        $this->clientService->persist($client);
+        $this->clientService->archive($client);
 
         return $this->redirect()->toRoute('clients');
     }
 
     public function activateAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);
             return;
         }
 
-        $client->setActive(true);
-        $this->clientService->persist($client);
+        $this->clientRepository->activate($client);
 
         return $this->redirect()->toRoute('clients/show', ['clientId' => $client->getId()]);
     }
@@ -126,7 +135,7 @@ class ClientController extends AbstractActionController
     {
         $clients = [];
 
-        foreach ($this->clientService->findAllArchived() as $client) {
+        foreach ($this->clientRepository->findAllArchived() as $client) {
             $clients[] = [
                 'name'         => $client->getName(),
                 'activate_url' => $this->url()->fromRoute('clients/activate', ['clientId' => $client->getId()]),
@@ -138,7 +147,7 @@ class ClientController extends AbstractActionController
 
     public function getDataAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);

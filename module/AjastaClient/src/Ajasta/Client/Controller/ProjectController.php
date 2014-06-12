@@ -1,6 +1,8 @@
 <?php
 namespace Ajasta\Client\Controller;
 
+use Ajasta\Client\Repository\ClientRepository;
+use Ajasta\Client\Repository\ProjectRepository;
 use Ajasta\Client\Service\ClientService;
 use Ajasta\Client\Service\ProjectService;
 use Zend\Form\FormInterface;
@@ -10,9 +12,14 @@ use Zend\View\Model\ViewModel;
 class ProjectController extends AbstractActionController
 {
     /**
-     * @var ClientService
+     * @var ClientRepository
      */
-    protected $clientService;
+    protected $clientRepository;
+
+    /**
+     * @var ProjectRepository
+     */
+    protected $projectRepository;
 
     /**
      * @var ProjectService
@@ -25,23 +32,26 @@ class ProjectController extends AbstractActionController
     protected $projectForm;
 
     /**
-     * @param ClientService  $clientService
-     * @param ProjectService $projectService
-     * @param FormInterface  $projectForm
+     * @param ClientRepository  $clientRepository
+     * @param ProjectRepository $projectRepository
+     * @param ProjectService    $projectService
+     * @param FormInterface     $projectForm
      */
     public function __construct(
-        ClientService $clientService,
+        ClientRepository $clientRepository,
+        ProjectRepository $projectRepository,
         ProjectService $projectService,
         FormInterface $projectForm
     ) {
-        $this->clientService  = $clientService;
-        $this->projectService = $projectService;
-        $this->projectForm    = $projectForm;
+        $this->clientRepository  = $clientRepository;
+        $this->projectRepository = $projectRepository;
+        $this->projectService    = $projectService;
+        $this->projectForm       = $projectForm;
     }
 
     public function createAction()
     {
-        $client = $this->clientService->find($this->params('clientId'));
+        $client = $this->clientRepository->find($this->params('clientId'));
 
         if ($client === null) {
             $this->getResponse()->setStatusCode(404);
@@ -72,7 +82,7 @@ class ProjectController extends AbstractActionController
 
     public function editAction()
     {
-        $project = $this->projectService->find($this->params('projectId'));
+        $project = $this->projectRepository->find($this->params('projectId'));
 
         if ($project === null) {
             $this->getResponse()->setStatusCode(404);

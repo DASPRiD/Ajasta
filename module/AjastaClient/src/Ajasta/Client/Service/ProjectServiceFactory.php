@@ -11,11 +11,6 @@ class ProjectServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-
-        return new ProjectService(
-            $objectManager,
-            $objectManager->getRepository('Ajasta\Client\Entity\Project')
-        );
+        return new ProjectService($serviceLocator->get('doctrine.entitymanager.orm_default'));
     }
 }

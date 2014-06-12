@@ -3,7 +3,6 @@ namespace Ajasta\Client\Service;
 
 use Ajasta\Client\Entity\Client;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\Persistence\ObjectRepository;
 
 class ClientService
 {
@@ -13,43 +12,11 @@ class ClientService
     protected $objectManager;
 
     /**
-     * @var ObjectRepository
-     */
-    protected $clientRepository;
-
-    /**
      * @param ObjectManager    $objectManager
-     * @param ObjectRepository $clientRepository
      */
-    public function __construct(ObjectManager $objectManager, ObjectRepository $clientRepository)
+    public function __construct(ObjectManager $objectManager)
     {
-        $this->objectManager    = $objectManager;
-        $this->clientRepository = $clientRepository;
-    }
-
-    /**
-     * @param  int $clientId
-     * @return Client|null
-     */
-    public function find($clientId)
-    {
-        return $this->clientRepository->find($clientId);
-    }
-
-    /**
-     * @return Client[]
-     */
-    public function findAllActive()
-    {
-        return $this->clientRepository->findBy(['active' => true]);
-    }
-
-    /**
-     * @return Client[]
-     */
-    public function findAllArchived()
-    {
-        return $this->clientRepository->findBy(['active' => false]);
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -59,5 +26,23 @@ class ClientService
     {
         $this->objectManager->persist($client);
         $this->objectManager->flush();
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function archive(Client $client)
+    {
+        $client->setActive(false);
+        $this->persist($client);
+    }
+
+    /**
+     * @param Client $client
+     */
+    public function activate(Client $client)
+    {
+        $client->setActive(true);
+        $this->persist($client);
     }
 }
