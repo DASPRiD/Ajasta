@@ -89,6 +89,37 @@ module.exports = function(grunt) {
                 files: ['./assets/stylesheets/*.less'],
                 tasks: ['less']
             }
+        },
+        phplint: {
+            all: [
+                'config/**/*.php{,.dist}',
+                'module/**/*.{php,phtml}'
+            ]
+        },
+        phpcs: {
+            all: {
+                dir: ['config', 'module']
+            },
+            options: {
+                bin: 'vendor/bin/phpcs',
+                standard: 'psr2',
+                encoding: 'utf-8',
+                extensions: 'php'
+            }
+        },
+        jslint: {
+            client: {
+                src: [
+                    'assets/javascript/**/*.js'
+                ],
+                directives: {
+                    browser: true,
+                    predef: [
+                        'jQuery'
+                    ],
+                    unparam: true
+                }
+            }
         }
     });
 
@@ -98,7 +129,12 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-phpcs');
+    grunt.loadNpmTasks("grunt-phplint");
+    grunt.loadNpmTasks('grunt-jslint');
 
     // Task definition
     grunt.registerTask('default', ['watch']);
+    grunt.registerTask('compile', ['copy', 'less', 'concat', 'uglify']);
+    grunt.registerTask('travis', ['phplint', 'phpcs', 'jslint']);
 };

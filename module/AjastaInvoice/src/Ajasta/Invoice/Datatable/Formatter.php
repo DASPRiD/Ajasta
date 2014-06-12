@@ -62,7 +62,6 @@ class Formatter
         IntlDateFormatter $dateFormatter,
         NumberFormatter $numberFormatter,
         RouteInterface $router
-
     ) {
         $this->escaper         = $escaper;
         $this->dateFormatter   = $dateFormatter;

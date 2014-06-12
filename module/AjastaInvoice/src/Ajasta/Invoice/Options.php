@@ -111,8 +111,8 @@ class Options extends AbstractOptions
         if (!is_string($invoiceNumberFormat)) {
             throw new InvalidArgumentException(sprintf(
                 'Invoice number format must be a string, got %s',
-                is_object($invoiceNumberFormat) ? get_class($invoiceNumberFormat) : gettype($invoiceNumberFormat))
-            );
+                is_object($invoiceNumberFormat) ? get_class($invoiceNumberFormat) : gettype($invoiceNumberFormat)
+            ));
         }
 
         $this->invoiceNumberFormat = $invoiceNumberFormat;

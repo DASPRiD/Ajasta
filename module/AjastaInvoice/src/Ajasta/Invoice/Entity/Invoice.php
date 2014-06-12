@@ -297,7 +297,7 @@ class Invoice
 
         foreach ($this->items as $item) {
             if (!in_array($item, $items, true)) {
-               $this->items->removeElement($item);
+                $this->items->removeElement($item);
             }
         }
 
