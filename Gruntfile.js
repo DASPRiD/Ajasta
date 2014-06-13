@@ -107,6 +107,15 @@ module.exports = function(grunt) {
                 extensions: 'php'
             }
         },
+        phpunit: {
+            AjastaAddress: {
+                dir: 'module/AjastaAddress',
+                configuration: 'module/AjastaAddress/phpunit.xml.dist'
+            },
+            options: {
+                bin: 'vendor/bin/phpunit'
+            }
+        },
         jslint: {
             client: {
                 src: [
@@ -120,6 +129,16 @@ module.exports = function(grunt) {
                     unparam: true
                 }
             }
+        },
+        mkdir: {
+            build: {
+                options: {
+                    create: [
+                        'build/coverage',
+                        'build/logs'
+                    ]
+                }
+            }
         }
     });
 
@@ -129,12 +148,33 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-mkdir');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks("grunt-phplint");
+    grunt.loadNpmTasks('grunt-phpunit');
     grunt.loadNpmTasks('grunt-jslint');
 
     // Task definition
     grunt.registerTask('default', ['watch']);
     grunt.registerTask('compile', ['copy', 'less', 'concat', 'uglify']);
-    grunt.registerTask('travis', ['phplint', 'phpcs', 'jslint']);
+    grunt.registerTask('test', function (env) {
+        if (env === 'ci') {
+            // In CI, we want to collect coverage reports
+            grunt.task.run(['mkdir:build']);
+
+            var phpunitConfig = grunt.config.get('phpunit');
+
+            for (var property in phpunitConfig) {
+                if (property === 'options') {
+                    continue;
+                }
+
+                phpunitConfig[property].coveragePhp = 'build/coverage/' + property + '.cov';
+            }
+
+            grunt.config.set('phpunit', phpunitConfig)
+        }
+
+        grunt.task.run(['phplint', 'phpcs', 'phpunit', 'jslint']);
+    });
 };

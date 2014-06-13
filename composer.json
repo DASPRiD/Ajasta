@@ -15,7 +15,10 @@
     },
     "require-dev": {
         "doctrine/migrations": "dev-master",
-        "squizlabs/php_codesniffer": "2.0.*@dev"
+        "phpunit/phpunit": "4.1.*",
+        "squizlabs/php_codesniffer": "2.0.*@dev",
+        "satooshi/php-coveralls": "dev-master",
+        "phpunit/phpcov": "2.0.0"
     },
     "autoload": {
         "psr-0": {
