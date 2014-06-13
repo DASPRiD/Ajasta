@@ -17,8 +17,7 @@
         "doctrine/migrations": "dev-master",
         "phpunit/phpunit": "4.1.*",
         "squizlabs/php_codesniffer": "2.0.*@dev",
-        "satooshi/php-coveralls": "dev-master",
-        "phpunit/phpcov": "2.0.0"
+        "satooshi/php-coveralls": "dev-master"
     },
     "autoload": {
         "psr-0": {

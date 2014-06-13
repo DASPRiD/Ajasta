@@ -134,7 +134,6 @@ module.exports = function(grunt) {
             build: {
                 options: {
                     create: [
-                        'build/coverage',
                         'build/logs'
                     ]
                 }
@@ -169,7 +168,7 @@ module.exports = function(grunt) {
                     continue;
                 }
 
-                phpunitConfig[property].coveragePhp = 'build/coverage/' + property + '.cov';
+                phpunitConfig[property].coverageClover = 'build/logs/clover-' + property + '.xml';
             }
 
             grunt.config.set('phpunit', phpunitConfig)

@@ -1,2 +1,2 @@
 src_dir: module
-
+coverage_clover: build/logs/clover-*.xml
