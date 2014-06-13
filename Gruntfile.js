@@ -54,7 +54,7 @@ module.exports = function(grunt) {
                     './bower_components/chosen/chosen.jquery.js',
                     './bower_components/bootstrap-switch/dist/js/bootstrap-switch.js',
                     './bower_components/momentjs/min/moment-with-langs.js',
-                    './bower_components/Bootstrap-DatePicker/bootstrap-datepicker.js',
+                    './bower_components/bootstrap-datepicker-dasprid/bootstrap-datepicker.js',
                     './assets/javascript/main.js'
                 ],
                 dest: './public/assets/javascript/main.js'
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
                     './bower_components/jquery/jquery.js',
                     './bower_components/jquery-ui/ui/jquery-ui.js',
                     './bower_components/bootstrap/dist/js/bootstrap.js',
-                    './bower_components/Bootstrap-DatePicker/bootstrap-datepicker.js',
+                    './bower_components/bootstrap-datepicker-dasprid/bootstrap-datepicker.js',
                     './bower_components/boostrap-switch/dist/js/bootstrap-switch.js',
                     './bower_components/chosen/coffee/chosen.jquery.coffee',
                     './bower_components/datatables/media/js/jquery.dataTables.js',
