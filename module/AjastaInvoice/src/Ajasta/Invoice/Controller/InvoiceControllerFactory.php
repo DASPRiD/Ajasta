@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Invoice\Controller;
 
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -9,9 +10,11 @@ class InvoiceControllerFactory implements FactoryInterface
     /**
      * @return InvoiceController
      */
-    public function createService(ServiceLocatorInterface $controllerManager)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceLocator = $controllerManager->getServiceLocator();
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            $serviceLocator = $serviceLocator->getServiceLocator();
+        }
 
         return new InvoiceController(
             $serviceLocator->get('Ajasta\Invoice\Repository\InvoiceRepository'),

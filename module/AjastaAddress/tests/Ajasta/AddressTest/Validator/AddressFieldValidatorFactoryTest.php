@@ -5,7 +5,6 @@ use Ajasta\Address\Validator\AddressFieldValidatorFactory;
 use PHPUnit_Framework_TestCase as TestCase;
 use ReflectionClass;
 use Zend\ServiceManager\ServiceManager;
-use Zend\Validator\ValidatorPluginManager;
 
 /**
  * @coversDefaultClass Ajasta\Address\Validator\AddressFieldValidatorFactory
@@ -19,9 +18,9 @@ class AddressFieldValidatorFactoryTest extends TestCase
     protected $addressService;
 
     /**
-     * @var ValidatorPluginManager
+     * @var ServiceManager
      */
-    protected $validatorManager;
+    protected $serviceLocator;
 
     public function setUp()
     {
@@ -30,14 +29,11 @@ class AddressFieldValidatorFactoryTest extends TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $serviceLocator = new ServiceManager();
-        $serviceLocator->setService(
+        $this->serviceLocator = new ServiceManager();
+        $this->serviceLocator->setService(
             'Ajasta\Address\Service\AddressService',
             $this->addressService
         );
-
-        $this->validatorManager = new ValidatorPluginManager();
-        $this->validatorManager->setServiceLocator($serviceLocator);
     }
 
     /**
@@ -51,7 +47,7 @@ class AddressFieldValidatorFactoryTest extends TestCase
         );
 
         $factory = new AddressFieldValidatorFactory();
-        $factory->createService($this->validatorManager);
+        $factory->createService($this->serviceLocator);
     }
 
     /**
@@ -65,7 +61,7 @@ class AddressFieldValidatorFactoryTest extends TestCase
 
         $this->assertInstanceOf(
             'Ajasta\Address\Validator\AddressFieldValidator',
-            $factory->createService($this->validatorManager)
+            $factory->createService($this->serviceLocator)
         );
     }
 
@@ -78,7 +74,7 @@ class AddressFieldValidatorFactoryTest extends TestCase
         $factory = new AddressFieldValidatorFactory();
         $factory->setCreationOptions(['field' => 'foo']);
 
-        $addressFieldValidator = $factory->createService($this->validatorManager);
+        $addressFieldValidator = $factory->createService($this->serviceLocator);
 
         $reflectedValidator = new ReflectionClass($addressFieldValidator);
         $reflectedProperty  = $reflectedValidator->getProperty('fieldName');

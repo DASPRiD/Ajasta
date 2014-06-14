@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Invoice\View\Helper;
 
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -9,9 +10,13 @@ class InvoiceOptionsFactory implements FactoryInterface
     /**
      * @return InvoiceOptions
      */
-    public function createService(ServiceLocatorInterface $viewHelperManager)
+    public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $options = $viewHelperManager->getServiceLocator()->get('Ajasta\Invoice\Options');
+        if ($serviceLocator instanceof AbstractPluginManager) {
+            $serviceLocator = $serviceLocator->getServiceLocator();
+        }
+
+        $options = $serviceLocator->get('Ajasta\Invoice\Options');
 
         return new InvoiceOptions(
             $options->getDefaultVat(),
