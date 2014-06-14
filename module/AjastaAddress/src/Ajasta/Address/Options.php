@@ -58,10 +58,6 @@ class Options extends AbstractOptions
      */
     public function setDataPath($dataPath)
     {
-        if (!is_dir($dataPath)) {
-            throw new InvalidArgumentException('Data path is not a directory');
-        }
-
         $this->dataPath = rtrim($dataPath, '/');
     }
 
