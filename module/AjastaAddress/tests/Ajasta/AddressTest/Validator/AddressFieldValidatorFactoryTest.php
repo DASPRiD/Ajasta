@@ -55,6 +55,7 @@ class AddressFieldValidatorFactoryTest extends TestCase
     }
 
     /**
+     * @covers ::setCreationOptions
      * @covers ::createService
      */
     public function testFactoryReturnsAddressFieldValidator()
@@ -69,6 +70,7 @@ class AddressFieldValidatorFactoryTest extends TestCase
     }
 
     /**
+     * @covers ::setCreationOptions
      * @covers ::createService
      */
     public function testFactoryInjectsFieldOption()

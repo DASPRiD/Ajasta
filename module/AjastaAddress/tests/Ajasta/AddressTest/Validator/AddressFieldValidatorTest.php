@@ -26,32 +26,31 @@ class AddressFieldValidatorTest extends TestCase
             ->getMockBuilder('Ajasta\Address\Service\AddressService')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->addressFieldValidator = new AddressFieldValidator(
-            $this->addressService,
-            'foo'
-        );
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testFailureOnMissingCountryCode()
     {
-        $this->assertFalse($this->addressFieldValidator->isValid('foo'));
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+
+        $this->assertFalse($addressFieldValidator->isValid('foo'));
         $this->assertArrayHasKey(
             AddressFieldValidator::MISSING_COUNTRY_CODE,
-            $this->addressFieldValidator->getMessages()
+            $addressFieldValidator->getMessages()
         );
 
-        $this->assertFalse($this->addressFieldValidator->isValid('foo', []));
+        $this->assertFalse($addressFieldValidator->isValid('foo', []));
         $this->assertArrayHasKey(
             AddressFieldValidator::MISSING_COUNTRY_CODE,
-            $this->addressFieldValidator->getMessages()
+            $addressFieldValidator->getMessages()
         );
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testCountryCodeIsTrimmed()
@@ -63,10 +62,12 @@ class AddressFieldValidatorTest extends TestCase
             ->with($this->equalTo('bar'))
             ->will($this->returnValue([]));
 
-        $this->addressFieldValidator->isValid('', ['countryCode' => ' bar ']);
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+        $addressFieldValidator->isValid('', ['countryCode' => ' bar ']);
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnNonExistentEmptyField()
@@ -78,10 +79,12 @@ class AddressFieldValidatorTest extends TestCase
             ->with($this->equalTo('bar'))
             ->will($this->returnValue([]));
 
-        $this->assertTrue($this->addressFieldValidator->isValid('', ['countryCode' => 'bar']));
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+        $this->assertTrue($addressFieldValidator->isValid('', ['countryCode' => 'bar']));
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnNonRequiredEmptyField()
@@ -93,10 +96,12 @@ class AddressFieldValidatorTest extends TestCase
             ->with($this->equalTo('bar'))
             ->will($this->returnValue(['foo' => false]));
 
-        $this->assertTrue($this->addressFieldValidator->isValid('', ['countryCode' => 'bar']));
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+        $this->assertTrue($addressFieldValidator->isValid('', ['countryCode' => 'bar']));
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnRequiredNonEmptyField()
@@ -108,10 +113,12 @@ class AddressFieldValidatorTest extends TestCase
             ->with($this->equalTo('bar'))
             ->will($this->returnValue(['foo' => true]));
 
-        $this->assertTrue($this->addressFieldValidator->isValid('foo', ['countryCode' => 'bar']));
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+        $this->assertTrue($addressFieldValidator->isValid('foo', ['countryCode' => 'bar']));
     }
 
     /**
+     * @covers ::__construct
      * @covers ::isValid
      */
     public function testFailureOnRequiredEmptyField()
@@ -123,10 +130,11 @@ class AddressFieldValidatorTest extends TestCase
             ->with($this->equalTo('bar'))
             ->will($this->returnValue(['foo' => true]));
 
-        $this->assertFalse($this->addressFieldValidator->isValid('', ['countryCode' => 'bar']));
+        $addressFieldValidator = new AddressFieldValidator($this->addressService, 'foo');
+        $this->assertFalse($addressFieldValidator->isValid('', ['countryCode' => 'bar']));
         $this->assertArrayHasKey(
             AddressFieldValidator::IS_EMPTY,
-            $this->addressFieldValidator->getMessages()
+            $addressFieldValidator->getMessages()
         );
     }
 }

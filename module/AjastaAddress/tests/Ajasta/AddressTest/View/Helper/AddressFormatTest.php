@@ -28,12 +28,10 @@ class AddressFormatTest extends TestCase
             ->getMockBuilder('Ajasta\Address\Service\AddressService')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $this->addressFormat = new AddressFormat($this->addressService);
-        $this->addressFormat->setView(new PhpRenderer());
     }
 
     /**
+     * @covers ::__construct
      * @covers ::__invoke
      */
     public function testInvokeFormatsForHtml()
@@ -47,6 +45,8 @@ class AddressFormatTest extends TestCase
             ->with($this->equalTo($address))
             ->will($this->returnValue(['foo', '&bar']));
 
-        $this->assertEquals("foo<br />\n&amp;bar", $this->addressFormat->__invoke($address));
+        $addressFormat = new AddressFormat($this->addressService);
+        $addressFormat->setView(new PhpRenderer());
+        $this->assertEquals("foo<br />\n&amp;bar", $addressFormat($address));
     }
 }
