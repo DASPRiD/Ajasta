@@ -8,7 +8,7 @@ use PHPUnit_Framework_TestCase as TestCase;
  * @coversDefaultClass Ajasta\Address\Options
  * @covers ::<!public>
  */
-class AddressTest extends TestCase
+class OptionsTest extends TestCase
 {
     /**
      * @covers ::__construct
