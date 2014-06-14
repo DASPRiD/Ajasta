@@ -4,6 +4,8 @@ namespace Ajasta\Address\Service;
 use Ajasta\Address\Options;
 use Zend\Config\Writer\PhpArray as PhpArrayWriter;
 use Zend\Http\Client as HttpClient;
+use Zend\ProgressBar\ProgressBar;
+use Zend\ProgressBar\Adapter\AbstractAdapter as ProgressAdapter;
 
 class MaintenanceService
 {
@@ -27,7 +29,10 @@ class MaintenanceService
         $this->httpClient = $httpClient;
     }
 
-    public function updateAddressFormats()
+    /**
+     * @param ProgressAdapter $progressAdapter
+     */
+    public function updateAddressFormats(ProgressAdapter $progressAdapter = null)
     {
         $localeDataUri = $this->options->getLocaleDataUri();
         $dataPath      = $this->options->getDataPath();
@@ -43,14 +48,26 @@ class MaintenanceService
             $countryCodes = explode('~', $locales->countries);
             $countryCodes[] = 'ZZ';
 
+            if ($progressAdapter !== null) {
+                $progressBar = new ProgressBar($progressAdapter, 0, count($countryCodes));
+            }
+
             foreach ($countryCodes as $countryCode) {
                 file_put_contents(
                     $dataPath . '/' . $countryCode . '.json',
                     $this->httpClient->setUri($localeDataUri . '/' . $countryCode)->send()->getContent()
                 );
+
+                if (isset($progressBar)) {
+                    $progressBar->next();
+                }
             }
         } else {
             $countryCodes = [];
+        }
+
+        if (isset($progressBar)) {
+            $progressBar->finish();
         }
 
         // We clearly don't want the "ZZ" in the array!

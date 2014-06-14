@@ -3,6 +3,7 @@ namespace Ajasta\Address\Controller;
 
 use Ajasta\Address\Service\MaintenanceService;
 use Zend\Mvc\Controller\AbstractConsoleController;
+use Zend\ProgressBar\Adapter\Console as ConsoleAdapter;
 
 class MaintenanceController extends AbstractConsoleController
 {
@@ -22,7 +23,7 @@ class MaintenanceController extends AbstractConsoleController
     public function updateAddressFormatsAction()
     {
         $this->getConsole()->writeLine('Updating address formats, this may take a while.');
-        $this->maintenanceService->updateAddressFormats();
+        $this->maintenanceService->updateAddressFormats(new ConsoleAdapter());
         $this->getConsole()->writeLine('Address formats have been updated.');
     }
 }

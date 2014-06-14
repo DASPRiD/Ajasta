@@ -92,13 +92,4 @@ class MaintenanceServiceTest extends TestCase
         $this->assertSame('{"name": "UK"}', file_get_contents($this->root->url() . '/UK.json'));
         $this->assertSame('{"name": "ZZ"}', file_get_contents($this->root->url() . '/ZZ.json'));
     }
-
-    /**
-        $localeDataDirectory = new vfsStreamDirectory('locale_data');
-        $localeDataDirectory->addChild(
-            (new vfsStreamFile('US.json'))->withContent(
-                '{"fmt": "%N%n%O%n%A%n%C %S %Z", "require": "ACSZ" "name": "UNITED STATES"}'
-            )
-        );
-     */
 }

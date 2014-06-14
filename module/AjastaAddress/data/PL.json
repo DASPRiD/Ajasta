@@ -1,1 +1,1 @@
-{"key": "PL", "zipex": "00-950,05-470,48-300,32-015,00-940", "name": "POLAND", "zip": "\\d{2}-\\d{3}", "fmt": "%N%n%O%n%A%n%Z %C", "require": "ACZ", "posturl": "http://www.poczta-polska.pl/kody.php", "id": "data/PL"}
+{"key": "PL", "zipex": "00-950,05-470,48-300,32-015,00-940", "name": "POLAND", "zip": "\\d{2}-\\d{3}", "require": "ACZ", "fmt": "%N%n%O%n%A%n%Z %C", "posturl": "http://www.poczta-polska.pl/kody.php", "id": "data/PL"}

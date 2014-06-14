@@ -1,1 +1,1 @@
-{"key": "SM", "zipex": "47890,47891,47895,47899", "name": "SAN MARINO", "zip": "4789\\d", "fmt": "%N%n%O%n%A%n%Z %C", "require": "AZ", "posturl": "http://www.poste.it/online/cercacap/", "id": "data/SM"}
+{"key": "SM", "zipex": "47890,47891,47895,47899", "name": "SAN MARINO", "zip": "4789\\d", "require": "AZ", "fmt": "%N%n%O%n%A%n%Z %C", "posturl": "http://www.poste.it/online/cercacap/", "id": "data/SM"}

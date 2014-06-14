@@ -1,1 +1,1 @@
-{"key": "DE", "zipex": "26133,53225", "name": "GERMANY", "zip": "\\d{5}", "fmt": "%N%n%O%n%A%n%Z %C", "require": "ACZ", "posturl": "http://www.postdirekt.de/plzserver/", "id": "data/DE"}
+{"key": "DE", "zipex": "26133,53225", "name": "GERMANY", "zip": "\\d{5}", "require": "ACZ", "fmt": "%N%n%O%n%A%n%Z %C", "posturl": "http://www.postdirekt.de/plzserver/", "id": "data/DE"}

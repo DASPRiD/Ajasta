@@ -1,1 +1,1 @@
-{"key": "UA", "zipex": "15432,01055,01001", "name": "UKRAINE", "zip": "\\d{5}", "fmt": "%Z %C%n%A%n%O%n%N", "posturl": "http://services.ukrposhta.com/postindex_new/", "id": "data/UA"}
+{"zipex": "15432,01055,01001", "posturl": "http://services.ukrposhta.com/postindex_new/", "zip": "\\d{5}", "fmt": "%Z %C%n%A%n%O%n%N", "key": "UA", "id": "data/UA", "name": "UKRAINE"}
