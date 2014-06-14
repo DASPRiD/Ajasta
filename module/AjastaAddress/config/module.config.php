@@ -61,6 +61,9 @@ return [
         ],
     ],
     'form_elements' => [
+        'invokables' => [
+            'Ajasta\Address\Form\Element\AddressField' => 'Ajasta\Address\Form\Element\AddressField',
+        ],
         'factories' => [
             'Ajasta\Address\Form\AddressFieldset' => 'Ajasta\Address\Form\AddressFieldsetFactory',
             'Ajasta\Address\Form\Element\CountrySelect' => 'Ajasta\Address\Form\Element\CountrySelectFactory',
