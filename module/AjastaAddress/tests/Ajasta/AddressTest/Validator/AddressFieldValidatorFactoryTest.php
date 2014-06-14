@@ -13,18 +13,13 @@ use Zend\ServiceManager\ServiceManager;
 class AddressFieldValidatorFactoryTest extends TestCase
 {
     /**
-     * @var \Ajasta\Address\Service\AddressService|\PHPUnit_Framework_MockObject_MockObject
-     */
-    protected $addressService;
-
-    /**
      * @var ServiceManager
      */
     protected $serviceLocator;
 
     public function setUp()
     {
-        $this->addressService = $this
+        $addressService = $this
             ->getMockBuilder('Ajasta\Address\Service\AddressService')
             ->disableOriginalConstructor()
             ->getMock();
@@ -32,8 +27,24 @@ class AddressFieldValidatorFactoryTest extends TestCase
         $this->serviceLocator = new ServiceManager();
         $this->serviceLocator->setService(
             'Ajasta\Address\Service\AddressService',
-            $this->addressService
+            $addressService
         );
+    }
+
+    /**
+     * @covers ::createService
+     */
+    public function testFactoryRetrievesServiceLocatorFromPluginManager()
+    {
+        $pluginManager = $this->getMock('Zend\ServiceManager\AbstractPluginManager');
+        $pluginManager
+            ->expects($this->once())
+            ->method('getServiceLocator')
+            ->will($this->returnValue($this->serviceLocator));
+
+        $factory = new AddressFieldValidatorFactory();
+        $factory->setCreationOptions(['field' => 'foo']);
+        $factory->createService($pluginManager);
     }
 
     /**

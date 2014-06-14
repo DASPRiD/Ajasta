@@ -12,26 +12,49 @@ use Zend\ServiceManager\ServiceManager;
 class AddressFormatFactoryTest extends TestCase
 {
     /**
-     * @covers ::createService
+     * @var ServiceManager
      */
-    public function testFactoryReturnsAddressFormat()
+    protected $serviceLocator;
+
+    public function setUp()
     {
         $addressService = $this
             ->getMockBuilder('Ajasta\Address\Service\AddressService')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $serviceLocator = new ServiceManager();
-        $serviceLocator->setService(
+        $this->serviceLocator = new ServiceManager();
+        $this->serviceLocator->setService(
             'Ajasta\Address\Service\AddressService',
             $addressService
         );
+    }
 
+    /**
+     * @covers ::createService
+     */
+    public function testFactoryRetrievesServiceLocatorFromPluginManager()
+    {
+        $pluginManager = $this->getMock('Zend\ServiceManager\AbstractPluginManager');
+        $pluginManager
+            ->expects($this->once())
+            ->method('getServiceLocator')
+            ->will($this->returnValue($this->serviceLocator));
+
+        $factory = new AddressFormatFactory();
+        $factory->createService($pluginManager);
+    }
+
+    /**
+     * @covers ::createService
+     */
+    public function testFactoryReturnsAddressFormat()
+    {
         $factory = new AddressFormatFactory();
 
         $this->assertInstanceOf(
             'Ajasta\Address\View\Helper\AddressFormat',
-            $factory->createService($serviceLocator)
+            $factory->createService($this->serviceLocator)
         );
     }
 }
