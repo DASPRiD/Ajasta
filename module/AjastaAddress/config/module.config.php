@@ -1,9 +1,11 @@
 <?php
 return [
-    'address_formats' => [
-        'locale_data_uri' => 'http://i18napis.appspot.com/address/data',
-        'data_path'       => __DIR__ . '/../data',
-        'country_codes'   => require __DIR__ . '/../data/country-codes.php',
+    'ajasta' => [
+        'address' => [
+            'locale_data_uri' => 'http://i18napis.appspot.com/address/data',
+            'data_path'       => __DIR__ . '/../data',
+            'country_codes'   => require __DIR__ . '/../data/country-codes.php',
+        ],
     ],
     'doctrine' => [
         'driver' => [
@@ -38,12 +40,12 @@ return [
     'console' => [
         'router' => [
             'routes' => [
-                'update-address-formats' => [
+                'ajasta:address:update-address-formats' => [
                     'type' => 'simple',
                     'options' => [
-                        'route' => 'update-address-formats',
+                        'route' => 'ajasta:address:update-address-formats',
                         'defaults' => [
-                            'controller' => 'Ajasta\Address\Controller\IndexController',
+                            'controller' => 'Ajasta\Address\Controller\MaintenanceController',
                             'action' => 'update-address-formats'
                         ],
                     ],
@@ -54,10 +56,12 @@ return [
     'controllers' => [
         'factories' => [
             'Ajasta\Address\Controller\IndexController' => 'Ajasta\Address\Controller\IndexControllerFactory',
+            'Ajasta\Address\Controller\MaintenanceController' => 'Ajasta\Address\Controller\MaintenanceControllerFactory',
         ],
     ],
     'service_manager' => [
         'factories' => [
+            'Ajasta\Address\Options' => 'Ajasta\Address\OptionsFactory',
             'Ajasta\Address\Service\AddressService' => 'Ajasta\Address\Service\AddressServiceFactory',
         ],
     ],

@@ -7,6 +7,7 @@ use PHPUnit_Framework_TestCase as TestCase;
 /**
  * @coversDefaultClass Ajasta\Address\Validator\AddressFieldValidator
  * @covers ::<!public>
+ * @covers ::__construct
  */
 class AddressFieldValidatorTest extends TestCase
 {
@@ -29,7 +30,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testFailureOnMissingCountryCode()
@@ -50,7 +50,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testCountryCodeIsTrimmed()
@@ -67,7 +66,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnNonExistentEmptyField()
@@ -84,7 +82,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnNonRequiredEmptyField()
@@ -101,7 +98,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testSuccessOnRequiredNonEmptyField()
@@ -118,7 +114,6 @@ class AddressFieldValidatorTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::isValid
      */
     public function testFailureOnRequiredEmptyField()

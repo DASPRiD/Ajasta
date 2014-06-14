@@ -11,12 +11,6 @@ class AddressServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $config = $serviceLocator->get('Config')['address_formats'];
-
-        return new AddressService(
-            $config['data_path'],
-            $config['locale_data_uri'],
-            $config['country_codes']
-        );
+        return new AddressService($serviceLocator->get('Ajasta\Address\Options'));
     }
 }

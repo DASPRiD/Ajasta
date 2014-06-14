@@ -9,6 +9,7 @@ use Zend\View\Renderer\PhpRenderer;
 /**
  * @coversDefaultClass Ajasta\Address\View\Helper\AddressFormat
  * @covers ::<!public>
+ * @covers ::__construct
  */
 class AddressFormatTest extends TestCase
 {
@@ -31,7 +32,6 @@ class AddressFormatTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
      * @covers ::__invoke
      */
     public function testInvokeFormatsForHtml()

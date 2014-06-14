@@ -40,6 +40,9 @@ return [
             'Zend\Cache\Service\StorageCacheAbstractServiceFactory',
             'Zend\Log\LoggerAbstractServiceFactory',
         ],
+        'invokables' => [
+            'Ajasta\Core\Http\Client' => 'Zend\Http\Client',
+        ],
         'factories' => [
             'Ajasta\Core\TransactionalManager' => 'Ajasta\Core\TransactionalManagerFactory',
             'Ajasta\Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',

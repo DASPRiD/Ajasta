@@ -2,8 +2,8 @@
 namespace Ajasta\Address\Service;
 
 use Ajasta\Address\Entity\Address;
+use Ajasta\Address\Options;
 use RuntimeException;
-use Zend\Config\Writer\PhpArray as PhpArrayWriter;
 
 class AddressService
 {
@@ -23,35 +23,26 @@ class AddressService
     ];
 
     /**
-     * @var string
+     * @var Options
      */
-    protected $dataPath;
+    protected $options;
 
     /**
-     * @var string
-     */
-    protected $localeDataUri;
-
-    /**
-     * @var array
+     * @var string[]|null
      */
     protected $countryCodes;
 
     /**
-     * @var array
+     * @var bool[]
      */
     protected $fieldCache = [];
 
     /**
-     * @param string $dataPath
-     * @param string $localeDataUri
-     * @param array  $countryCodes
+     * @param Options $options
      */
-    public function __construct($dataPath, $localeDataUri, array $countryCodes)
+    public function __construct(Options $options)
     {
-        $this->dataPath      = rtrim($dataPath, '/');
-        $this->localeDataUri = $localeDataUri;
-        $this->countryCodes  = $countryCodes;
+        $this->options = $options;
     }
 
     /**
@@ -97,7 +88,7 @@ class AddressService
             $lines[] = $normalizedLine;
         }
 
-        if ($addCountry) {
+        if ($addCountry && $countryCode !== 'ZZ') {
             $lines[] = $this->getJsonValue($countryCode, 'name');
         }
 
@@ -137,44 +128,15 @@ class AddressService
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getCountryCodes()
     {
-        return $this->countryCodes;
-    }
-
-    /**
-     * This is a maintenance method for development only.
-     */
-    public function updateAddressFormats()
-    {
-        $locales = json_decode(file_get_contents($this->localeDataUri));
-
-        foreach (glob($this->dataPath . '/*.json') as $file) {
-            unlink($file);
+        if ($this->countryCodes !== null) {
+            return $this->countryCodes;
         }
 
-        if (isset($locales->countries)) {
-            $countryCodes = explode('~', $locales->countries);
-            $countryCodes[] = 'ZZ';
-
-            foreach ($countryCodes as $countryCode) {
-                file_put_contents(
-                    $this->dataPath . '/' . $countryCode . '.json',
-                    file_get_contents($this->localeDataUri . '/' . $countryCode)
-                );
-            }
-        } else {
-            $countryCodes = [];
-        }
-
-        // We clearly don't want the "ZZ" in the array!
-        array_pop($countryCodes);
-
-        $writer = new PhpArrayWriter();
-        $writer->setUseBracketArraySyntax(true);
-        $writer->toFile($this->dataPath . '/country-codes.php', $countryCodes);
+        return ($this->countryCodes = require $this->options->getCountryCodesPath());
     }
 
     /**
@@ -247,11 +209,11 @@ class AddressService
      */
     protected function getJsonValue($countryCode, $key)
     {
-        if (!in_array($countryCode, $this->countryCodes) && $countryCode !== 'ZZ') {
+        if (!in_array($countryCode, $this->getCountryCodes()) && $countryCode !== 'ZZ') {
             return null;
         }
 
-        $filename = $this->dataPath . '/' . $countryCode . '.json';
+        $filename = $this->options->getDataPath() . '/' . $countryCode . '.json';
 
         if (!file_exists($filename)) {
             return null;
