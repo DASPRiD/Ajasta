@@ -16,11 +16,6 @@ class AddressFieldValidatorTest extends TestCase
      */
     protected $addressService;
 
-    /**
-     * @var AddressFieldValidator
-     */
-    protected $addressFieldValidator;
-
     public function setUp()
     {
         $this->addressService = $this

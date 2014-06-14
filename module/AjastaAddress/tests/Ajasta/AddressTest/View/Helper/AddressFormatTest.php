@@ -18,11 +18,6 @@ class AddressFormatTest extends TestCase
      */
     protected $addressService;
 
-    /**
-     * AddressFormat
-     */
-    protected $addressFormat;
-
     public function setUp()
     {
         $this->addressService = $this
