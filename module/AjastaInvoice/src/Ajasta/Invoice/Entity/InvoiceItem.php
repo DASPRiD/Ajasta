@@ -26,7 +26,7 @@ class InvoiceItem
     protected $description;
 
     /**
-     * @var decimal
+     * @var string
      */
     protected $quantity;
 
@@ -36,7 +36,7 @@ class InvoiceItem
     protected $unit;
 
     /**
-     * @var decimal
+     * @var string
      */
     protected $unitPrice;
 
@@ -103,7 +103,7 @@ class InvoiceItem
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getQuantity()
     {
@@ -111,7 +111,7 @@ class InvoiceItem
     }
 
     /**
-     * @param decimal $quantity
+     * @param string $quantity
      */
     public function setQuantity($quantity)
     {
@@ -135,7 +135,7 @@ class InvoiceItem
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getUnitPrice()
     {
@@ -143,7 +143,7 @@ class InvoiceItem
     }
 
     /**
-     * @param decimal $unitPrice
+     * @param string $unitPrice
      */
     public function setUnitPrice($unitPrice)
     {
@@ -151,7 +151,7 @@ class InvoiceItem
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getAmount()
     {

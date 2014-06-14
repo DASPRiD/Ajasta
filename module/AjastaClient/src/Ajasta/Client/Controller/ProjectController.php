@@ -3,7 +3,6 @@ namespace Ajasta\Client\Controller;
 
 use Ajasta\Client\Repository\ClientRepository;
 use Ajasta\Client\Repository\ProjectRepository;
-use Ajasta\Client\Service\ClientService;
 use Ajasta\Client\Service\ProjectService;
 use Zend\Form\FormInterface;
 use Zend\Mvc\Controller\AbstractActionController;

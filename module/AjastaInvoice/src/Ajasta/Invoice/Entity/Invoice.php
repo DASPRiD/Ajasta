@@ -66,12 +66,12 @@ class Invoice
     protected $payDate;
 
     /**
-     * @var decimal|null
+     * @var string|null
      */
     protected $discount;
 
     /**
-     * @var decimal|null
+     * @var string|null
      */
     protected $vat;
 
@@ -237,9 +237,8 @@ class Invoice
         $this->payDate = $payDate;
     }
 
-
     /**
-     * @return decimal|null
+     * @return string|null
      */
     public function getDiscount()
     {
@@ -247,7 +246,7 @@ class Invoice
     }
 
     /**
-     * @param decimal|null $discount
+     * @param string|null $discount
      */
     public function setDiscount($discount)
     {
@@ -255,7 +254,7 @@ class Invoice
     }
 
     /**
-     * @return decimal|null
+     * @return string|null
      */
     public function getVat()
     {
@@ -263,7 +262,7 @@ class Invoice
     }
 
     /**
-     * @param decimal|null $vat
+     * @param string|null $vat
      */
     public function setVat($vat)
     {
@@ -334,7 +333,7 @@ class Invoice
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getItemAmount()
     {
@@ -348,7 +347,7 @@ class Invoice
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getDiscountAmount()
     {
@@ -356,7 +355,7 @@ class Invoice
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getDiscountedAmount()
     {
@@ -372,7 +371,7 @@ class Invoice
     }
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getTotalAmount()
     {

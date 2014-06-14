@@ -19,12 +19,12 @@ class Project
     protected $name;
 
     /**
-     * @var decimal|null
+     * @var string|null
      */
     protected $defaultUnit;
 
     /**
-     * @var decimal|null
+     * @var string|null
      */
     protected $defaultUnitPrice;
 
@@ -85,7 +85,7 @@ class Project
     }
 
     /**
-     * @return decimal|null
+     * @return string|null
      */
     public function getDefaultUnitPrice()
     {
@@ -93,7 +93,7 @@ class Project
     }
 
     /**
-     * @param decimal|null $defaultUnitPrice
+     * @param string|null $defaultUnitPrice
      */
     public function setDefaultUnitPrice($defaultUnitPrice)
     {

@@ -42,7 +42,7 @@ class Client
     protected $defaultUnit;
 
     /**
-     * @var decimal|null
+     * @var string|null
      */
     protected $defaultUnitPrice;
 
@@ -62,7 +62,7 @@ class Client
     }
 
     /**
-     * @return id
+     * @return int
      */
     public function getId()
     {
@@ -166,7 +166,7 @@ class Client
     }
 
     /**
-     * @return decimal|null
+     * @return string|null
      */
     public function getDefaultUnitPrice()
     {
@@ -174,7 +174,7 @@ class Client
     }
 
     /**
-     * @param decimal|null $defaultUnitPrice
+     * @param string|null $defaultUnitPrice
      */
     public function setDefaultUnitPrice($defaultUnitPrice)
     {

@@ -40,7 +40,7 @@ class PaginationResult
     }
 
     /**
-     * @return Invoice[]
+     * @return array|Traversable
      */
     public function getResults()
     {

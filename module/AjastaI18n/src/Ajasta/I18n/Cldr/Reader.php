@@ -114,7 +114,7 @@ class Reader
      * @param  string|null $attribute
      * @param  string|null $value
      * @param  array       $temp
-     * @return array
+     * @return bool
      */
     protected function findRoute($locale, $path, $attribute, $value, &$temp)
     {

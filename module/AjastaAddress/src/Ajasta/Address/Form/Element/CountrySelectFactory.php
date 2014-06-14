@@ -7,7 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class CountrySelectFactory implements FactoryInterface
 {
     /**
-     * @return IndexController
+     * @return CountrySelect
      */
     public function createService(ServiceLocatorInterface $formElementManager)
     {

@@ -71,7 +71,7 @@ class Formatter
 
     /**
      * @param  Invoice $invoice
-     * @return array
+     * @return string[]
      */
     public function format(Invoice $invoice)
     {
