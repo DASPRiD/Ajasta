@@ -44,26 +44,22 @@ class MaintenanceService
             }
         }
 
-        if (isset($locales->countries)) {
-            $countryCodes = explode('~', $locales->countries);
-            $countryCodes[] = 'ZZ';
+        $countryCodes = isset($locales->countries) ? explode('~', $locales->countries) : [];
+        $countryCodes[] = 'ZZ';
 
-            if ($progressAdapter !== null) {
-                $progressBar = new ProgressBar($progressAdapter, 0, count($countryCodes));
+        if ($progressAdapter !== null) {
+            $progressBar = new ProgressBar($progressAdapter, 0, count($countryCodes));
+        }
+
+        foreach ($countryCodes as $countryCode) {
+            file_put_contents(
+                $dataPath . '/' . $countryCode . '.json',
+                $this->httpClient->setUri($localeDataUri . '/' . $countryCode)->send()->getContent()
+            );
+
+            if (isset($progressBar)) {
+                $progressBar->next();
             }
-
-            foreach ($countryCodes as $countryCode) {
-                file_put_contents(
-                    $dataPath . '/' . $countryCode . '.json',
-                    $this->httpClient->setUri($localeDataUri . '/' . $countryCode)->send()->getContent()
-                );
-
-                if (isset($progressBar)) {
-                    $progressBar->next();
-                }
-            }
-        } else {
-            $countryCodes = [];
         }
 
         if (isset($progressBar)) {

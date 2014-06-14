@@ -60,13 +60,19 @@ class MaintenanceServiceTest extends TestCase
      */
     public function testUpdateAddressFormatsIgnoresInvalidResponse()
     {
+        $testAdapter = new HttpTestAdapter();
+        $testAdapter->setResponse([
+            (new HttpResponse())->setContent('invalid'),
+            (new HttpResponse())->setContent('{"name": "ZZ"}'),
+        ]);
         $httpClient = new HttpClient();
-        $httpClient->setAdapter(new HttpTestAdapter());
+        $httpClient->setAdapter($testAdapter);
 
         $maintenanceService = new MaintenanceService($this->options, $httpClient);
         $maintenanceService->updateAddressFormats();
 
         $this->assertSame([], include $this->root->url() . '/country-codes.php');
+        $this->assertSame('{"name": "ZZ"}', file_get_contents($this->root->url() . '/ZZ.json'));
     }
 
     /**
@@ -91,5 +97,34 @@ class MaintenanceServiceTest extends TestCase
         $this->assertSame('{"name": "US"}', file_get_contents($this->root->url() . '/US.json'));
         $this->assertSame('{"name": "UK"}', file_get_contents($this->root->url() . '/UK.json'));
         $this->assertSame('{"name": "ZZ"}', file_get_contents($this->root->url() . '/ZZ.json'));
+    }
+
+    /**
+     * @covers ::updateAddressFormats
+     */
+    public function testUpdateAddressFormatsUsesProgresAdapter()
+    {
+        $testAdapter = new HttpTestAdapter();
+        $testAdapter->setResponse([
+            (new HttpResponse())->setContent('empty'),
+            (new HttpResponse())->setContent('{"name": "ZZ"}'),
+        ]);
+        $httpClient = new HttpClient();
+        $httpClient->setAdapter($testAdapter);
+
+        $progressAdapter = $this->getMock('Zend\ProgressBar\Adapter\AbstractAdapter');
+        $progressAdapter
+            ->expects($this->any())
+            ->method('notify')
+            ->with(
+                $this->logicalOr(
+                    $this->equalTo(0.0),
+                    $this->equalTo(1.0)
+                ),
+                $this->equalTo(1.0)
+            );
+
+        $maintenanceService = new MaintenanceService($this->options, $httpClient);
+        $maintenanceService->updateAddressFormats($progressAdapter);
     }
 }
