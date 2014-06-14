@@ -13,5 +13,4 @@ script:
  - grunt test:ci
 
 after_script:
- - vendor/bin/phpcov merge -n --clover=build/logs/clover.xml build/coverage
  - vendor/bin/coveralls -n

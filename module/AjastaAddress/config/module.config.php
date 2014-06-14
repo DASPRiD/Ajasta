@@ -49,7 +49,8 @@ return [
     'controllers' => [
         'factories' => [
             'Ajasta\Address\Controller\IndexController' => 'Ajasta\Address\Controller\IndexControllerFactory',
-            'Ajasta\Address\Controller\MaintenanceController' => 'Ajasta\Address\Controller\MaintenanceControllerFactory',
+            'Ajasta\Address\Controller\MaintenanceController'
+                => 'Ajasta\Address\Controller\MaintenanceControllerFactory',
         ],
     ],
     'service_manager' => [
