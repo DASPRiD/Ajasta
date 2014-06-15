@@ -3,7 +3,6 @@ namespace Ajasta\Invoice\Service;
 
 use Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository;
 use Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface;
-use Doctrine\Common\Persistence\ObjectManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -14,7 +13,7 @@ class InvoiceServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $objectManager ObjectManager */
+        /* @var $objectManager \Doctrine\Common\Persistence\ObjectManager */
         $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         /* @var $transactionalManager callable */
         $transactionalManager = $serviceLocator->get('Ajasta\Core\TransactionalManager');

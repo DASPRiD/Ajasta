@@ -1,7 +1,6 @@
 <?php
 namespace Ajasta\Address\Controller;
 
-use Ajasta\Address\Service\MaintenanceService;
 use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -15,7 +14,7 @@ class MaintenanceControllerFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $addressService MaintenanceService */
+        /* @var $maintenanceService \Ajasta\Address\Service\MaintenanceService */
         $maintenanceService = $serviceLocator->get('Ajasta\Address\Service\MaintenanceService');
 
         return new MaintenanceController($maintenanceService);

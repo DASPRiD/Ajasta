@@ -1,8 +1,6 @@
 <?php
 namespace Ajasta\Address\Service;
 
-use Ajasta\Address\Options;
-use Zend\Http\Client as HttpClient;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -13,9 +11,9 @@ class MaintenanceServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options Options */
+        /* @var $options \Ajasta\Address\Options */
         $options = $serviceLocator->get('Ajasta\Address\Options');
-        /* @var $httpClient HttpClient */
+        /* @var $httpClient \Zend\Http\Client */
         $httpClient = $serviceLocator->get('Ajasta\Core\Http\Client');
 
         return new MaintenanceService($options, $httpClient);

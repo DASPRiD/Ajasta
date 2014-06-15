@@ -5,7 +5,6 @@ use IntlDateFormatter;
 use Locale;
 use NumberFormatter;
 use Zend\Escaper\Escaper;
-use Zend\Mvc\Router\RouteInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -16,7 +15,7 @@ class FormatterFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $router RouteInterface */
+        /* @var $router \Zend\Mvc\Router\RouteInterface */
         $router = $serviceLocator->get('HttpRouter');
 
         return new Formatter(

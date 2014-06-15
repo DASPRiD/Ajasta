@@ -1,7 +1,6 @@
 <?php
 namespace Ajasta\Invoice\Service\InvoiceNumberGenerator;
 
-use Ajasta\Invoice\Options;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -12,7 +11,7 @@ class GeneratorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options Options*/
+        /* @var $options \Ajasta\Invoice\Options */
         $options = $serviceLocator->get('Ajasta\Invoice\Options');
 
         return new FormatGenerator($options->getInvoiceNumberFormat());
