@@ -7,11 +7,6 @@ use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
 
 class ClientForm extends Form
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function init()
     {
         parent::init();

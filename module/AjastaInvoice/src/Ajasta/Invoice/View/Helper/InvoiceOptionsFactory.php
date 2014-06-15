@@ -16,12 +16,6 @@ class InvoiceOptionsFactory implements FactoryInterface
             $serviceLocator = $serviceLocator->getServiceLocator();
         }
 
-        $options = $serviceLocator->get('Ajasta\Invoice\Options');
-
-        return new InvoiceOptions(
-            $options->getDefaultVat(),
-            $options->getDefaultUnit(),
-            $options->getDefaultUnitPrice()
-        );
+        return new InvoiceOptions($serviceLocator->get('Ajasta\Invoice\Options'));
     }
 }

@@ -1,22 +1,10 @@
 <?php
 namespace Ajasta\Invoice;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Ajasta\Core\AbstractOptionsFactory;
 
-class OptionsFactory implements FactoryInterface
+class OptionsFactory extends AbstractOptionsFactory
 {
-    /**
-     * @return Options
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        $config = $serviceLocator->get('Config');
-
-        if (!isset($config['ajasta']['invoice'])) {
-            return new Options();
-        }
-
-        return new Options($config['ajasta']['invoice']);
-    }
+    const CONFIG_KEY    = 'invoice';
+    const OPTIONS_CLASS = 'Ajasta\Invoice\Options';
 }

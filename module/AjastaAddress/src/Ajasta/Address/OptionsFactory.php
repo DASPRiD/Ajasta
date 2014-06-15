@@ -1,22 +1,10 @@
 <?php
 namespace Ajasta\Address;
 
-use Zend\ServiceManager\FactoryInterface;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Ajasta\Core\AbstractOptionsFactory;
 
-class OptionsFactory implements FactoryInterface
+class OptionsFactory extends AbstractOptionsFactory
 {
-    /**
-     * @return Options
-     */
-    public function createService(ServiceLocatorInterface $serviceLocator)
-    {
-        $config = $serviceLocator->get('Config');
-
-        if (!isset($config['ajasta']['address'])) {
-            return new Options();
-        }
-
-        return new Options($config['ajasta']['address']);
-    }
+    const CONFIG_KEY    = 'address';
+    const OPTIONS_CLASS = 'Ajasta\Address\Options';
 }

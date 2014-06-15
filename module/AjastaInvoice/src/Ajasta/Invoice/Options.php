@@ -7,7 +7,7 @@ use Zend\Stdlib\AbstractOptions;
 class Options extends AbstractOptions
 {
     /**
-     * @var decimal
+     * @var string
      */
     protected $defaultVat = '0.0';
 
@@ -17,7 +17,7 @@ class Options extends AbstractOptions
     protected $defaultUnit;
 
     /**
-     * @var decimal
+     * @var string
      */
     protected $defaultUnitPrice = '0.0';
 
@@ -27,7 +27,7 @@ class Options extends AbstractOptions
     protected $invoiceNumberFormat = '%1$s';
 
     /**
-     * @return decimal
+     * @return string
      */
     public function getDefaultVat()
     {
@@ -35,7 +35,7 @@ class Options extends AbstractOptions
     }
 
     /**
-     * @param decimal $defaultVat
+     * @param string $defaultVat
      */
     public function setDefaultVat($defaultVat)
     {
@@ -81,7 +81,7 @@ class Options extends AbstractOptions
     }
 
     /**
-     * @param decimal $defaultUnitPrice
+     * @param string $defaultUnitPrice
      */
     public function setDefaultUnitPrice($defaultUnitPrice)
     {

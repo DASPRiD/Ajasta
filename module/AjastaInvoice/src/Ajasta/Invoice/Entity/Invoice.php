@@ -363,7 +363,7 @@ class Invoice
     }
 
     /**
-     * @retrun decimal
+     * @return string
      */
     public function getVatAmount()
     {

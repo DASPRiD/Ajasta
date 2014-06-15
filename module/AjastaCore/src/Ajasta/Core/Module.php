@@ -2,14 +2,27 @@
 namespace Ajasta\Core;
 
 use Locale;
+use RuntimeException;
+use Zend\EventManager\EventInterface;
 use Zend\Http\PhpEnvironment\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\Mvc\MvcEvent;
 
-class Module
+class Module implements
+    BootstrapListenerInterface,
+    ConfigProviderInterface
 {
-    public function onBootstrap(MvcEvent $event)
+    public function onBootstrap(EventInterface $event)
     {
+        if (!$event instanceof MvcEvent) {
+            throw new RuntimeException(sprintf(
+                'Listener expects MvcEvent, got %s',
+                get_class($event)
+            ));
+        }
+
         // Hard-coded until later
         Locale::setDefault('en-US');
 

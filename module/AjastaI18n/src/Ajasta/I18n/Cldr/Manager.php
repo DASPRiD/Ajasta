@@ -49,6 +49,12 @@ class Manager
         return $names[$currencyCode];
     }
 
+    /**
+     * @param  string      $countryCode
+     * @param  string|null $locale
+     * @return string
+     * @throws InvalidArgumentException
+     */
     public function lookupCountryName($countryCode, $locale = null)
     {
         $locale = $locale ?: Locale::getDefault();

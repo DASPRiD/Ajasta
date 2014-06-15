@@ -1,35 +1,22 @@
 <?php
 namespace Ajasta\Invoice\View\Helper;
 
+use Ajasta\Invoice\Options;
 use Zend\View\Helper\AbstractHelper;
 
 class InvoiceOptions extends AbstractHelper
 {
     /**
-     * @var decimal
+     * @var Options
      */
-    protected $defaultVat;
+    protected $options;
 
     /**
-     * @var string|null
+     * @param Options $options
      */
-    protected $defaultUnit;
-
-    /**
-     * @var decimal
-     */
-    protected $defaultUnitPrice;
-
-    /**
-     * @param decimal     $defaultVat
-     * @param string|null $defaultUnit
-     * @param decimal     $defaultUnitPrice
-     */
-    public function __construct($defaultVat, $defaultUnit, $defaultUnitPrice)
+    public function __construct(Options $options)
     {
-        $this->defaultVat       = $defaultVat;
-        $this->defaultUnit      = $defaultUnit;
-        $this->defaultUnitPrice = $defaultUnitPrice;
+        $this->options = $options;
     }
 
     /**
@@ -38,9 +25,9 @@ class InvoiceOptions extends AbstractHelper
     public function __invoke()
     {
         return [
-            'defaultVat'       => $this->defaultVat,
-            'defaultUnit'      => $this->defaultUnit,
-            'defaultUnitPrice' => $this->defaultUnitPrice,
+            'defaultVat'       => $this->options->getDefaultVat(),
+            'defaultUnit'      => $this->options->getDefaultUnit(),
+            'defaultUnitPrice' => $this->options->getDefaultUnitPrice(),
         ];
     }
 }
