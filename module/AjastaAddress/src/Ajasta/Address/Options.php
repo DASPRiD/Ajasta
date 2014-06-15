@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Address;
 
+use Traversable;
 use Zend\Stdlib\AbstractOptions;
 
 class Options extends AbstractOptions
@@ -20,6 +21,9 @@ class Options extends AbstractOptions
      */
     protected $countryCodesPath;
 
+    /**
+     * @param array|Traversable|null $options
+     */
     public function __construct($options = null)
     {
         $this->dataPath         = __DIR__ . '/../../../data';

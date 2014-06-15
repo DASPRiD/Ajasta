@@ -7,7 +7,7 @@ use Traversable;
 class PaginationResult
 {
     /**
-     * @var array|Traversable
+     * @var object[]|Traversable
      */
     protected $results;
 
