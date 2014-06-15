@@ -2,7 +2,7 @@
 namespace Ajasta\Address\Controller;
 
 use Ajasta\Address\Service\MaintenanceService;
-use Zend\ServiceManager\AbstractPluginManager;
+use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -13,9 +13,7 @@ class MaintenanceControllerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
         /* @var $addressService MaintenanceService */
         $maintenanceService = $serviceLocator->get('Ajasta\Address\Service\MaintenanceService');

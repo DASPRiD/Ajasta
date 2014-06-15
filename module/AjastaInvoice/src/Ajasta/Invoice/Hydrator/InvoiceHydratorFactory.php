@@ -1,9 +1,10 @@
 <?php
 namespace Ajasta\Invoice\Hydrator;
 
+use Ajasta\Core\FactoryUtils;
 use Ajasta\Core\Hydrator\Strategy\DateStrategy;
 use Ajasta\Core\Hydrator\Strategy\EntityStrategy;
-use Zend\ServiceManager\AbstractPluginManager;
+use Doctrine\Common\Persistence\ObjectManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Stdlib\Hydrator\ClassMethods as ClassMethodsHydrator;
@@ -15,10 +16,9 @@ class InvoiceHydratorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
+        /* @var $objectManager ObjectManager */
         $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
         $hydrator      = new ClassMethodsHydrator(false);
 

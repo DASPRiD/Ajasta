@@ -2,8 +2,8 @@
 namespace Ajasta\Address\Form;
 
 use Ajasta\Address\Hydrator\AddressHydrator;
+use Ajasta\Core\FactoryUtils;
 use Zend\Stdlib\Hydrator\HydratorPluginManager;
-use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -14,13 +14,11 @@ class AddressFieldsetFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
         /* @var $hydratorManager HydratorPluginManager */
-        /* @var $addressHydrator AddressHydrator */
         $hydratorManager = $serviceLocator->get('HydratorManager');
+        /* @var $addressHydrator AddressHydrator */
         $addressHydrator = $hydratorManager->get('Ajasta\Address\Hydrator\AddressHydrator');
 
         return new AddressFieldset($addressHydrator);

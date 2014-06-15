@@ -4,8 +4,8 @@ namespace Ajasta\Address\Service;
 use Ajasta\Address\Options;
 use Zend\Config\Writer\PhpArray as PhpArrayWriter;
 use Zend\Http\Client as HttpClient;
-use Zend\ProgressBar\ProgressBar;
 use Zend\ProgressBar\Adapter\AbstractAdapter as ProgressAdapter;
+use Zend\ProgressBar\ProgressBar;
 
 class MaintenanceService
 {

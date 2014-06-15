@@ -1,9 +1,10 @@
 <?php
 namespace Ajasta\Invoice\Form;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Stdlib\Hydrator\HydratorInterface;
 
 class InvoiceFieldsetFactory implements FactoryInterface
 {
@@ -12,14 +13,15 @@ class InvoiceFieldsetFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
-        
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
+
+        /* @var $hydratorManager HydratorPluginManager */
+        $hydratorManager = $serviceLocator->get('HydratorManager');
+        /* @var $invoiceHydrator HydratorInterface */
+        $invoiceHydrator = $hydratorManager->get('Ajasta\Invoice\Hydrator\InvoiceHydrator');
+
         $fieldset = new InvoiceFieldset();
-        $fieldset->setHydrator(
-            $serviceLocator->get('hydratorManager')->get('Ajasta\Invoice\Hydrator\InvoiceHydrator')
-        );
+        $fieldset->setHydrator($invoiceHydrator);
 
         return $fieldset;
     }

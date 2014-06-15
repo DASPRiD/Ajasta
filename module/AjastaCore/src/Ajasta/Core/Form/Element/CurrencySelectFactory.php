@@ -1,7 +1,8 @@
 <?php
 namespace Ajasta\Core\Form\Element;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Ajasta\Core\FactoryUtils;
+use Ajasta\I18n\Cldr\Manager as CldrManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -12,10 +13,11 @@ class CurrencySelectFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        return new CurrencySelect($serviceLocator->get('Ajasta\I18n\Cldr\Manager'));
+        /* @var $cldrManager CldrManager */
+        $cldrManager = $serviceLocator->get('Ajasta\I18n\Cldr\Manager');
+
+        return new CurrencySelect($cldrManager);
     }
 }

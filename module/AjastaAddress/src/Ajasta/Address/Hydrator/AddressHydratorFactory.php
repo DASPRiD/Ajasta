@@ -2,7 +2,7 @@
 namespace Ajasta\Address\Hydrator;
 
 use Ajasta\Address\Service\AddressService;
-use Zend\ServiceManager\AbstractPluginManager;
+use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -13,9 +13,7 @@ class AddressHydratorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
         /* @var $addressService AddressService */
         $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');

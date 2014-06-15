@@ -2,8 +2,8 @@
 namespace Ajasta\Address\Validator;
 
 use Ajasta\Address\Service\AddressService;
+use Ajasta\Core\FactoryUtils;
 use RuntimeException;
-use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\MutableCreationOptionsInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -25,9 +25,7 @@ class AddressFieldValidatorFactory implements FactoryInterface, MutableCreationO
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
         if (!isset($this->options['field'])) {
             throw new RuntimeException('Missing option "field"');
