@@ -6,9 +6,9 @@ use Zend\Form\Element\Select;
 
 class UnitSelect extends Select
 {
-    public function __construct($name = null, $options = array())
+    public function __construct()
     {
-        parent::__construct($name, $options);
+        parent::__construct(null, []);
 
         $this->setValueOptions([
             ''      => 'None',

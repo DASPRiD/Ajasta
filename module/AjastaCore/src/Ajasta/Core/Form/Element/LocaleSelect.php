@@ -15,9 +15,9 @@ class LocaleSelect extends Select
         'de-DE',
     ];
 
-    public function __construct($name = null, $options = array())
+    public function __construct()
     {
-        parent::__construct($name, $options);
+        parent::__construct(null, []);
 
         $valueOptions = [];
 

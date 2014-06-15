@@ -96,6 +96,7 @@ class AddressService
     }
 
     /**
+     * @param  string $countryCode
      * @return bool[]
      */
     public function getFieldsForCountry($countryCode)

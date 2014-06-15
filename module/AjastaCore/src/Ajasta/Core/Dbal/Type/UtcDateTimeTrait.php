@@ -51,4 +51,9 @@ trait UTcDateTimeTrait
 
         return $dateTime;
     }
+
+    /**
+     * @return string
+     */
+    abstract protected function getName();
 }

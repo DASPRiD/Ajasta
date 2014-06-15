@@ -64,7 +64,7 @@ class CurrencySelect extends Select
     }
 
     /**
-     * @return array[]
+     * @return array
      */
     public function getValueOptions()
     {
@@ -79,7 +79,7 @@ class CurrencySelect extends Select
 
     /**
      * @param  CldrManager $cldrManager
-     * @return array[]
+     * @return array
      */
     protected static function getCurrencyValueOptions(CldrManager $cldrManager)
     {

@@ -44,6 +44,10 @@ class ClientSelect extends Select
         return parent::getValueOptions();
     }
 
+    /**
+     * @param  string|int $value
+     * @return self
+     */
     public function setValue($value)
     {
         $this->insertSelectedClientIfRequired($value);
@@ -61,7 +65,7 @@ class ClientSelect extends Select
      * archived in the meantime, is still part of the select list until another
      * client is selected and stored.
      *
-     * @param int $clientId
+     * @param string|int $clientId
      */
     protected function insertSelectedClientIfRequired($clientId)
     {
