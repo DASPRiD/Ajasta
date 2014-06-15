@@ -3,6 +3,7 @@ Ajasta
 
 [![Build Status](https://api.travis-ci.org/DASPRiD/Ajasta.png?branch=master)](http://travis-ci.org/DASPRiD/Ajasta)
 [![Coverage Status](https://coveralls.io/repos/DASPRiD/Ajasta/badge.png)](https://coveralls.io/r/DASPRiD/Ajasta)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DASPRiD/Ajasta/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/DASPRiD/Ajasta/?branch=master)
 
 Introduction
 ------------
