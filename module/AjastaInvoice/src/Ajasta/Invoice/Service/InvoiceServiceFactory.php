@@ -13,22 +13,13 @@ class InvoiceServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $objectManager \Doctrine\Common\Persistence\ObjectManager */
         $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        /* @var $transactionalManager callable */
-        $transactionalManager = $serviceLocator->get('Ajasta\Core\TransactionalManager');
-        /* @var $invoiceNumberIncrementerRepository InvoiceNumberIncrementerRepository */
-        $invoiceNumberIncrementerRepository
-            = $serviceLocator->get('Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository');
-        /* @var $invoiceNumberGenerator GeneratorInterface */
-        $invoiceNumberGenerator
-            = $serviceLocator->get('Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface');
 
         return new InvoiceService(
             $objectManager,
-            $transactionalManager,
-            $invoiceNumberIncrementerRepository,
-            $invoiceNumberGenerator
+            $serviceLocator->get('Ajasta\Core\TransactionalManager'),
+            $serviceLocator->get('Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository'),
+            $serviceLocator->get('Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface')
         );
     }
 }

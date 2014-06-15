@@ -11,6 +11,8 @@ class ProjectServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new ProjectService($serviceLocator->get('doctrine.entitymanager.orm_default'));
+        return new ProjectService(
+            $serviceLocator->get('doctrine.entitymanager.orm_default')
+        );
     }
 }

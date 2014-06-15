@@ -11,9 +11,8 @@ class ManagerFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $reader Reader */
-        $reader = $serviceLocator->get('Ajasta\I18n\Cldr\Reader');
-
-        return new Manager($reader);
+        return new Manager(
+            $serviceLocator->get('Ajasta\I18n\Cldr\Reader')
+        );
     }
 }

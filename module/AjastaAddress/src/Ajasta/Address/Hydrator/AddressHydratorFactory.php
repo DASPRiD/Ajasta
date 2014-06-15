@@ -14,9 +14,8 @@ class AddressHydratorFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $addressService \Ajasta\Address\Service\AddressService */
-        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
-
-        return new AddressHydrator($addressService);
+        return new AddressHydrator(
+            $serviceLocator->get('Ajasta\Address\Service\AddressService')
+        );
     }
 }

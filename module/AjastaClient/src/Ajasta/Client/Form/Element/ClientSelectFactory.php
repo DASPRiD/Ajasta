@@ -1,7 +1,7 @@
 <?php
 namespace Ajasta\Client\Form\Element;
 
-use Zend\ServiceManager\AbstractPluginManager;
+use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -12,11 +12,8 @@ class ClientSelectFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
-
-        $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
+        $objectManager  = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
         return new ClientSelect(
             $objectManager->getRepository('Ajasta\Client\Entity\Client')

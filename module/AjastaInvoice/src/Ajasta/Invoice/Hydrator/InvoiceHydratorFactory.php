@@ -16,11 +16,9 @@ class InvoiceHydratorFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
+        $objectManager  = $serviceLocator->get('doctrine.entitymanager.orm_default');
 
-        /* @var $objectManager \Doctrine\Common\Persistence\ObjectManager */
-        $objectManager = $serviceLocator->get('doctrine.entitymanager.orm_default');
-        $hydrator      = new ClassMethodsHydrator(false);
-
+        $hydrator = new ClassMethodsHydrator(false);
         $hydrator->addStrategy(
             'client',
             new EntityStrategy($objectManager->getRepository('Ajasta\Client\Entity\Client'))

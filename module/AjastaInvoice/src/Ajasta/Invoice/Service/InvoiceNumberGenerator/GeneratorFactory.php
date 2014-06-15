@@ -11,9 +11,8 @@ class GeneratorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \Ajasta\Invoice\Options */
-        $options = $serviceLocator->get('Ajasta\Invoice\Options');
-
-        return new FormatGenerator($options->getInvoiceNumberFormat());
+        return new FormatGenerator(
+            $serviceLocator->get('Ajasta\Invoice\Options')->getInvoiceNumberFormat()
+        );
     }
 }

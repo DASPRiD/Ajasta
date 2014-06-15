@@ -12,13 +12,11 @@ class AddressFieldsetFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
-
-        /* @var $hydratorManager \Zend\Stdlib\Hydrator\HydratorPluginManager */
+        $serviceLocator  = FactoryUtils::resolveServiceLocator($serviceLocator);
         $hydratorManager = $serviceLocator->get('HydratorManager');
-        /* @var $addressHydrator \Ajasta\Address\Hydrator\AddressHydrator */
-        $addressHydrator = $hydratorManager->get('Ajasta\Address\Hydrator\AddressHydrator');
 
-        return new AddressFieldset($addressHydrator);
+        return new AddressFieldset(
+            $hydratorManager->get('Ajasta\Address\Hydrator\AddressHydrator')
+        );
     }
 }

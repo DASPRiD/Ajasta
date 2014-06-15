@@ -14,9 +14,8 @@ class MaintenanceControllerFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $maintenanceService \Ajasta\Address\Service\MaintenanceService */
-        $maintenanceService = $serviceLocator->get('Ajasta\Address\Service\MaintenanceService');
-
-        return new MaintenanceController($maintenanceService);
+        return new MaintenanceController(
+            $serviceLocator->get('Ajasta\Address\Service\MaintenanceService')
+        );
     }
 }

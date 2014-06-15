@@ -11,6 +11,8 @@ class ReaderFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new Reader($serviceLocator->get('Config')['cldr']['data_path']);
+        return new Reader(
+            $serviceLocator->get('Config')['cldr']['data_path']
+        );
     }
 }

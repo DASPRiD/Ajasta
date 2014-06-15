@@ -11,11 +11,9 @@ class MaintenanceServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \Ajasta\Address\Options */
-        $options = $serviceLocator->get('Ajasta\Address\Options');
-        /* @var $httpClient \Zend\Http\Client */
-        $httpClient = $serviceLocator->get('Ajasta\Core\Http\Client');
-
-        return new MaintenanceService($options, $httpClient);
+        return new MaintenanceService(
+            $serviceLocator->get('Ajasta\Address\Options'),
+            $serviceLocator->get('Ajasta\Core\Http\Client')
+        );
     }
 }

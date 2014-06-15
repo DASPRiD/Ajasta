@@ -11,9 +11,8 @@ class AddressServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $options \Ajasta\Address\Options */
-        $options = $serviceLocator->get('Ajasta\Address\Options');
-
-        return new AddressService($options);
+        return new AddressService(
+            $serviceLocator->get('Ajasta\Address\Options')
+        );
     }
 }

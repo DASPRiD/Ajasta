@@ -11,6 +11,8 @@ class ClientServiceFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new ClientService($serviceLocator->get('doctrine.entitymanager.orm_default'));
+        return new ClientService(
+            $serviceLocator->get('doctrine.entitymanager.orm_default')
+        );
     }
 }

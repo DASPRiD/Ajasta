@@ -15,9 +15,8 @@ class InvoiceOptionsFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $options Options */
-        $options = $serviceLocator->get('Ajasta\Invoice\Options');
-
-        return new InvoiceOptions($options);
+        return new InvoiceOptions(
+            $serviceLocator->get('Ajasta\Invoice\Options')
+        );
     }
 }

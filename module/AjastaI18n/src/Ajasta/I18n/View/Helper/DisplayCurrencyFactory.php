@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\I18n\View\Helper;
 
+use Ajasta\Core\FactoryUtils;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -12,10 +13,10 @@ class DisplayCurrencyFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        if ($serviceLocator instanceof AbstractPluginManager) {
-            $serviceLocator = $serviceLocator->getServiceLocator();
-        }
+        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        return new DisplayCurrency($serviceLocator->get('Ajasta\I18n\Cldr\Manager'));
+        return new DisplayCurrency(
+            $serviceLocator->get('Ajasta\I18n\Cldr\Manager')
+        );
     }
 }

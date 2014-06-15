@@ -30,11 +30,8 @@ class AddressFieldValidatorFactory implements FactoryInterface, MutableCreationO
             throw new RuntimeException('Missing option "field"');
         }
 
-        /* @var $addressService \Ajasta\Address\Service\AddressService */
-        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
-
         return new AddressFieldValidator(
-            $addressService,
+            $serviceLocator->get('Ajasta\Address\Service\AddressService'),
             $this->options['field']
         );
     }

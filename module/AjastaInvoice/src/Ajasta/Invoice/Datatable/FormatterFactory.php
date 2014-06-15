@@ -15,14 +15,11 @@ class FormatterFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        /* @var $router \Zend\Mvc\Router\RouteInterface */
-        $router = $serviceLocator->get('HttpRouter');
-
         return new Formatter(
             new Escaper(),
             new IntlDateFormatter(Locale::getDefault(), IntlDateFormatter::MEDIUM, IntlDateFormatter::NONE),
             new NumberFormatter(Locale::getDefault(), NumberFormatter::CURRENCY),
-            $router
+            $serviceLocator->get('HttpRouter')
         );
     }
 }

@@ -12,15 +12,11 @@ class InvoiceFieldsetFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
-
-        /* @var $hydratorManager \Zend\Stdlib\Hydrator\HydratorPluginManager */
+        $serviceLocator  = FactoryUtils::resolveServiceLocator($serviceLocator);
         $hydratorManager = $serviceLocator->get('HydratorManager');
-        /* @var $invoiceHydrator \Zend\Stdlib\Hydrator\HydratorInterface */
-        $invoiceHydrator = $hydratorManager->get('Ajasta\Invoice\Hydrator\InvoiceHydrator');
 
         $fieldset = new InvoiceFieldset();
-        $fieldset->setHydrator($invoiceHydrator);
+        $fieldset->setHydrator($hydratorManager->get('Ajasta\Invoice\Hydrator\InvoiceHydrator'));
 
         return $fieldset;
     }

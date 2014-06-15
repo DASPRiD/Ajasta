@@ -14,11 +14,9 @@ class CountrySelectFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $addressService \Ajasta\Address\Service\AddressService */
-        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
-        /* @var $cldrManager \Ajasta\I18n\Cldr\Manager */
-        $cldrManager = $serviceLocator->get('Ajasta\I18n\Cldr\Manager');
-
-        return new CountrySelect($addressService, $cldrManager);
+        return new CountrySelect(
+            $serviceLocator->get('Ajasta\Address\Service\AddressService'),
+            $serviceLocator->get('Ajasta\I18n\Cldr\Manager')
+        );
     }
 }

@@ -14,9 +14,8 @@ class IndexControllerFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $addressService \Ajasta\Address\Service\AddressService */
-        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
-
-        return new IndexController($addressService);
+        return new IndexController(
+            $serviceLocator->get('Ajasta\Address\Service\AddressService')
+        );
     }
 }

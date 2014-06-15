@@ -14,9 +14,8 @@ class AddressFormatFactory implements FactoryInterface
     {
         $serviceLocator = FactoryUtils::resolveServiceLocator($serviceLocator);
 
-        /* @var $addressService \Ajasta\Address\Service\AddressService */
-        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
-
-        return new AddressFormat($addressService);
+        return new AddressFormat(
+            $serviceLocator->get('Ajasta\Address\Service\AddressService')
+        );
     }
 }
