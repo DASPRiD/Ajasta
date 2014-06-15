@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Address\Validator;
 
+use Ajasta\Address\Service\AddressService;
 use RuntimeException;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
@@ -32,8 +33,11 @@ class AddressFieldValidatorFactory implements FactoryInterface, MutableCreationO
             throw new RuntimeException('Missing option "field"');
         }
 
+        /* @var $addressService AddressService */
+        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
+
         return new AddressFieldValidator(
-            $serviceLocator->get('Ajasta\Address\Service\AddressService'),
+            $addressService,
             $this->options['field']
         );
     }

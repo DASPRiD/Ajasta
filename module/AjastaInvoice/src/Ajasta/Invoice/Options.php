@@ -73,7 +73,7 @@ class Options extends AbstractOptions
     }
 
     /**
-     * @return string|null
+     * @return string
      */
     public function getDefaultUnitPrice()
     {

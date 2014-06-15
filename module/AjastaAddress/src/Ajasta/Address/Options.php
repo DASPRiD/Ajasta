@@ -1,7 +1,6 @@
 <?php
 namespace Ajasta\Address;
 
-use InvalidArgumentException;
 use Zend\Stdlib\AbstractOptions;
 
 class Options extends AbstractOptions

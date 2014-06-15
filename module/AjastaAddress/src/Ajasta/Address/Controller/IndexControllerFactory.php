@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Address\Controller;
 
+use Ajasta\Address\Service\AddressService;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
@@ -16,8 +17,9 @@ class IndexControllerFactory implements FactoryInterface
             $serviceLocator = $serviceLocator->getServiceLocator();
         }
 
-        return new IndexController(
-            $serviceLocator->get('Ajasta\Address\Service\AddressService')
-        );
+        /* @var $addressService AddressService */
+        $addressService = $serviceLocator->get('Ajasta\Address\Service\AddressService');
+
+        return new IndexController($addressService);
     }
 }
