@@ -26,10 +26,4 @@ class IndexController extends AbstractActionController
             'fields' => $this->addressService->getFieldsForCountry($this->params('countryCode'))
         ]);
     }
-
-    public function updateAddressFormatsAction()
-    {
-        $this->addressService->updateAddressFormats();
-        return "Address formats have been updated.\n";
-    }
 }

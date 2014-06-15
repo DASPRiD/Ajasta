@@ -18,7 +18,7 @@ class MaintenanceControllerFactoryTest extends TestCase
 
     public function setUp()
     {
-        $addressService = $this
+        $maintenanceService = $this
             ->getMockBuilder('Ajasta\Address\Service\MaintenanceService')
             ->disableOriginalConstructor()
             ->getMock();
@@ -26,7 +26,7 @@ class MaintenanceControllerFactoryTest extends TestCase
         $this->serviceLocator = new ServiceManager();
         $this->serviceLocator->setService(
             'Ajasta\Address\Service\MaintenanceService',
-            $addressService
+            $maintenanceService
         );
     }
 
