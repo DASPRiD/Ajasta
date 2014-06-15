@@ -2,7 +2,6 @@
 namespace Ajasta\I18n\View\Helper;
 
 use Ajasta\Core\FactoryUtils;
-use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
