@@ -52,7 +52,7 @@ class Client
     protected $address;
 
     /**
-     * @var Project[]
+     * @var Project[]|\Doctrine\Common\Collections\Collection
      */
     protected $projects;
 
@@ -198,7 +198,7 @@ class Client
     }
 
     /**
-     * @return Project[]
+     * @return Project[]|\Doctrine\Common\Collections\Collection
      */
     public function getProjects()
     {

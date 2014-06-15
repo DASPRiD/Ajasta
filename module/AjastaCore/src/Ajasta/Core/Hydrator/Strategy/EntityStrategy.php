@@ -21,7 +21,7 @@ class EntityStrategy implements StrategyInterface
     }
 
     /**
-     * @param  mixed $value
+     * @param  object|null $value
      * @return int|null
      */
     public function extract($value)
@@ -35,7 +35,7 @@ class EntityStrategy implements StrategyInterface
 
     /**
      * @param  int|null $value
-     * @return mixed
+     * @return object|null
      * @throws RuntimeException
      */
     public function hydrate($value)

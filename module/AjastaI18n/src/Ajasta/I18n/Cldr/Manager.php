@@ -22,31 +22,22 @@ class Manager
     /**
      * Looks up a currency name from a currency code.
      *
-     * @param  string $currencyCode
-     * @param  string $locale
+     * @param  string      $currencyCode
+     * @param  string|null $locale
      * @return string
      * @throws InvalidArgumentException
      */
     public function lookupCurrencyName($currencyCode, $locale = null)
     {
-        $locale = $locale ?: Locale::getDefault();
-
         if (!preg_match('(^[A-Z]{3}$)', $currencyCode)) {
             throw new InvalidArgumentException('Invalid currency code given');
         }
 
-        $names = $this->reader->getPathData(
-            $locale,
+        return $this->lookupNames(
             '/ldml/numbers/currencies/currency[@type="' . $currencyCode . '"]/displayName[not(@count)]',
-            '',
-            $currencyCode
+            $currencyCode,
+            $locale
         );
-
-        if (!isset($names[$currencyCode])) {
-            return $currencyCode;
-        }
-
-        return $names[$currencyCode];
     }
 
     /**
@@ -57,23 +48,38 @@ class Manager
      */
     public function lookupCountryName($countryCode, $locale = null)
     {
-        $locale = $locale ?: Locale::getDefault();
-
         if (!preg_match('(^[A-Z]{2}$)', $countryCode)) {
             throw new InvalidArgumentException('Invalid country code given');
         }
 
+        return $this->lookupNames(
+            '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]',
+            $countryCode,
+            $locale
+        );
+    }
+
+    /**
+     * @param  string      $path
+     * @param  string      $fallback
+     * @param  string|null $locale
+     * @return string
+     */
+    protected function lookupNames($path, $fallback, $locale = null)
+    {
+        $locale = $locale ?: Locale::getDefault();
+
         $names = $this->reader->getPathData(
             $locale,
-            '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]',
+            $path,
             '',
-            $countryCode
+            'value'
         );
 
-        if (!isset($names[$countryCode])) {
-            return $countryCode;
+        if (!isset($names['value'])) {
+            return $fallback;
         }
 
-        return $names[$countryCode];
+        return $names['value'];
     }
 }

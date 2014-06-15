@@ -1,7 +1,7 @@
 <?php
 namespace Ajasta\Invoice\Entity;
 
-use RuntimeException;
+use Ajasta\Core\EntityUtils;
 
 class InvoiceItem
 {
@@ -54,16 +54,7 @@ class InvoiceItem
      */
     public function setInvoice(Invoice $invoice)
     {
-        $caller = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT, 2)[1]['object'];
-
-        if (!$caller instanceof Invoice) {
-            throw new RuntimeException(sprintf(
-                '%s may only be called by %s\Invoice',
-                __METHOD__,
-                __NAMESPACE__
-            ));
-        }
-
+        EntityUtils::restrictCaller('Ajasta\Invoice\Entity\Invoice');
         $this->invoice = $invoice;
     }
 
@@ -73,16 +64,7 @@ class InvoiceItem
      */
     public function setPosition($position)
     {
-        $caller = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS | DEBUG_BACKTRACE_PROVIDE_OBJECT, 2)[1]['object'];
-
-        if (!$caller instanceof Invoice) {
-            throw new RuntimeException(sprintf(
-                '%s may only be called by %s\Invoice',
-                __METHOD__,
-                __NAMESPACE__
-            ));
-        }
-
+        EntityUtils::restrictCaller('Ajasta\Invoice\Entity\Invoice');
         $this->position = $position;
     }
 

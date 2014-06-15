@@ -1,7 +1,7 @@
 <?php
 namespace Ajasta\Invoice\Repository;
 
-use Ajasta\Invoice\Entity\Invoice;
+use Ajasta\Invoice\Entity\InvoiceNumberIncrementer;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\EntityRepository;
 
@@ -22,7 +22,7 @@ class InvoiceNumberIncrementerRepository
 
     /**
      * @param  int $id
-     * @return Invoice|null
+     * @return InvoiceNumberIncrementer|null
      */
     public function findWithWriteLock($id)
     {

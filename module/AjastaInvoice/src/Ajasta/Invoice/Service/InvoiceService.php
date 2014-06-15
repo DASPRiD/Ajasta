@@ -6,6 +6,7 @@ use Ajasta\Invoice\Entity\InvoiceNumberIncrementer;
 use Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository;
 use Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use RuntimeException;
 
 class InvoiceService
 {
@@ -63,6 +64,13 @@ class InvoiceService
             $invoiceNumberIncrememter = $this->invoiceNumberIncrementerRepository->findWithWriteLock(
                 InvoiceNumberIncrementer::ID
             );
+
+            if ($invoiceNumberIncrememter === null) {
+                throw new RuntimeException(sprintf(
+                    'Missing invoice number incrementer with id %d',
+                    InvoiceNumberIncrementer::ID
+                ));
+            }
 
             $invoice->setInvoiceNumber(
                 $this->invoiceNumberGenerator->generate(

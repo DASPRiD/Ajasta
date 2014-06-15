@@ -126,7 +126,7 @@ class ClientController extends AbstractActionController
             return;
         }
 
-        $this->clientRepository->activate($client);
+        $this->clientService->activate($client);
 
         return $this->redirect()->toRoute('clients/show', ['clientId' => $client->getId()]);
     }

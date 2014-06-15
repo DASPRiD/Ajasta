@@ -32,7 +32,7 @@ class AddressFieldValidator extends NotEmptyValidator
     }
 
     /**
-     * @param array|null $context
+     * @param string[]|null $context
      */
     public function isValid($value, $context = null)
     {

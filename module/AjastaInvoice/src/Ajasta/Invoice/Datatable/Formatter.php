@@ -4,6 +4,7 @@ namespace Ajasta\Invoice\Datatable;
 use Ajasta\Invoice\Entity\Invoice;
 use IntlDateFormatter;
 use NumberFormatter;
+use RuntimeException;
 use Zend\Escaper\Escaper;
 use Zend\Mvc\Router\RouteInterface;
 
@@ -120,8 +121,8 @@ class Formatter
     protected function getIssueDateAddition(Invoice $invoice)
     {
         switch ($invoice->getStatus()) {
-            case 'draft':
-            case 'sent':
+            case Invoice::STATUS_DRAFT:
+            case Invoice::STATUS_SENT:
                 if ($invoice->getDueDate() === null) {
                     return 'No due date';
                 }
@@ -134,7 +135,7 @@ class Formatter
                     $dueTime === 1 ? 'day' : 'days'
                 );
 
-            case 'late':
+            case Invoice::STATUS_LATE:
                 $lateTime = $invoice->getDueDate()->diff($invoice->getIssueDate())->days;
 
                 return sprintf(
@@ -143,7 +144,7 @@ class Formatter
                     $lateTime === 1 ? 'day' : 'days'
                 );
 
-            case 'paid':
+            case Invoice::STATUS_PAID:
                 $payTime = $invoice->getPayDate()->diff($invoice->getIssueDate())->days;
 
                 return sprintf(
@@ -152,5 +153,10 @@ class Formatter
                     $payTime === 1 ? 'day' : 'days'
                 );
         }
+
+        throw new RuntimeException(sprintf(
+            'Invalid invoice status "%s"',
+            $invoice->getStatus()
+        ));
     }
 }

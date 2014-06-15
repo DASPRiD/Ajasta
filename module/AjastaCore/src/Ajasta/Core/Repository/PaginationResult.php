@@ -22,8 +22,8 @@ class PaginationResult
     protected $numFilteredResults;
 
     /**
-     * @param  array|Traversable $results
-     * @param  int               $numTotalResults
+     * @param  object[]|Traversable $results
+     * @param  int                  $numTotalResults
      * @throws InvalidArgumentException
      */
     public function __construct($results, $numTotalResults)
@@ -40,7 +40,7 @@ class PaginationResult
     }
 
     /**
-     * @return array|Traversable
+     * @return object[]|Traversable
      */
     public function getResults()
     {

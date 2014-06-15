@@ -9,6 +9,16 @@ use Zend\Form\Element\Select;
 class CurrencySelect extends Select
 {
     /**
+     * @var CldrManager
+     */
+    protected $cldrManager;
+
+    /**
+     * @var array|null
+     */
+    protected $valueOptions = null;
+
+    /**
      * List of most common currency codes, these will be listed at the top in
      * the given order.
      *
@@ -48,14 +58,28 @@ class CurrencySelect extends Select
      */
     public function __construct(CldrManager $cldrManager)
     {
-        parent::__construct(null, []);
+        $this->cldrManager = $cldrManager;
 
-        $this->setValueOptions(static::getCurrencyValueOptions($cldrManager));
+        parent::__construct(null, []);
+    }
+
+    /**
+     * @return array[]
+     */
+    public function getValueOptions()
+    {
+        if ($this->valueOptions !== null) {
+            return $this->valueOptions;
+        }
+
+        $this->setValueOptions(static::getCurrencyValueOptions($this->cldrManager));
+
+        return $this->valueOptions;
     }
 
     /**
      * @param  CldrManager $cldrManager
-     * @return array
+     * @return array[]
      */
     protected static function getCurrencyValueOptions(CldrManager $cldrManager)
     {

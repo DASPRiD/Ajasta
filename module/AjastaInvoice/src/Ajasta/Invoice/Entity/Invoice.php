@@ -76,13 +76,13 @@ class Invoice
     protected $vat;
 
     /**
-     * @var InvoiceItem[]
+     * @var InvoiceItem[]|\Doctrine\Common\Collections\Collection
      */
     protected $items;
 
     public function __construct()
     {
-        $this->items  = new ArrayCollection();
+        $this->items = new ArrayCollection();
     }
 
     /**
@@ -270,7 +270,7 @@ class Invoice
     }
 
     /**
-     * @return InvoiceItem[]
+     * @return InvoiceItem[]|\Doctrine\Common\Collections\Collection
      */
     public function getItems()
     {
@@ -278,7 +278,7 @@ class Invoice
     }
 
     /**
-     * @param InvoiceItem[] $items
+     * @param InvoiceItem[]|\Doctrine\Common\Collections\Collection $items
      */
     public function setItems($items)
     {

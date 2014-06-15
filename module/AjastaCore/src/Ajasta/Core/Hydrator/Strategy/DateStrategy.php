@@ -45,10 +45,10 @@ class DateStrategy implements StrategyInterface
             return null;
         }
 
-        return DateTime::createFRomFormat(
+        return DateTime::createFromFormat(
             '!Y-m-d',
             $value,
             static::$utcTimezone ?: (static::$utcTimezone = new DateTimeZone('utc'))
-        );
+        ) ?: null;
     }
 }

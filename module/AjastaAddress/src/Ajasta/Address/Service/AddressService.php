@@ -48,7 +48,7 @@ class AddressService
     /**
      * @param  Address $address
      * @param  bool    $addCountry
-     * @return array
+     * @return string[]
      */
     public function formatAddress(Address $address, $addCountry = true)
     {
@@ -96,7 +96,7 @@ class AddressService
     }
 
     /**
-     * @return array
+     * @return bool[]
      */
     public function getFieldsForCountry($countryCode)
     {
@@ -141,7 +141,7 @@ class AddressService
 
     /**
      * @param  string $countryCode
-     * @return array
+     * @return string[]
      * @throws RuntimeException
      */
     protected function getFormatSubStrings($countryCode)

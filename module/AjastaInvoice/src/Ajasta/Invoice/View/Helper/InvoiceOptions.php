@@ -20,7 +20,7 @@ class InvoiceOptions extends AbstractHelper
     }
 
     /**
-     * @return array<string|null>
+     * @return array
      */
     public function __invoke()
     {

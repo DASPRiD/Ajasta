@@ -2,17 +2,12 @@
 namespace Ajasta\Core\Dbal\Type;
 
 use DateTime;
-use DateTimeZone;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeType;
 
 class UtcDateTimeType extends DateTimeType
 {
-    /**
-     * @var DateTimeZone|null
-     */
-    protected static $utcTimezone;
+    use UtcDateTimeTrait;
 
     /**
      * @param  DateTime|null    $value
@@ -21,36 +16,16 @@ class UtcDateTimeType extends DateTimeType
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if ($value === null) {
-            return null;
-        }
-
-        $value->setTimezone(self::$utcTimezone ?: (self::$utcTimezone = new DateTimeZone('utc')));
-        return $value->format($platform->getDateTimeFormatString());
+        return $this->doConvertToDatabaseValue($value, $platform->getDateTimeFormatString());
     }
 
     /**
      * @param  string|null $value
      * @param  AbstractPlatform $platform
      * @return DateTime|null
-     * @throws ConversionException
      */
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if ($value === null) {
-            return null;
-        }
-
-        $value = DateTime::createFromFormat(
-            '!' . $platform->getDateTimeFormatString(),
-            $value,
-            self::$utcTimezone ?: (self::$utcTimezone = new DateTimeZone('utc'))
-        );
-
-        if (!$value) {
-            throw ConversionException::conversionFailed($value, $this->getName());
-        }
-
-        return $value;
+        return $this->doConvertToPHPValue($value, $platform->getDateTimeFormatString());
     }
 }

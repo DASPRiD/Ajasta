@@ -30,7 +30,7 @@ class MaintenanceService
     }
 
     /**
-     * @param ProgressAdapter $progressAdapter
+     * @param ProgressAdapter|null $progressAdapter
      */
     public function updateAddressFormats(ProgressAdapter $progressAdapter = null)
     {

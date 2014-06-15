@@ -7,7 +7,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class GeneratorFactory implements FactoryInterface
 {
     /**
-     * @return GeneratorInterface
+     * @return FormatGenerator
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
