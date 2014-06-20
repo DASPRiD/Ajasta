@@ -39,7 +39,7 @@ class Unit
             $unitFormats[] = sprintf(
                 '%s{%s}',
                 $category,
-                str_replace('{0}', '{value,number}', $format)
+                str_replace('{0}', '{0, number}', $format)
             );
         }
 
@@ -58,7 +58,7 @@ class Unit
     protected static function getMessageFormatter($locale)
     {
         if (!isset(static::$messageFormatters[$locale])) {
-            static::$messageFormatters[$locale] = new MessageFormatter($locale, '{0}');
+            static::$messageFormatters[$locale] = new MessageFormatter($locale, ' ');
         }
 
         return static::$messageFormatters[$locale];
