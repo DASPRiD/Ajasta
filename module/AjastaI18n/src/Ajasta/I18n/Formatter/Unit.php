@@ -44,11 +44,9 @@ class Unit
         }
 
         $messageFormatter = $this->getMessageFormatter($locale);
-        $messageFormatter->setPattern(sprintf('{value, plural, %s}', implode('', $unitFormats)));
+        $messageFormatter->setPattern(sprintf('{0, plural, %s}', implode('', $unitFormats)));
 
-        return $messageFormatter->format([
-            'value' => $number,
-        ]);
+        return $messageFormatter->format([$number]);
     }
 
     /**
