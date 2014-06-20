@@ -68,6 +68,31 @@ return [
                             ],
                         ],
                     ],
+                    'change-status' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/change-status/:invoiceId/:status',
+                            'defaults' => [
+                                'action' => 'change-status',
+                            ],
+                            'constraints' => [
+                                'invoiceId' => '\d+',
+                                'status' => '(draft|sent|paid)',
+                            ],
+                        ],
+                    ],
+                    'pdf' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/pdf/:invoiceId',
+                            'defaults' => [
+                                'action' => 'pdf',
+                            ],
+                            'constraints' => [
+                                'invoiceId' => '\d+',
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -86,6 +111,9 @@ return [
         'factories' => [
             'Ajasta\Invoice\Datatable\Formatter' => 'Ajasta\Invoice\Datatable\FormatterFactory',
             'Ajasta\Invoice\Options' => 'Ajasta\Invoice\OptionsFactory',
+            'Ajasta\Invoice\Pdf\InvoicePrinter' => 'Ajasta\Invoice\Pdf\InvoicePrinterFactory',
+            'Ajasta\Invoice\Pdf\TranslationLoader' => 'Ajasta\Invoice\Pdf\TranslationLoaderFactory',
+            'Ajasta\Invoice\Pdf\XmlGenerator' => 'Ajasta\Invoice\Pdf\XmlGeneratorFactory',
             'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface'
                 => 'Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorFactory',
             'Ajasta\Invoice\Service\InvoiceService' => 'Ajasta\Invoice\Service\InvoiceServiceFactory',

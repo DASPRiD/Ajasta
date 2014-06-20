@@ -153,8 +153,8 @@ class Reader
             $result = $this->ldml[$locale]->xpath($search . '/alias');
 
             if (!empty($result)) {
-                $source  = $result[0]['source'];
-                $newPath = $result[0]['path'];
+                $source  = (string) $result[0]['source'];
+                $newPath = (string) $result[0]['path'];
 
                 if ($newPath !== '//ldml') {
                     while (substr($newPath, 0, 3) === '../') {

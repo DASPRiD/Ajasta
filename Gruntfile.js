@@ -112,6 +112,10 @@ module.exports = function(grunt) {
                 dir: 'module/AjastaAddress',
                 configuration: 'module/AjastaAddress/phpunit.xml.dist'
             },
+            AjastaI18n: {
+                dir: 'module/AjastaI18n',
+                configuration: 'module/AjastaI18n/phpunit.xml.dist'
+            },
             options: {
                 bin: 'vendor/bin/phpunit'
             }

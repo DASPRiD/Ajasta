@@ -5,6 +5,7 @@ use Ajasta\Invoice\Datatable\Formatter as DatatableFormatter;
 use Ajasta\Invoice\Repository\InvoiceRepository;
 use Ajasta\Invoice\Service\InvoiceService;
 use Zend\Form\FormInterface;
+use Zend\Http\Response\Stream as StreamResponse;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
@@ -132,5 +133,38 @@ class InvoiceController extends AbstractActionController
         return new ViewModel([
             'invoice' => $invoice,
         ]);
+    }
+
+    public function changeStatusAction()
+    {
+        $invoice = $this->invoiceRepository->find($this->params('invoiceId'));
+
+        if ($invoice === null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $this->invoiceService->changeStatus($invoice, $this->params('status'));
+        $this->redirect()->toRoute('invoices/show', ['invoiceId' => $invoice->getId()]);
+    }
+
+    public function pdfAction()
+    {
+        $invoice = $this->invoiceRepository->find($this->params('invoiceId'));
+
+        if ($invoice === null) {
+            $this->getResponse()->setStatusCode(404);
+            return;
+        }
+
+        $pdfPath  = $this->invoiceService->generatePdf($invoice);
+        $response = new StreamResponse();
+        $response->setStream(fopen($pdfPath, 'r'));
+        $response->getHeaders()->addHeaders([
+            'Content-Disposition' => 'attachment; filename="invoice.pdf"',
+            'Content-Type'        => 'application/pdf',
+            'Content-Length'      => filesize($pdfPath),
+        ]);
+        return $response;
     }
 }

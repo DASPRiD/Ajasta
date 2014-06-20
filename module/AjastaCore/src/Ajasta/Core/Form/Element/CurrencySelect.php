@@ -60,7 +60,7 @@ class CurrencySelect extends Select
     {
         $this->cldrManager = $cldrManager;
 
-        parent::__construct(null, []);
+        parent::__construct();
     }
 
     /**

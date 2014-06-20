@@ -8,20 +8,16 @@ use Zend\Form\Element\Select;
 class LocaleSelect extends Select
 {
     /**
-     * @var array
+     * @param string[] $selectableLocales
+     * @param string   $defaultLocale
      */
-    protected static $locales = [
-        'en-US',
-        'de-DE',
-    ];
-
-    public function __construct()
+    public function __construct(array $selectableLocales, $defaultLocale)
     {
-        parent::__construct(null, []);
+        parent::__construct();
 
         $valueOptions = [];
 
-        foreach (static::$locales as $locale) {
+        foreach ($selectableLocales as $locale) {
             $valueOptions[$locale] = sprintf(
                 '%s (%s)',
                 Locale::getDisplayLanguage($locale),
@@ -33,5 +29,6 @@ class LocaleSelect extends Select
         $collator->asort($valueOptions);
 
         $this->setValueOptions($valueOptions);
+        $this->setValue($defaultLocale);
     }
 }

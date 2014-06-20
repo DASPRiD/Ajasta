@@ -8,7 +8,7 @@ class UnitSelect extends Select
 {
     public function __construct()
     {
-        parent::__construct(null, []);
+        parent::__construct();
 
         $this->setValueOptions([
             ''      => 'None',

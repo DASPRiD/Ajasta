@@ -45,6 +45,8 @@ return [
         ],
         'factories' => [
             'Ajasta\Core\TransactionalManager' => 'Ajasta\Core\TransactionalManagerFactory',
+            'Ajasta\Core\Options' => 'Ajasta\Core\OptionsFactory',
+            'Ajasta\Core\Pdf\FopClient' => 'Ajasta\Core\Pdf\FopClientFactory',
             'Ajasta\Navigation' => 'Zend\Navigation\Service\DefaultNavigationFactory',
         ],
         'aliases' => [
@@ -54,12 +56,12 @@ return [
     'form_elements' => [
         'invokables' => [
             'Ajasta\Core\Form\Element\DatePicker' => 'Ajasta\Core\Form\Element\DatePicker',
-            'Ajasta\Core\Form\Element\LocaleSelect' => 'Ajasta\Core\Form\Element\LocaleSelect',
             'Ajasta\Core\Form\Element\Toggle' => 'Ajasta\Core\Form\Element\Toggle',
             'Ajasta\Core\Form\Element\UnitSelect' => 'Ajasta\Core\Form\Element\UnitSelect',
         ],
         'factories' => [
             'Ajasta\Core\Form\Element\CurrencySelect' => 'Ajasta\Core\Form\Element\CurrencySelectFactory',
+            'Ajasta\Core\Form\Element\LocaleSelect' => 'Ajasta\Core\Form\Element\LocaleSelectFactory',
         ],
     ],
     'view_helpers' => [

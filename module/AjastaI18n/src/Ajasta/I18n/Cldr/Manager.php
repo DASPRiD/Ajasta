@@ -30,13 +30,16 @@ class Manager
     public function lookupCurrencyName($currencyCode, $locale = null)
     {
         if (!preg_match('(^[A-Z]{3}$)', $currencyCode)) {
-            throw new InvalidArgumentException('Invalid currency code given');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid currency code "%s"',
+                $currencyCode
+            ));
         }
 
-        return $this->lookupNames(
+        return $this->lookupName(
             '/ldml/numbers/currencies/currency[@type="' . $currencyCode . '"]/displayName[not(@count)]',
             $currencyCode,
-            $locale
+            $locale ?: Locale::getDefault()
         );
     }
 
@@ -49,26 +52,53 @@ class Manager
     public function lookupCountryName($countryCode, $locale = null)
     {
         if (!preg_match('(^[A-Z]{2}$)', $countryCode)) {
-            throw new InvalidArgumentException('Invalid country code given');
+            throw new InvalidArgumentException(sprintf(
+                'Invalid country code "%s"',
+                $countryCode
+            ));
         }
 
-        return $this->lookupNames(
+        return $this->lookupName(
             '/ldml/localeDisplayNames/territories/territory[@type="' . $countryCode . '"]',
             $countryCode,
-            $locale
+            $locale ?: Locale::getDefault()
         );
     }
 
     /**
-     * @param  string      $path
-     * @param  string      $fallback
+     * @param  string      $unit
+     * @param  string      $length
      * @param  string|null $locale
+     * @return string[]
+     * @throws InvalidArgumentException
+     */
+    public function getUnitForms($unit, $length, $locale = null)
+    {
+        $units = $this->reader->getPathData(
+            $locale ?: Locale::getDefault(),
+            '/ldml/units/unitLength[@type="' . $length . '"]/unit[@type="' . $unit . '"]/unitPattern',
+            'count'
+        );
+
+        if (!$units) {
+            throw new InvalidArgumentException(sprintf(
+                'No units found for length "%s" and unit "%s"',
+                $length,
+                $unit
+            ));
+        }
+
+        return $units;
+    }
+
+    /**
+     * @param  string $path
+     * @param  string $fallback
+     * @param  string $locale
      * @return string
      */
-    protected function lookupNames($path, $fallback, $locale = null)
+    protected function lookupName($path, $fallback, $locale)
     {
-        $locale = $locale ?: Locale::getDefault();
-
         $names = $this->reader->getPathData(
             $locale,
             $path,

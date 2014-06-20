@@ -1,8 +1,6 @@
 <?php
 namespace Ajasta\Invoice\Service;
 
-use Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository;
-use Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -19,7 +17,9 @@ class InvoiceServiceFactory implements FactoryInterface
             $objectManager,
             $serviceLocator->get('Ajasta\Core\TransactionalManager'),
             $serviceLocator->get('Ajasta\Invoice\Repository\InvoiceNumberIncrementerRepository'),
-            $serviceLocator->get('Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface')
+            $serviceLocator->get('Ajasta\Invoice\Service\InvoiceNumberGenerator\GeneratorInterface'),
+            $serviceLocator->get('Ajasta\Invoice\Pdf\InvoicePrinter'),
+            $serviceLocator->get('Ajasta\Invoice\Options')->getInvoicePath()
         );
     }
 }

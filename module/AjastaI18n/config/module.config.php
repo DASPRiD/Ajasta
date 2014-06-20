@@ -7,6 +7,7 @@ return [
         'factories' => [
             'Ajasta\I18n\Cldr\Manager' => 'Ajasta\I18n\Cldr\ManagerFactory',
             'Ajasta\I18n\Cldr\Reader' => 'Ajasta\I18n\Cldr\ReaderFactory',
+            'Ajasta\I18n\Formatter\Unit' => 'Ajasta\I18n\Formatter\UnitFactory',
         ],
     ],
     'view_helpers' => [

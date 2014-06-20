@@ -1,8 +1,56 @@
+<?php
+use Ajasta\Invoice\Entity\Invoice;
+
+$status = $this->invoice->getStatus();
+?>
+
 <div class="page-header">
-    <a href="<?php echo $this->url('invoices/edit', ['invoiceId' => $this->invoice->getId()]); ?>" class="btn btn-primary pull-right">
-        <span class="glyphicon glyphicon-pencil"></span>
-        Edit invoice
-    </a>
+    <div class="btn-group pull-right">
+        <?php if ($status === Invoice::STATUS_DRAFT): ?>
+            <a href="<?php echo $this->url(
+                'invoices/change-status',
+                [
+                    'invoiceId' => $this->invoice->getId(),
+                    'status' => Invoice::STATUS_SENT
+                ]
+            ); ?>" class="btn btn-default">
+                <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                Mark as sent
+            </a>
+        <?php elseif ($status === Invoice::STATUS_SENT || $status === Invoice::STATUS_LATE): ?>
+            <a href="<?php echo $this->url(
+                'invoices/change-status',
+                [
+                    'invoiceId' => $this->invoice->getId(),
+                    'status' => Invoice::STATUS_PAID
+                ]
+            ); ?>" class="btn btn-default">
+                <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                Mark as paid
+            </a>
+        <?php else: ?>
+            <a href="<?php echo $this->url(
+                'invoices/change-status',
+                [
+                    'invoiceId' => $this->invoice->getId(),
+                    'status' => Invoice::STATUS_DRAFT
+                ]
+            ); ?>" class="btn btn-default">
+                <span class="glyphicon glyphicon glyphicon-ok-circle"></span>
+                Mark as draft
+            </a>
+        <?php endif; ?>
+
+        <a href="<?php echo $this->url('invoices/pdf', ['invoiceId' => $this->invoice->getId()]); ?>" class="btn btn-success">
+            <span class="glyphicon glyphicon-download"></span>
+            Download PDF
+        </a>
+
+        <a href="<?php echo $this->url('invoices/edit', ['invoiceId' => $this->invoice->getId()]); ?>" class="btn btn-primary">
+            <span class="glyphicon glyphicon-pencil"></span>
+            Edit invoice
+        </a>
+    </div>
     <h1>Invoice: </h1>
 </div>
 

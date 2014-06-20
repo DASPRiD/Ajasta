@@ -1,7 +1,7 @@
 <?php
 namespace Ajasta\Client\Form\Element;
 
-use Doctrine\Common\Persistence\ObjectRepository;
+use Ajasta\Client\Repository\ClientRepository;
 use Zend\Form\Element\Select;
 
 class ClientSelect extends Select
@@ -12,14 +12,14 @@ class ClientSelect extends Select
     protected $initialized = false;
 
     /**
-     * @var ObjectRepository
+     * @var ClientRepository
      */
     protected $clientRepository;
 
     /**
-     * @param ObjectRepository $clientRepository
+     * @param ClientRepository $clientRepository
      */
-    public function __construct(ObjectRepository $clientRepository)
+    public function __construct(ClientRepository $clientRepository)
     {
         $this->clientRepository = $clientRepository;
         parent::__construct();
@@ -34,7 +34,7 @@ class ClientSelect extends Select
         $this->initialized = true;
         $valueOptions = [];
 
-        foreach ($this->clientRepository->findBy(['active' => true]) as $client) {
+        foreach ($this->clientRepository->findAllActive() as $client) {
             $valueOptions[$client->getId()] = $client->getName();
         }
 

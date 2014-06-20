@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Invoice;
 
+use IntlDateFormatter;
 use InvalidArgumentException;
 use Zend\Stdlib\AbstractOptions;
 
@@ -25,6 +26,37 @@ class Options extends AbstractOptions
      * @var string
      */
     protected $invoiceNumberFormat = '%1$s';
+
+    /**
+     * @var string
+     */
+    protected $invoicePath = 'data/invoices';
+
+    /**
+     * @var string
+     */
+    protected $xslPath;
+
+    /**
+     * @var string
+     */
+    protected $translationPath;
+
+    /**
+     * @var int
+     */
+    protected $dateType = IntlDateFormatter::MEDIUM;
+
+    /**
+     * @param array|Traversable|null $options
+     */
+    public function __construct($options = null)
+    {
+        $this->xslPath         = __DIR__ . '/../../../examples/invoice.xsl';
+        $this->translationPath = __DIR__ . '/../../../examples/translations';
+
+        parent::__construct($options);
+    }
 
     /**
      * @return string
@@ -116,5 +148,69 @@ class Options extends AbstractOptions
         }
 
         $this->invoiceNumberFormat = $invoiceNumberFormat;
+    }
+
+    /**
+     * @return string
+     */
+    public function getInvoicePath()
+    {
+        return $this->invoicePath;
+    }
+
+    /**
+     * @param string $invoicePath
+     */
+    public function setInvoicePath($invoicePath)
+    {
+        $this->invoicePath = rtrim($invoicePath, '/');
+    }
+
+    /**
+     * @return string
+     */
+    public function getXslPath()
+    {
+        return $this->xslPath;
+    }
+
+    /**
+     * @param string $xslPath
+     */
+    public function setXslPath($xslPath)
+    {
+        $this->xslPath = $xslPath;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTranslationPath()
+    {
+        return $this->translationPath;
+    }
+
+    /**
+     * @param string $translationPath
+     */
+    public function setTranslationPath($translationPath)
+    {
+        $this->translationPath = $translationPath;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDateType()
+    {
+        return $this->dateType;
+    }
+
+    /**
+     * @param int $dateType
+     */
+    public function setDateType($dateType)
+    {
+        $this->dateType = $dateType;
     }
 }
