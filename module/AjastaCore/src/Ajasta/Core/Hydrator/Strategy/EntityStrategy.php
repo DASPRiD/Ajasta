@@ -47,7 +47,7 @@ class EntityStrategy implements StrategyInterface
         $entity = $this->objectRepository->find($value);
 
         if ($entity === null) {
-            throw new RuntimeException(sprintf('Entity with ID "%s" not found'), $value);
+            throw new RuntimeException(sprintf('Entity with ID "%s" not found', $value));
         }
 
         return $entity;
