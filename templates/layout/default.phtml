@@ -1,0 +1,39 @@
+<?php
+$this->headLink()
+    ->prependStylesheet($this->serverUrl('vendor/bootstrap/css/bootstrap.min.css'));
+
+$this->inlineScript()
+    ->prependFile('vendor/bootstrap/js/bootstrap.min.js')
+    ->prependFile('vendor/jquery/jquery-2.2.0.min.js');
+?>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+        <?php echo $this->headTitle('Ajasta')->setSeparator(' - ')->setAutoEscape(false) ?>
+        <?php echo $this->headMeta(); ?>
+        <?php echo $this->headLink(); ?>
+    </head>
+    <body>
+        <nav class="navbar navbar-fixed-top navbar-dark bg-inverse">
+            <a class="navbar-brand" href="https://github.com/Ajasta/Ajasta">Ajasta</a>
+
+            <div class="nav navbar-nav">
+                <a href="#" class="nav-item nav-link active">Foo</a>
+                <a href="#" class="nav-item nav-link">Bar</a>
+                <a href="#" class="nav-item nav-link">Baz</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <h1>Hello, world!</h1>
+
+            <?php echo $this->content ?>
+
+            <?php echo $this->inlineScript(); ?>
+        </div>
+    </body>
+</html>
