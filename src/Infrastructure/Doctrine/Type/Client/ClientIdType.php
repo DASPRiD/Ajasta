@@ -24,4 +24,3 @@ class ClientIdType extends AbstractIdType
         return 'Ajasta\Client\ClientId';
     }
 }
-

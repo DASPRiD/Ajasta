@@ -19,7 +19,7 @@ final class CurrencyCode
 
     public static function fromString(string $value) : self
     {
-        if (!preg_match('^[a-z]{3}$', $value)) {
+        if (!preg_match('^[A-Z]{3}$', $value)) {
             throw InvalidCurrencyCode::fromInvalidCurrencyCode($value);
         }
 
