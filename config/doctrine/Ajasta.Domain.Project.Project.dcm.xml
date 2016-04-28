@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Ajasta\Domain\Project\Project">
+        <id name="projectId" type="Ajasta\Project\ProjectId"/>
+
+        <field name="active" type="boolean"/>
+        <field name="name" type="Ajasta\Descriptor"/>
+        <field name="defaultUnit" type="Ajasta\Unit" nullable="true"/>
+        <field name="defaultUnitPrice" type="Ajasta\Price" nullable="true"/>
+
+        <many-to-one field="client" target-entity="Ajasta\Domain\Client\Client">
+            <join-column name="clientId" referenced-column-name="clientId" nullable="false"/>
+        </many-to-one>
+    </entity>
+</doctrine-mapping>

@@ -10,8 +10,9 @@ final class InvoiceNumber
      */
     private $value;
 
-    private function __construct()
+    private function __construct(string $value)
     {
+        $this->value = $value;
     }
 
     /**
@@ -20,10 +21,8 @@ final class InvoiceNumber
      */
     public static function fromString($value)
     {
-        $invoiceNumber = new self();
-        $invoiceNumber->value = $value;
-
-        return $invoiceNumber;
+        // @todo validation
+        return new self($value);
     }
 
     /**

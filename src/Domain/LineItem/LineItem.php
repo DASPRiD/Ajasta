@@ -1,6 +1,7 @@
 <?php
 namespace Ajasta\Domain\LineItem;
 
+use Ajasta\Domain\Descriptor;
 use Ajasta\Domain\Price;
 use Ajasta\Domain\Unit;
 
@@ -12,12 +13,7 @@ final class LineItem
     private $lineItemId;
 
     /**
-     * @var Position
-     */
-    private $position;
-
-    /**
-     * @var string
+     * @var Descriptor
      */
     private $description;
 
@@ -41,17 +37,9 @@ final class LineItem
         $this->lineItemId = LineItemId::newLineItemId();
     }
 
-    /**
-     * @param Position $position
-     * @param string $description
-     * @param Quantity $quantity
-     * @param Unit $unit
-     * @param Price $unitPrice
-     */
-    public static function newLineItem($position, $description, $quantity, $unit, $unitPrice)
+    public static function newLineItem(Descriptor $description, Quantity $quantity, Unit $unit, Price $unitPrice)
     {
         $lineItem = new self();
-        $lineItem->position = $position;
         $lineItem->description = $description;
         $lineItem->quantity = $quantity;
         $lineItem->unit = $unit;
@@ -60,7 +48,7 @@ final class LineItem
         return $lineItem;
     }
 
-    public function getDescription() : string
+    public function getDescription() : Descriptor
     {
         return $this->description;
     }

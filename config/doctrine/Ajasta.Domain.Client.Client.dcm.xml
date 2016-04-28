@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="Ajasta\Domain\Client\Client">
+        <id name="clientId" type="Ajasta\Client\ClientId"/>
+
+        <field name="active" type="boolean"/>
+        <field name="name" type="Ajasta\Descriptor"/>
+        <field name="locale" type="Ajasta\Locale" nullable="true"/>
+        <field name="currencyCode" type="Ajasta\CurrencyCode" nullable="true"/>
+        <field name="taxable" type="boolean"/>
+        <field name="defaultUnit" type="Ajasta\Unit" nullable="true"/>
+        <field name="defaultUnitPrice" type="Ajasta\Price" nullable="true"/>
+        <field name="vatPercentage" type="Ajasta\VatPercentage" nullable="true"/>
+
+        <embedded name="address" class="Ajasta\Domain\Address\Address"/>
+
+        <one-to-many field="projects" target-entity="Ajasta\Domain\Project\Project" mapped-by="client"/>
+    </entity>
+</doctrine-mapping>

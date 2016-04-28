@@ -3,9 +3,12 @@ declare(strict_types=1);
 
 namespace Ajasta\Domain\Client;
 
+use Ajasta\Domain\Address\Address;
 use Ajasta\Domain\CurrencyCode;
+use Ajasta\Domain\Descriptor;
 use Ajasta\Domain\Locale;
 use Ajasta\Domain\Price;
+use Ajasta\Domain\Project\Project;
 use Ajasta\Domain\Unit;
 use Ajasta\Domain\VatPercentage;
 use Assert\Assertion;
@@ -25,7 +28,7 @@ final class Client
     private $active;
 
     /**
-     * @var Name
+     * @var Descriptor
      */
     private $name;
 
@@ -45,7 +48,7 @@ final class Client
     private $taxable;
 
     /**
-     * @var Unit
+     * @var Unit|null
      */
     private $defaultUnit;
 
@@ -85,7 +88,7 @@ final class Client
         return $this->active;
     }
 
-    public function getName() : Name
+    public function getName() : Descriptor
     {
         return $this->name;
     }

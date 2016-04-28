@@ -6,7 +6,7 @@ namespace Ajasta\Domain;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
 
-abstract class AbstractId
+trait IdTrait
 {
     /**
      * @var UuidInterface
@@ -18,18 +18,28 @@ abstract class AbstractId
         $this->uuid = $uuid;
     }
 
-    public static function newInvoiceId() : self
+    public static function newId() : self
     {
-        return new static(Uuid::uuid4());
+        return new self(Uuid::uuid4());
     }
 
     public static function fromString(string $id) : self
     {
-        return new static(Uuid::fromString($id));
+        return new self(Uuid::fromString($id));
+    }
+
+    public static function fromBytes(string $id) : self
+    {
+        return new self(Uuid::fromBytes($id));
+    }
+
+    public function toBytes() : string
+    {
+        return $this->uuid->getBytes();
     }
 
     public function __toString() : string
     {
-        return $this->id->toString();
+        return $this->uuid->toString();
     }
 }

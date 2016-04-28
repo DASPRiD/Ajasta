@@ -3,9 +3,7 @@ declare(strict_types=1);
 
 namespace Ajasta\Domain;
 
-use Ajasta\Domain\Exception\InvalidVatPercentage;
-
-final class VatPercentage
+final class Descriptor
 {
     /**
      * @var string
@@ -19,15 +17,13 @@ final class VatPercentage
 
     public static function fromString(string $value) : self
     {
-        if (!preg_match('^\d*(?:\.\d*)$', $value)) {
-            throw InvalidVatPercentage::fromInvalidNumber($value);
+        $trimmedValue = trim($value);
+
+        if ('' === $trimmedValue) {
+            throw Exception\InvalidDescriptor::fromBlankDescriptor();
         }
 
-        if (-1 === bccomp($value, '0')) {
-            throw InvalidVatPercentage::fromNegativeNumber($value);
-        }
-
-        return new self($value);
+        return new self($trimmedValue);
     }
 
     public function __toString() : string

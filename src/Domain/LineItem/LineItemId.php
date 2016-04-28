@@ -3,8 +3,9 @@ declare(strict_types=1);
 
 namespace Ajasta\Domain\LineItem;
 
-use Ajasta\Domain\AbstractId;
+use Ajasta\Domain\IdTrait;
 
-final class LineItemId extends AbstractId
+final class LineItemId
 {
+    use IdTrait;
 }

@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Ajasta\Domain\Project;
 
+use Ajasta\Domain\Client\Client;
+use Ajasta\Domain\Descriptor;
 use Ajasta\Domain\Price;
 use Ajasta\Domain\Unit;
 use Assert\Assertion;
@@ -25,12 +27,12 @@ final class Project
     private $client;
 
     /**
-     * @var Name
+     * @var Descriptor
      */
     private $name;
 
     /**
-     * @var Unit
+     * @var Unit|null
      */
     private $defaultUnit;
 
@@ -44,18 +46,34 @@ final class Project
         $this->projectId = new ProjectId();
     }
 
+    public function getProjectId() : ProjectId
+    {
+        return $this->projectId;
+    }
+
     public function isActive() : bool
     {
         return $this->active;
     }
 
-    public function getName() : Name
+    public function getClient() : Client
+    {
+        return $this->client;
+    }
+
+    public function getName() : Descriptor
     {
         return $this->name;
     }
 
+    public function hasDefaultUnit() : bool
+    {
+        return null !== $this->defaultUnit;
+    }
+
     public function getDefaultUnit() : Unit
     {
+        Assertion::notNull($this->defaultUnit);
         return $this->defaultUnit;
     }
 

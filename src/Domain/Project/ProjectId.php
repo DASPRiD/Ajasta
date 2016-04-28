@@ -1,11 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace Ajasta\Domain\Invoice;
+namespace Ajasta\Domain\Project;
 
 use Ajasta\Domain\IdTrait;
 
-final class InvoiceId
+final class ProjectId
 {
     use IdTrait;
 }

@@ -5,7 +5,7 @@ namespace Ajasta\Domain\Invoice;
 
 use Ajasta\Domain\IdTrait;
 
-final class InvoiceId
+final class ClientId
 {
     use IdTrait;
 }

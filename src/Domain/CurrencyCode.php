@@ -12,8 +12,9 @@ final class CurrencyCode
      */
     private $value;
 
-    private function __construct()
+    private function __construct(string $value)
     {
+        $this->value = $value;
     }
 
     public static function fromString(string $value) : self
@@ -22,10 +23,7 @@ final class CurrencyCode
             throw InvalidCurrencyCode::fromInvalidCurrencyCode($value);
         }
 
-        $instance = new self();
-        $instance->value = $value;
-
-        return $instance;
+        return new self($value);
     }
 
     public function __toString() : string

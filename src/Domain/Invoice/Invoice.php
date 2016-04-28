@@ -3,11 +3,12 @@ declare(strict_types=1);
 
 namespace Ajasta\Domain\Invoice;
 
+use Ajasta\Domain\Client\Client;
 use Ajasta\Domain\CurrencyCode;
+use Ajasta\Domain\LineItem\LineItem;
 use Ajasta\Domain\Locale;
+use Ajasta\Domain\Project\Project;
 use Ajasta\Domain\VatPercentage;
-use Ajasta\Invoicing\Entity\LineItem;
-use Ajasta\Invoicing\InvoiceNumber;
 use Assert\Assertion;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -71,14 +72,14 @@ final class Invoice
     private $vatPercentage;
 
     /**
-     * @var LineItem[]|Collection
+     * @var LineItemReference[]|Collection
      */
-    private $lineItems;
+    private $lineItemReferences;
 
     private function __construct()
     {
         $this->invoiceId = new InvoiceId();
-        $this->lineItems = new ArrayCollection();
+        $this->lineItemReferences = new ArrayCollection();
     }
 
     public static function newInvoice(
@@ -118,9 +119,11 @@ final class Invoice
         $this->project = $project;
 
         $this->lineItems->clear();
+        $position = 0;
 
         foreach ($lineItems as $lineItem) {
-            $this->lineItems->add($lineItem);
+            Assertion::isInstanceOf($lineItem, LineItem::class);
+            $this->lineItemReferences->add(new LineItemReference(++$position, $lineItem));
         }
     }
 
@@ -202,6 +205,8 @@ final class Invoice
      */
     public function getLineItems() : array
     {
-        return $this->lineItems->toArray();
+        return $this->lineItemReferences->map(function (LineItemReference $lineItemReference) {
+            return $lineItemReference->getLineItem();
+        });
     }
 }
