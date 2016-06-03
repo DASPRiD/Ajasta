@@ -58,6 +58,6 @@ class QuantityType extends IntegerType
      */
     public function getName()
     {
-        return 'Ajasta\LineItem\Quantity';
+        return 'Ajasta.LineItem.Quantity';
     }
 }

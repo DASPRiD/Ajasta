@@ -21,6 +21,6 @@ class ProjectIdType extends AbstractIdType
      */
     public function getName()
     {
-        return 'Ajasta\Project\ProjectId';
+        return 'Ajasta.Project.ProjectId';
     }
 }

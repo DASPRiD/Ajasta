@@ -1,0 +1,31 @@
+<?php $this->layout('layout::login'); ?>
+
+<div class="center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <form method="post" action="<?php echo $this->url('login'); ?>" role="login">
+                    <img src="/images/ajasta-logo.svg" class="img-responsive logo" alt="Ajasta">
+
+                    <label for="input.username">Username:</label>
+                    <input type="text" name="username" id="input.username" class="form-control" required autofocus>
+
+                    <label for="input.password">Password:</label>
+                    <input type="password" name="password" id="input.password" class="form-control" required>
+
+                    <p class="error">
+                        <?php if ($loginError): ?>
+                            Sorry that didn't work. Please try again.
+                        <?php else: ?>
+                            &nbsp;
+                        <?php endif; ?>
+                    </p>
+
+                    <button class="btn btn-login" type="submit">Sign In</button>
+                </form>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    </div>
+</div>

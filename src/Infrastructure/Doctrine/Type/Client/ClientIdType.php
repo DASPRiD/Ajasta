@@ -21,6 +21,6 @@ class ClientIdType extends AbstractIdType
      */
     public function getName()
     {
-        return 'Ajasta\Client\ClientId';
+        return 'Ajasta.Client.ClientId';
     }
 }

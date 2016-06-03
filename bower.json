@@ -1,0 +1,20 @@
+{
+  "name": "Ajasta",
+  "homepage": "https://github.com/DASPRiD/Ajasta",
+  "authors": [
+    "Ben Scholzen <mail@dasprids.de>"
+  ],
+  "moduleType": [],
+  "license": "BSD-2-Clause",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.2.3",
+    "bootstrap": "~3.3.6"
+  }
+}

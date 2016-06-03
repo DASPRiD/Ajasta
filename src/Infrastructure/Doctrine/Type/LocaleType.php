@@ -59,6 +59,6 @@ class LocaleType extends StringType
      */
     public function getName()
     {
-        return 'Ajasta\Locale';
+        return 'Ajasta.Locale';
     }
 }

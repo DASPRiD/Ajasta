@@ -59,6 +59,6 @@ class VatPercentageType extends DecimalType
      */
     public function getName()
     {
-        return 'Ajasta\VatPercentage';
+        return 'Ajasta.VatPercentage';
     }
 }

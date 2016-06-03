@@ -59,6 +59,6 @@ class CurrencyCodeType extends StringType
      */
     public function getName()
     {
-        return 'Ajasta\CurrencyCode';
+        return 'Ajasta.CurrencyCode';
     }
 }

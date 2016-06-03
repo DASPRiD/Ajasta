@@ -6,16 +6,16 @@
     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Ajasta\Domain\Invoice\Invoice">
-        <id name="invoiceId" type="Ajasta\Invoice\InvoiceId"/>
+        <id name="invoiceId" type="Ajasta.Invoice.InvoiceId"/>
 
-        <field name="invoiceNumber" type="Ajasta\Invoice\InvoiceNumber"/>
-        <field name="locale" type="Ajasta\Locale"/>
-        <field name="currencyCode" type="Ajasta\CurrencyCode"/>
-        <field name="issueDate" type="Ajasta\ImmutableDate"/>
-        <field name="dueDate" type="Ajasta\ImmutableDate"/>
-        <field name="transmissionDate" type="Ajasta\ImmutableDate" nullable="true"/>
-        <field name="paymentReceiptDate" type="Ajasta\ImmutableDate" nullable="true"/>
-        <field name="vatPercentage" type="Ajasta\VatPercentage"/>
+        <field name="invoiceNumber" type="Ajasta.Invoice.InvoiceNumber"/>
+        <field name="locale" type="Ajasta.Locale"/>
+        <field name="currencyCode" type="Ajasta.CurrencyCode"/>
+        <field name="issueDate" type="Ajasta.ImmutableDate"/>
+        <field name="dueDate" type="Ajasta.ImmutableDate"/>
+        <field name="transmissionDate" type="Ajasta.ImmutableDate" nullable="true"/>
+        <field name="paymentReceiptDate" type="Ajasta.ImmutableDate" nullable="true"/>
+        <field name="vatPercentage" type="Ajasta.VatPercentage"/>
 
         <many-to-one field="client" target-entity="Ajasta\Domain\Client\Client">
             <join-column name="clientId" referenced-column-name="clientId" nullable="false"/>

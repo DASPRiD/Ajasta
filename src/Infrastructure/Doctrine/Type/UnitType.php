@@ -48,6 +48,6 @@ class UnitType extends StringType
      */
     public function getName()
     {
-        return 'Ajasta\Unit';
+        return 'Ajasta.Unit';
     }
 }

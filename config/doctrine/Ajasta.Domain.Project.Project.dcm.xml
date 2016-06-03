@@ -6,12 +6,12 @@
     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Ajasta\Domain\Project\Project">
-        <id name="projectId" type="Ajasta\Project\ProjectId"/>
+        <id name="projectId" type="Ajasta.Project.ProjectId"/>
 
         <field name="active" type="boolean"/>
-        <field name="name" type="Ajasta\Descriptor"/>
-        <field name="defaultUnit" type="Ajasta\Unit" nullable="true"/>
-        <field name="defaultUnitPrice" type="Ajasta\Price" nullable="true"/>
+        <field name="name" type="Ajasta.Descriptor"/>
+        <field name="defaultUnit" type="Ajasta.Unit" nullable="true"/>
+        <field name="defaultUnitPrice" type="Ajasta.Price" nullable="true"/>
 
         <many-to-one field="client" target-entity="Ajasta\Domain\Client\Client">
             <join-column name="clientId" referenced-column-name="clientId" nullable="false"/>

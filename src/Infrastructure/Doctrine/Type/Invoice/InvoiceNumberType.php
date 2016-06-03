@@ -6,9 +6,9 @@ namespace Ajasta\Infrastructure\Doctrine\Type\Invoice;
 use Ajasta\Domain\Invoice\InvoiceNumber;
 use Assert\Assertion;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\GuidType;
+use Doctrine\DBAL\Types\StringType;
 
-class InvoiceNumberType extends GuidType
+class InvoiceNumberType extends StringType
 {
     /**
      * {@inheritdoc}

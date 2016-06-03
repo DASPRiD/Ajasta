@@ -59,6 +59,6 @@ class PriceType extends DecimalType
      */
     public function getName()
     {
-        return 'Ajasta\Price';
+        return 'Ajasta.Price';
     }
 }

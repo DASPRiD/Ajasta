@@ -205,7 +205,7 @@ final class Invoice
      */
     public function getLineItems() : array
     {
-        return $this->lineItemReferences->map(function (LineItemReference $lineItemReference) {
+        return $this->lineItemReferences->map(function (LineItemReference $lineItemReference) : LineItem {
             return $lineItemReference->getLineItem();
         });
     }

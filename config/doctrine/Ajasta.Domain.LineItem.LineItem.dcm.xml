@@ -6,11 +6,11 @@
     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Ajasta\Domain\LineItem\LineItem">
-        <id name="lineItemId" type="Ajasta\LineItem\LineItemId"/>
+        <id name="lineItemId" type="Ajasta.LineItem.LineItemId"/>
 
-        <field name="description" type="Ajasta\Descriptor"/>
-        <field name="quantity" type="Ajasta\LineItem\Quantity"/>
-        <field name="unit" type="Ajasta\Unit"/>
-        <field name="unitPrice" type="Ajasta\Price"/>
+        <field name="description" type="Ajasta.Descriptor"/>
+        <field name="quantity" type="Ajasta.LineItem.Quantity"/>
+        <field name="unit" type="Ajasta.Unit"/>
+        <field name="unitPrice" type="Ajasta.Price"/>
     </entity>
 </doctrine-mapping>

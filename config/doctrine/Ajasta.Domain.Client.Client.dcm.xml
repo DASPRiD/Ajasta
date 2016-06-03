@@ -6,16 +6,16 @@
     http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <entity name="Ajasta\Domain\Client\Client">
-        <id name="clientId" type="Ajasta\Client\ClientId"/>
+        <id name="clientId" type="Ajasta.Client.ClientId"/>
 
         <field name="active" type="boolean"/>
-        <field name="name" type="Ajasta\Descriptor"/>
-        <field name="locale" type="Ajasta\Locale" nullable="true"/>
-        <field name="currencyCode" type="Ajasta\CurrencyCode" nullable="true"/>
+        <field name="name" type="Ajasta.Descriptor"/>
+        <field name="locale" type="Ajasta.Locale" nullable="true"/>
+        <field name="currencyCode" type="Ajasta.CurrencyCode" nullable="true"/>
         <field name="taxable" type="boolean"/>
-        <field name="defaultUnit" type="Ajasta\Unit" nullable="true"/>
-        <field name="defaultUnitPrice" type="Ajasta\Price" nullable="true"/>
-        <field name="vatPercentage" type="Ajasta\VatPercentage" nullable="true"/>
+        <field name="defaultUnit" type="Ajasta.Unit" nullable="true"/>
+        <field name="defaultUnitPrice" type="Ajasta.Price" nullable="true"/>
+        <field name="vatPercentage" type="Ajasta.VatPercentage" nullable="true"/>
 
         <embedded name="address" class="Ajasta\Domain\Address\Address"/>
 

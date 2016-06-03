@@ -66,6 +66,6 @@ class ImmutableDateType extends DateType
      */
     public function getName()
     {
-        return 'Ajasta\ImmutableDate';
+        return 'Ajasta.ImmutableDate';
     }
 }

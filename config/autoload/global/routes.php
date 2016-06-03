@@ -3,24 +3,34 @@ return [
     'dependencies' => [
         'invokables' => [
             Zend\Expressive\Router\RouterInterface::class => Zend\Expressive\Router\FastRouteRouter::class,
-            App\Action\PingAction::class => App\Action\PingAction::class,
         ],
         'factories' => [
-            App\Action\HomePageAction::class => App\Action\HomePageFactory::class,
+            Ajasta\Infrastructure\Middleware\Dashboard::class =>
+                Ajasta\Factory\Infrastructure\Middleware\DashboardFactory::class,
+            Ajasta\Infrastructure\Middleware\Login::class =>
+                Ajasta\Factory\Infrastructure\Middleware\LoginFactory::class,
+            Ajasta\Infrastructure\Middleware\Logout::class =>
+                Ajasta\Factory\Infrastructure\Middleware\LogoutFactory::class,
         ],
     ],
 
     'routes' => [
         [
-            'name' => 'home',
+            'name' => 'dashboard',
             'path' => '/',
-            'middleware' => App\Action\HomePageAction::class,
+            'middleware' => Ajasta\Infrastructure\Middleware\Dashboard::class,
             'allowed_methods' => ['GET'],
         ],
         [
-            'name' => 'api.ping',
-            'path' => '/api/ping',
-            'middleware' => App\Action\PingAction::class,
+            'name' => 'login',
+            'path' => '/login',
+            'middleware' => Ajasta\Infrastructure\Middleware\Login::class,
+            'allowed_methods' => ['GET', 'POST'],
+        ],
+        [
+            'name' => 'logout',
+            'path' => '/logout',
+            'middleware' => Ajasta\Infrastructure\Middleware\Logout::class,
             'allowed_methods' => ['GET'],
         ],
     ],

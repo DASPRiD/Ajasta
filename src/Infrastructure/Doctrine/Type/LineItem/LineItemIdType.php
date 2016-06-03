@@ -21,6 +21,6 @@ class LineItemIdType extends AbstractIdType
      */
     public function getName()
     {
-        return 'Ajasta\LineItem\LineItemId';
+        return 'Ajasta.LineItem.LineItemId';
     }
 }

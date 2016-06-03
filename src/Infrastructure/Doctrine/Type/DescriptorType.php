@@ -48,6 +48,6 @@ class DescriptorType extends StringType
      */
     public function getName()
     {
-        return 'Ajasta\Descriptor';
+        return 'Ajasta.Descriptor';
     }
 }

@@ -21,6 +21,6 @@ class InvoiceIdType extends AbstractIdType
      */
     public function getName()
     {
-        return 'Ajasta\Invoice\InvoiceId';
+        return 'Ajasta.Invoice.InvoiceId';
     }
 }
