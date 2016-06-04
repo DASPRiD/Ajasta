@@ -70,8 +70,7 @@ class Login
             }
         }
 
-        return $this->responseRenderer->render($request, $response, 'app::login', [
-            'layout' => 'layout::login',
+        return $this->responseRenderer->render($request, $response, 'common::login', [
             'form' => $form,
             'loginError' => $loginError,
         ]);

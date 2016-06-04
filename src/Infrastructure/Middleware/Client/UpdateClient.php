@@ -1,22 +1,29 @@
 <?php
 declare(strict_types=1);
 
-namespace Ajasta\Infrastructure\Middleware;
+namespace Ajasta\Infrastructure\Middleware\Client;
 
 use Ajasta\Infrastructure\View\ResponseRenderer;
+use DASPRiD\Formidable\Form;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 
-class Dashboard
+class UpdateClient
 {
     /**
      * @var ResponseRenderer
      */
     private $responseRenderer;
 
-    public function __construct(ResponseRenderer $responseRenderer)
+    /**
+     * @var Form
+     */
+    private $clientForm;
+
+    public function __construct(ResponseRenderer $responseRenderer, Form $clientForm)
     {
         $this->responseRenderer = $responseRenderer;
+        $this->clientForm = $clientForm;
     }
 
     public function __invoke(
@@ -24,6 +31,10 @@ class Dashboard
         ResponseInterface $response,
         callable $out = null
     ) : ResponseInterface {
-        return $this->responseRenderer->render($request, $response, 'common::dashboard');
+        $clientForm = $this->clientForm;
+
+        return $this->responseRenderer->render($request, $response, 'client::update', [
+            'clientForm' => $clientForm,
+        ]);
     }
 }

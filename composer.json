@@ -29,7 +29,9 @@
         "dasprid/formidable": "^0.1.0",
         "zendframework/zend-console": "^2.6",
         "doctrine/migrations": "^1.4",
-        "zendframework/zend-expressive-platesrenderer": "^1.1"
+        "zendframework/zend-expressive-platesrenderer": "^1.1",
+        "commerceguys/addressing": "^0.8.2",
+        "commerceguys/intl": "^0.7.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^4.8",

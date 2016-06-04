@@ -15,7 +15,7 @@ class LoginFactory
     {
         return new Login(
             $container->get(ResponseRenderer::class),
-            $container->get('Ajasta\Infrastructure\Form\LoginForm'),
+            $container->get('Ajasta.Form.LoginForm'),
             $container->get(UsersByUsernameInterface::class),
             $container->get(UrlHelper::class)
         );

@@ -1,0 +1,52 @@
+<fieldset role="address">
+    <legend>Address</legend>
+
+    <div class="row">
+        <div class="col-md-6">
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'recipient'),
+                'label' => 'Contact Name',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'organization'),
+                'label' => 'Company',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'addressLine1'),
+                'label' => 'Address Line 1',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'addressLine2'),
+                'label' => 'Address Line 2',
+            ]); ?>
+            <?php echo $this->fetch('form::select', [
+                'field' => $form->getField($prefix . 'countryCode'),
+                'label' => 'Country',
+                'options' => $this->getAddressCountryList(),
+            ]); ?>
+        </div>
+
+        <div class="col-md-6">
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'locality'),
+                'label' => 'Locality',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'dependentLocality'),
+                'label' => 'Dependent Locality',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'administrativeArea'),
+                'label' => 'Administrative Area',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'postalCode'),
+                'label' => 'Postal Code',
+            ]); ?>
+            <?php echo $this->fetch('form::input-text', [
+                'field' => $form->getField($prefix . 'sortingCode'),
+                'label' => 'Cedex',
+            ]); ?>
+        </div>
+    </div>
+</fieldset>

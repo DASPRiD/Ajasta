@@ -7,18 +7,27 @@ return [
 
             Zend\Expressive\Template\TemplateRendererInterface::class =>
                 Zend\Expressive\Plates\PlatesRendererFactory::class,
+
+            Ajasta\Infrastructure\View\Extension\AddressExtension::class =>
+                Ajasta\Factory\Infrastructure\View\Extension\AddressExtensionFactory::class,
         ],
     ],
 
     'templates' => [
         'extension' => 'phtml',
         'paths' => [
-            'app'    => ['templates/app'],
+            'form' => ['templates/form'],
+            'common' => ['templates/common'],
+            'address' => ['templates/address'],
+            'client' => ['templates/client'],
             'layout' => ['templates/layout'],
             'error'  => ['templates/error'],
         ],
     ],
 
-    'view_helpers' => [
+    'plates' => [
+        'extensions' => [
+            Ajasta\Infrastructure\View\Extension\AddressExtension::class,
+        ],
     ],
 ];

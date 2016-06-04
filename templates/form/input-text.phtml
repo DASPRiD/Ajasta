@@ -1,0 +1,7 @@
+<div class="form-group">
+    <label for="input.<?php echo $this->escape($field->getKey()); ?>"><?php echo $this->escape($label); ?>:</label>
+    <?php echo (new DASPRiD\Formidable\Helper\InputText())->__invoke(
+        $field,
+        ['class' => 'form-control']
+    ); ?>
+</div>

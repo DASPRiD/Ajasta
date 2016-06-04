@@ -1,0 +1,93 @@
+<?php $this->layout('layout::default', ['user' => $user]); ?>
+<?php $this->start('inline-script'); ?>
+    <script type="text/javascript" src="/js/address.js"></script>
+<?php $this->stop(); ?>
+<?php
+$select = new \DASPRiD\Formidable\Helper\Select();
+$inputText = new \DASPRiD\Formidable\Helper\InputText();
+$inputCheckbox = new \DASPRiD\Formidable\Helper\InputCheckbox();
+?>
+
+<h1 class="page-header">Update Client</h1>
+
+<form method="post" action="<?php echo $this->url('client.update'); ?>">
+    <fieldset>
+        <legend>Basic Information</legend>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="input.name">Name:</label>
+                    <?php echo $inputText(
+                        $clientForm->getField('name'),
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="input.name">Locale:</label>
+                    <?php echo $select(
+                        $clientForm->getField('locale'),
+                        [
+                            'en-US' => Locale::getDisplayLanguage('en-US') . ' (' . Locale::getDisplayRegion('en-US') . ')',
+                        ],
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="input.name">Currency:</label>
+                    <?php echo $inputText(
+                        $clientForm->getField('name'),
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <?php echo $inputCheckbox(
+                            $clientForm->getField('taxable')
+                        ); ?>
+                        Taxable
+                    </label>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="input.name">Default Unit:</label>
+                    <?php echo $select(
+                        $clientForm->getField('defaultUnit'),
+                        [
+                            '' => 'Use global default',
+                            'none' => 'None',
+                            'hours' => 'Hours',
+                            'days' => 'Days',
+                        ],
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="input.name">Default Unit Price:</label>
+                    <?php echo $inputText(
+                        $clientForm->getField('defaultUnitPrice'),
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+
+                <div class="form-group">
+                    <label for="input.name">VAT Percentage:</label>
+                    <?php echo $inputText(
+                        $clientForm->getField('vatPercentage'),
+                        ['class' => 'form-control']
+                    ); ?>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <?php echo $this->fetch('address::fieldset', ['form' => $clientForm, 'prefix' => '']); ?>
+
+    <input type="submit">
+</form>
