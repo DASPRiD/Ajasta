@@ -1,4 +1,5 @@
-composer.phar
-composer.lock
-phpunit.xml
-vendor/
+/composer.phar
+/composer.lock
+/phpunit.xml
+/docker-compose.override.yml
+/vendor/

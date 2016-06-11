@@ -8,7 +8,7 @@ $entityManager = $container->get(Doctrine\ORM\EntityManagerInterface::class);
 
 $username = Zend\Console\Prompt\Line::prompt('Username: ');
 $emailAddress = Zend\Console\Prompt\Line::prompt('Email Address: ');
-$password = Zend\Console\Prompt\Password::prompt('Password: ', true);
+$password = Zend\Console\Prompt\Password::prompt('Password: ');
 
 $user = Ajasta\Domain\User\User::create(
     Ajasta\Domain\User\Username::fromString($username),

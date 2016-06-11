@@ -1,0 +1,40 @@
+version: '2'
+services:
+    nginx:
+        build: ./docker/nginx/
+        links:
+            - php
+        volumes_from:
+            - app
+            
+    php:
+        build: ./docker/php/
+        expose:
+            - 9000
+        links:
+            - mysql
+        volumes_from:
+            - app
+            
+    mysql:
+        image: mysql:latest
+        volumes_from:
+            - data
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ajasta
+            MYSQL_USER: dev
+            MYSQL_PASSWORD: dev
+
+    data:
+        image: mysql:latest
+        volumes:
+            - /var/lib/mysql
+        command: "true"
+
+    app:
+        image: php:7.0-fpm
+        volumes:
+            - .:/var/www/html
+        command: "true"
+
