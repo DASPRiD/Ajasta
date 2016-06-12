@@ -1,0 +1,4 @@
+vendor/
+docker-compose.override.yml
+docker-compose.override.yml.dist
+docker-compose.yml
