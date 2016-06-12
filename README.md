@@ -20,7 +20,6 @@ While you can run Ajasta completely on your local machine, with your own webserv
 commands:
 
 ```bash
-$ composer install
 $ bower install
 ```
 
@@ -32,6 +31,7 @@ internal container port). After that, you can start the Docker containers:
 
 ```bash
 $ docker-compose up -d
+$ docker exec -i $(docker-compose ps -q application | head -1) composer install
 ```
 
 To set up the database structure, you'll need to run `doctrine-migrations` within the PHP container. To do so, you need
@@ -39,14 +39,14 @@ to get the container ID of it. Do so by running `docker ps` and search for the `
 following command:
 
 ```bash
-$ docker exec -i <php-container-id> vendor/bin/doctrine-migrations migrations:migrate
+$ docker exec -i $(docker-compose ps -q application | head -1) vendor/bin/doctrine-migrations migrations:migrate
 ```
 
 Finally, you need to create an initial user. To ease this task and not having to fiddle with the database, Ajasta
 provides a simple command line tool for this.
 
 ```bash
-$ docker exec -it <php-container-id> bin/create-user.php
+$ docker exec -it $(docker-compose ps -q application | head -1) php bin/create-user.php
 ```
 
 Now that you've got everything up and running, you can access Ajasta with your browser by opening
