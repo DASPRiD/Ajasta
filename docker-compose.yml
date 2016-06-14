@@ -1,40 +1,23 @@
 version: '2'
 services:
-    nginx:
-        build: ./docker/nginx/
-        links:
-            - php
-        volumes_from:
-            - app
-            
-    php:
-        build: ./docker/php/
-        expose:
-            - 9000
-        links:
-            - mysql
-        volumes_from:
-            - app
-            
-    mysql:
-        image: mysql:latest
-        volumes_from:
-            - data
-        environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: ajasta
-            MYSQL_USER: dev
-            MYSQL_PASSWORD: dev
-
-    data:
-        image: mysql:latest
-        volumes:
-            - /var/lib/mysql
-        command: "true"
-
-    app:
-        image: php:7.0-fpm
-        volumes:
-            - .:/var/www/html
-        command: "true"
-
+  application:
+    build: ./
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+    volumes:
+      - database:/var/lib/mysql
+  nginx:
+    image: nginx:1.10
+    depends_on:
+      - application
+    links:
+      - 'application:php-fpm'
+    volumes_from:
+      - application
+volumes:
+    database:
+        driver: local
