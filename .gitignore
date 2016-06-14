@@ -3,3 +3,4 @@
 /phpunit.xml
 /docker-compose.override.yml
 /vendor/
+/public/vendor/

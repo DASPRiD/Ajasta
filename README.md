@@ -16,38 +16,32 @@ rewrite, but will mature quickly.
 ## Installation
 
 While you can run Ajasta completely on your local machine, with your own webserver and such, a
-[Docker](https://www.docker.com/) configuration is provided to ease installation. To get started, execute the following
-commands:
+[Docker](https://www.docker.com/) configuration is provided to ease installation.
+
+### Development
+
+For a quick installation, run the development setup script:
 
 ```bash
-$ bower install
+$ docker/dev/setup.sh
 ```
 
-Then copy the `config/autoload/local/local.php.dist` to `config/autoload/local/local.php` and adjust the database
-connection values accordingly. For the Docker image, the connection string will be `mysql://dev:dev@mysql/ajasta`. Then
-copy the `docker-compose.override.yml.dist` file to `docker-compose.override.yml`. If port 80 is already used by a local
-web server, you may want to change the nginx port to something like `8080:80` (8080 being the host port and 80 being the
-internal container port). After that, you can start the Docker containers:
+After that, the containers will be running and you can access the application via <http://localhost:8080>. If you want
+to install new bower or composer components, there are two helper scripts which will run the executables within the
+application container:
+
+```bash
+$ docker/composer.sh
+$ docker/bower.sh
+```
+
+### Production
+
+Copy the `docker-compose.override.yml.dist` file to `docker-compose.override.yml` and choose the port to use for nginx
+as well as the database credentials. After that copy the `config/autoload/local/local.php.dist` to
+`config/autoload/local/local.php` and adjust the database connection values accordingly. Then you can start the docker
+container:
 
 ```bash
 $ docker-compose up -d
-$ docker exec -i $(docker-compose ps -q application | head -1) composer install
 ```
-
-To set up the database structure, you'll need to run `doctrine-migrations` within the PHP container. To do so, you need
-to get the container ID of it. Do so by running `docker ps` and search for the `ajasta_php` image. Then run the
-following command:
-
-```bash
-$ docker exec -i $(docker-compose ps -q application | head -1) vendor/bin/doctrine-migrations migrations:migrate
-```
-
-Finally, you need to create an initial user. To ease this task and not having to fiddle with the database, Ajasta
-provides a simple command line tool for this.
-
-```bash
-$ docker exec -it $(docker-compose ps -q application | head -1) php bin/create-user.php
-```
-
-Now that you've got everything up and running, you can access Ajasta with your browser by opening
-<http://localhost:8080>.

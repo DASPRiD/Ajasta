@@ -1,15 +1,11 @@
 version: '2'
 services:
-  application:
-    volumes:
-      - ./:/var/www/html
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-  mysql:
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: ajasta
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: dev
-  nginx:
-    ports:
-      - '80:80'
+    mysql:
+        environment:
+            MYSQL_ROOT_PASSWORD: <root_password>
+            MYSQL_DATABASE: <database>
+            MYSQL_USER: <username>
+            MYSQL_PASSWORD: <password
+    nginx:
+        ports:
+            - '80:80'
