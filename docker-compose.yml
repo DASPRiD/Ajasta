@@ -2,7 +2,7 @@ version: '2'
 services:
     application:
         build: ./
-        links:
+        depends_on:
             - mysql
         volumes:
             - data:/var/www/html/data
@@ -20,7 +20,7 @@ services:
             - application
     liquibase:
         build: docker/liquibase
-        links:
+        depends_on:
             - mysql
         volumes_from:
             - application
