@@ -35,6 +35,17 @@ $ docker/composer.sh
 $ docker/bower.sh
 ```
 
+If you made changes to the XML entity schema, you need to generate a matching changelog file. To do so, do the following
+steps:
+
+```bash
+$ docker/doctrine orm:schema-tool:update --force
+$ docker/dev/create-changelog-diff.sh
+```
+
+A new changelog file will be generated in the `changelog` folder. Please validate that the generated changes are valid
+before committing them.
+
 ### Production
 
 Copy the `docker-compose.override.yml.dist` file to `docker-compose.override.yml` and choose the port to use for nginx
@@ -44,4 +55,10 @@ container:
 
 ```bash
 $ docker-compose up -d
+```
+
+Finally, setup or migrate your database:
+
+```bash
+$ docker-compose liquibase update
 ```

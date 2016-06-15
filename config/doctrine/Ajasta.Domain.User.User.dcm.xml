@@ -11,7 +11,7 @@
         <field name="username" type="Ajasta.User.Username"/>
         <field name="passwordHash" type="Ajasta.User.PasswordHash"/>
         <field name="emailAddress" type="Ajasta.EmailAddress"/>
-        
+
         <unique-constraints>
             <unique-constraint columns="username" name="username"/>
             <unique-constraint columns="emailAddress" name="emailAddress"/>

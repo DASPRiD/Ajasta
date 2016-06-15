@@ -2,12 +2,14 @@ version: '2'
 services:
     application:
         build: ./
-        depends_on:
+        links:
             - mysql
+        volumes:
+            - data:/var/www/html/data
     mysql:
         image: mysql:5.7
         volumes:
-            - database:/var/lib/mysql
+            - mysql:/var/lib/mysql
     nginx:
         image: nginx:1.10
         depends_on:
@@ -16,6 +18,14 @@ services:
             - 'application:php-fpm'
         volumes_from:
             - application
+    liquibase:
+        build: docker/liquibase
+        links:
+            - mysql
+        volumes_from:
+            - application
 volumes:
-    database:
+    data:
+        driver: local
+    mysql:
         driver: local

@@ -13,3 +13,9 @@ services:
     nginx:
         ports:
             - '8080:80'
+    liquibase:
+        environment:
+            MYSQL_ADDRESS: mysql
+            MYSQL_DATABASE: ajasta
+            MYSQL_USERNAME: dev
+            MYSQL_PASSWORD: dev

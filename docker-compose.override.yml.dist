@@ -9,3 +9,9 @@ services:
     nginx:
         ports:
             - '80:80'
+    liquibase:
+        environment:
+            MYSQL_ADDRESS: mysql
+            MYSQL_DATABASE: <database>
+            MYSQL_USERNAME: <username>
+            MYSQL_PASSWORD: <password>

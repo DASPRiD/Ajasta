@@ -1,0 +1,214 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+    <changeSet author="root (generated)" id="1466006353219-1" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="Client">
+            <column name="active" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" remarks="(DC2Type:Ajasta.Descriptor)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locale" remarks="(DC2Type:Ajasta.Locale)" type="CHAR(5)"/>
+            <column name="currencyCode" remarks="(DC2Type:Ajasta.CurrencyCode)" type="CHAR(3)"/>
+            <column name="taxable" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="defaultUnit" remarks="(DC2Type:Ajasta.Unit)" type="VARCHAR(255)"/>
+            <column name="defaultUnitPrice" remarks="(DC2Type:Ajasta.Price)" type="DECIMAL(10, 2)"/>
+            <column name="vatPercentage" remarks="(DC2Type:Ajasta.VatPercentage)" type="DECIMAL(4, 2)"/>
+            <column name="clientId" remarks="(DC2Type:Ajasta.Client.ClientId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address_recipient" type="VARCHAR(255)"/>
+            <column name="address_organization" type="VARCHAR(255)"/>
+            <column name="address_addressLine1" type="VARCHAR(255)"/>
+            <column name="address_addressLine2" type="VARCHAR(255)"/>
+            <column name="address_locality" type="VARCHAR(255)"/>
+            <column name="address_dependentLocality" type="VARCHAR(255)"/>
+            <column name="address_administrativeArea" type="VARCHAR(255)"/>
+            <column name="address_postalCode" type="VARCHAR(255)"/>
+            <column name="address_sortingCode" type="VARCHAR(255)"/>
+            <column name="address_countryCode" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-2" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="Invoice">
+            <column name="invoiceNumber" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="locale" remarks="(DC2Type:Ajasta.Locale)" type="CHAR(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="currencyCode" remarks="(DC2Type:Ajasta.CurrencyCode)" type="CHAR(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="issueDate" remarks="(DC2Type:Ajasta.ImmutableDate)" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dueDate" remarks="(DC2Type:Ajasta.ImmutableDate)" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transmissionDate" remarks="(DC2Type:Ajasta.ImmutableDate)" type="date"/>
+            <column name="paymentReceiptDate" remarks="(DC2Type:Ajasta.ImmutableDate)" type="date"/>
+            <column name="vatPercentage" remarks="(DC2Type:Ajasta.VatPercentage)" type="DECIMAL(4, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="invoiceId" remarks="(DC2Type:Ajasta.Invoice.InvoiceId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clientId" remarks="(DC2Type:Ajasta.Client.ClientId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="projectId" remarks="(DC2Type:Ajasta.Project.ProjectId)" type="BINARY(16)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-3" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="InvoiceToLineItemReference">
+            <column name="position" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="invoiceId" remarks="(DC2Type:Ajasta.Invoice.InvoiceId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lineItemId" remarks="(DC2Type:Ajasta.LineItem.LineItemId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-4" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LineItem">
+            <column name="description" remarks="(DC2Type:Ajasta.Descriptor)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" remarks="(DC2Type:Ajasta.LineItem.Quantity)" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unit" remarks="(DC2Type:Ajasta.Unit)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="unitPrice" remarks="(DC2Type:Ajasta.Price)" type="DECIMAL(10, 2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lineItemId" remarks="(DC2Type:Ajasta.LineItem.LineItemId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-5" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="LineItemReference">
+            <column name="position" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="lineItemId" remarks="(DC2Type:Ajasta.LineItem.LineItemId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-6" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="Project">
+            <column name="active" type="TINYINT(3)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" remarks="(DC2Type:Ajasta.Descriptor)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="defaultUnit" remarks="(DC2Type:Ajasta.Unit)" type="VARCHAR(255)"/>
+            <column name="defaultUnitPrice" remarks="(DC2Type:Ajasta.Price)" type="DECIMAL(10, 2)"/>
+            <column name="projectId" remarks="(DC2Type:Ajasta.Project.ProjectId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="clientId" remarks="(DC2Type:Ajasta.Client.ClientId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-7" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createTable tableName="User">
+            <column name="username" remarks="(DC2Type:Ajasta.User.Username)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="passwordHash" remarks="(DC2Type:Ajasta.User.PasswordHash)" type="VARCHAR(60)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="emailAddress" remarks="(DC2Type:Ajasta.EmailAddress)" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userId" remarks="(DC2Type:Ajasta.User.UserId)" type="BINARY(16)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-8" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="clientId" constraintName="PRIMARY" tableName="Client"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-9" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="invoiceId" constraintName="PRIMARY" tableName="Invoice"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-10" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="invoiceId, lineItemId, position" constraintName="PRIMARY" tableName="InvoiceToLineItemReference"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-11" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="lineItemId" constraintName="PRIMARY" tableName="LineItem"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-12" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="position, lineItemId" constraintName="PRIMARY" tableName="LineItemReference"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-13" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="projectId" constraintName="PRIMARY" tableName="Project"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-14" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addPrimaryKey columnNames="userId" constraintName="PRIMARY" tableName="User"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-15" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="lineItemId" constraintName="UNIQ_902D88FFC7E87958" tableName="LineItemReference"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-16" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addUniqueConstraint columnNames="lineItemId" constraintName="UNIQ_FCF5693AC7E87958" tableName="InvoiceToLineItemReference"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-17" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_5FD82ED86C9360F7" tableName="Invoice">
+            <column name="projectId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-18" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_5FD82ED8EA1CE9BE" tableName="Invoice">
+            <column name="clientId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-19" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_E00EE972EA1CE9BE" tableName="Project">
+            <column name="clientId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-20" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_FCF5693A3D7BDC51" tableName="InvoiceToLineItemReference">
+            <column name="invoiceId"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-21" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <createIndex indexName="IDX_FCF5693AC7E87958462CE4F5" tableName="InvoiceToLineItemReference">
+            <column name="lineItemId"/>
+            <column name="position"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-22" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="projectId" baseTableName="Invoice" constraintName="FK_5FD82ED86C9360F7" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="projectId" referencedTableName="Project"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-23" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="clientId" baseTableName="Invoice" constraintName="FK_5FD82ED8EA1CE9BE" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="clientId" referencedTableName="Client"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-24" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="lineItemId" baseTableName="LineItemReference" constraintName="FK_902D88FFC7E87958" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="lineItemId" referencedTableName="LineItem"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-25" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="clientId" baseTableName="Project" constraintName="FK_E00EE972EA1CE9BE" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="clientId" referencedTableName="Client"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-26" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="invoiceId" baseTableName="InvoiceToLineItemReference" constraintName="FK_FCF5693A3D7BDC51" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="invoiceId" referencedTableName="Invoice"/>
+    </changeSet>
+    <changeSet author="root (generated)" id="1466006353219-27" objectQuotingStrategy="QUOTE_ALL_OBJECTS">
+        <addForeignKeyConstraint baseColumnNames="lineItemId,position" baseTableName="InvoiceToLineItemReference" constraintName="FK_FCF5693AC7E87958462CE4F5" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="lineItemId,position" referencedTableName="LineItemReference"/>
+    </changeSet>
+</databaseChangeLog>

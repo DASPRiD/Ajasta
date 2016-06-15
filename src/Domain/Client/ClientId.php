@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Ajasta\Domain\Invoice;
+namespace Ajasta\Domain\Client;
 
 use Ajasta\Domain\IdTrait;
 
